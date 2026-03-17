@@ -1,0 +1,263 @@
+% LaTeX Textbook Template - English Version
+% Save this as main.tex or include in your project
+
+\documentclass[12pt,a4paper,openany]{book}
+\usepackage{ctex}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage[most]{tcolorbox}
+\usepackage{fontspec}
+
+% Page setup
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+% Color scheme
+\definecolor{titleblue}{RGB}{0,51,102}       % Chapter/Section titles
+\definecolor{defgreen}{RGB}{34,139,34}        % Definitions/Notation
+\definecolor{thmorange}{RGB}{230,126,0}       % Theorems/Propositions/Lemmas/Corollaries/Proofs
+\definecolor{exblue}{RGB}{70,130,180}         % Examples
+\definecolor{remgray}{RGB}{200,200,200}       % Remarks
+\definecolor{linkblue}{RGB}{0,70,140}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkblue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    citecolor=thmorange,
+}
+
+% Section title formatting - Blue
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\color{titleblue}}
+{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{titleblue}}
+{\color{titleblue}\S\thesection}{0.8em}{}
+[\color{titleblue!40}\titlerule]
+\titleformat{\subsection}
+{\normalfont\large\bfseries\color{titleblue}}
+{\color{titleblue!85}\thesubsection}{0.6em}{}
+[\vspace{2pt}\color{titleblue!30}\rule{\linewidth}{0.4pt}]
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{28pt}
+
+% Theorem environments with numbered titles
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{notation}{Notation}[section]
+
+% Custom box styles with title header
+% Definition/Notation - Green
+\tcolorboxenvironment{definition}{
+    enhanced,
+    breakable,
+    colback=defgreen!8,
+    colframe=defgreen,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=defgreen,
+        colframe=defgreen,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+\tcolorboxenvironment{notation}{
+    enhanced,
+    breakable,
+    colback=defgreen!8,
+    colframe=defgreen,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=defgreen,
+        colframe=defgreen,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+% Theorem/Proposition/Lemma/Corollary/Proof - Orange
+\tcolorboxenvironment{theorem}{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+\tcolorboxenvironment{lemma}{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+\tcolorboxenvironment{proposition}{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+\tcolorboxenvironment{corollary}{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+% Proof - Orange, sans-serif, lighter weight
+\newenvironment{proofboxed}[1][Proof]{%
+    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1:}
+}{%
+    \par\medskip
+}
+
+% Example - Blue
+\tcolorboxenvironment{example}{
+    enhanced,
+    breakable,
+    colback=exblue!8,
+    colframe=exblue,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=exblue,
+        colframe=exblue,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+% Remark - Gray, no border, no title
+\tcolorboxenvironment{remark}{
+    enhanced,
+    breakable,
+    colback=remgray!30,
+    colframe=remgray!30,
+    boxrule=0pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=6pt,bottom=6pt,
+    before skip=10pt,after skip=10pt,
+    fontupper=\sffamily\small
+}
+
+% Paragraph settings
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+
+% Custom commands
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\bits}{\mathrm{bits}}
+\newcommand{\nats}{\mathrm{nats}}
+\newcommand{\Ent}{\mathrm{H}}
+
+\begin{document}
+
+% Your content here
+% Example:
+% \chapter{Introduction}
+%
+% This chapter introduces...
+%
+% \section{Basic Concepts}
+%
+% Let us begin with...
+%
+% \begin{definition}[Vector Space]
+% A vector space $V$ over a field $\mathbb{F}$ is...
+% \end{definition}
+%
+% This definition captures...
+
+\end{document}

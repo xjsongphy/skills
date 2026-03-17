@@ -1,0 +1,263 @@
+% LaTeX 教材模板 - 中文版本
+% 保存为 main.tex 或包含到项目中
+
+\documentclass[12pt,a4paper,openany]{book}
+\usepackage{ctex}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage[most]{tcolorbox}
+\usepackage{fontspec}
+
+% 页面设置
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+% 颜色方案
+\definecolor{titleblue}{RGB}{0,51,102}       % 章/节标题
+\definecolor{defgreen}{RGB}{34,139,34}        % 定义/记号
+\definecolor{thmorange}{RGB}{230,126,0}       % 定理/命题/引理/推论/证明
+\definecolor{exblue}{RGB}{70,130,180}         % 例
+\definecolor{remgray}{RGB}{200,200,200}       % 注
+\definecolor{linkblue}{RGB}{0,70,140}
+
+% 超链接设置
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkblue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    citecolor=thmorange,
+}
+
+% 节标题格式 - 蓝色
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\color{titleblue}}
+{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{titleblue}}
+{\color{titleblue}\S\thesection}{0.8em}{}
+[\color{titleblue!40}\titlerule]
+\titleformat{\subsection}
+{\normalfont\large\bfseries\color{titleblue}}
+{\color{titleblue!85}\thesubsection}{0.6em}{}
+[\vspace{2pt}\color{titleblue!30}\rule{\linewidth}{0.4pt}]
+
+% 页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{28pt}
+
+% 定理环境（带编号标题）
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{proposition}{命题}[section]
+\newtheorem{corollary}{推论}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem{example}{例}[section]
+\newtheorem{remark}{注}[section]
+\newtheorem{notation}{记号}[section]
+
+% 自定义框样式（带标题栏）
+% 定义/记号 - 绿色
+\tcolorboxenvironment{definition}{
+    enhanced,
+    breakable,
+    colback=defgreen!8,
+    colframe=defgreen,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=defgreen,
+        colframe=defgreen,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+\tcolorboxenvironment{notation}{
+    enhanced,
+    breakable,
+    colback=defgreen!8,
+    colframe=defgreen,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=defgreen,
+        colframe=defgreen,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+% 定理/命题/引理/推论/证明 - 橙色
+\tcolorboxenvironment{theorem}{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+\tcolorboxenvironment{lemma}{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+\tcolorboxenvironment{proposition}{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+\tcolorboxenvironment{corollary}{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+% 证明 - 橙色，等线字体，细体
+\newenvironment{proofboxed}[1][证明]{%
+    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1：}
+}{%
+    \par\medskip
+}
+
+% 例 - 蓝色
+\tcolorboxenvironment{example}{
+    enhanced,
+    breakable,
+    colback=exblue!8,
+    colframe=exblue,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=exblue,
+        colframe=exblue,
+        arc=2pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    }
+}
+
+% 注 - 灰色，无边框，无标题
+\tcolorboxenvironment{remark}{
+    enhanced,
+    breakable,
+    colback=remgray!30,
+    colframe=remgray!30,
+    boxrule=0pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=6pt,bottom=6pt,
+    before skip=10pt,after skip=10pt,
+    fontupper=\sffamily\small
+}
+
+% 段落设置
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+
+% 自定义命令
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\bits}{\mathrm{bits}}
+\newcommand{\nats}{\mathrm{nats}}
+\newcommand{\Ent}{\mathrm{H}}
+
+\begin{document}
+
+% 您的内容写在这里
+% 示例：
+% \chapter{向量空间}
+%
+% 本章介绍向量空间的基本概念...
+%
+% \section{定义和基本性质}
+%
+% 让我们从最基本的概念开始...
+%
+% \begin{definition}[向量空间]
+% 域 $\mathbb{F}$ 上的向量空间 $V$ 是...
+% \end{definition}
+%
+% 这个定义刻画了...
+
+\end{document}
