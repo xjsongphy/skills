@@ -89,7 +89,24 @@ Therefore, the theorem is proved. $\square$
 \end{proof}
 ```
 
-### 4. Bulleted and Numbered Lists
+### 4. No Italics - Use Bold for Emphasis
+
+**DO NOT use italics** in mathematical textbooks. Use **bold** for:
+- Emphasis on important concepts
+- Proper nouns (names of mathematicians, special terms)
+- Key terms being introduced
+
+**BAD**:
+```latex
+Let $V$ be a *vector space*. The \textit{Hahn-Banach theorem} states...
+```
+
+**GOOD**:
+```latex
+Let $V$ be a vector space. The \textbf{Hahn-Banach theorem} states...
+```
+
+### 5. Bulleted and Numbered Lists
 
 **ONLY use bullets (`itemize`) and numbered lists (`enumerate`) in:**
 - **Example boxes** (`\begin{example}...\end{example}`)
@@ -159,9 +176,10 @@ Before considering content complete:
 2. [ ] Narrative weaves through boxes (not box-box-box stacking)
 3. [ ] Proofs are coherent narratives, not step lists
 4. [ ] **No bullets or numbered lists in main narrative text** (only in examples/exercises)
-5. [ ] All referenceable items have `\label{}`
-6. [ ] All cross-references use `\ref{}`
-7. [ ] Document compiles without errors
+5. [ ] **No italics** - use bold for emphasis/proper nouns
+6. [ ] All referenceable items have `\label{}`
+7. [ ] All cross-references use `\ref{}`
+8. [ ] Document compiles without errors
 
 ## Compilation
 

@@ -80,7 +80,7 @@
     boxed title style={
         colback=defgreen,
         colframe=defgreen,
-        arc=2pt,
+        arc=4pt,
         boxrule=0pt,
         left=4pt,right=4pt,top=2pt,bottom=2pt,
         fontupper=\color{white}\sffamily\bfseries\small
@@ -100,7 +100,7 @@
     boxed title style={
         colback=defgreen,
         colframe=defgreen,
-        arc=2pt,
+        arc=4pt,
         boxrule=0pt,
         left=4pt,right=4pt,top=2pt,bottom=2pt,
         fontupper=\color{white}\sffamily\bfseries\small
@@ -121,7 +121,7 @@
     boxed title style={
         colback=thmorange,
         colframe=thmorange,
-        arc=2pt,
+        arc=4pt,
         boxrule=0pt,
         left=4pt,right=4pt,top=2pt,bottom=2pt,
         fontupper=\color{white}\sffamily\bfseries\small
@@ -141,7 +141,7 @@
     boxed title style={
         colback=thmorange,
         colframe=thmorange,
-        arc=2pt,
+        arc=4pt,
         boxrule=0pt,
         left=4pt,right=4pt,top=2pt,bottom=2pt,
         fontupper=\color{white}\sffamily\bfseries\small
@@ -161,7 +161,7 @@
     boxed title style={
         colback=thmorange,
         colframe=thmorange,
-        arc=2pt,
+        arc=4pt,
         boxrule=0pt,
         left=4pt,right=4pt,top=2pt,bottom=2pt,
         fontupper=\color{white}\sffamily\bfseries\small
@@ -181,15 +181,37 @@
     boxed title style={
         colback=thmorange,
         colframe=thmorange,
-        arc=2pt,
+        arc=4pt,
         boxrule=0pt,
         left=4pt,right=4pt,top=2pt,bottom=2pt,
         fontupper=\color{white}\sffamily\bfseries\small
     }
 }
 
-% 证明 - 橙色，等线字体，细体
-\newenvironment{proofboxed}[1][证明]{%
+% 证明 - 橙色框，等线字体，细体
+\newtcolorbox{proofboxed}[1][]{
+    enhanced,
+    breakable,
+    colback=thmorange!8,
+    colframe=thmorange,
+    boxrule=1pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=18pt,bottom=6pt,
+    before skip=12pt,after skip=12pt,
+    attach boxed title to top left={yshift=-3mm,xshift=3mm},
+    boxed title style={
+        colback=thmorange,
+        colframe=thmorange,
+        arc=4pt,
+        boxrule=0pt,
+        left=4pt,right=4pt,top=2pt,bottom=2pt,
+        fontupper=\color{white}\sffamily\bfseries\small
+    },
+    fontupper=\sffamily\fontseries{l}\selectfont,
+    title={#1}
+}
+
+\renewenvironment{proof}[1][\proofname]{%
     \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1：}
 }{%
     \par\medskip
@@ -209,7 +231,7 @@
     boxed title style={
         colback=exblue,
         colframe=exblue,
-        arc=2pt,
+        arc=4pt,
         boxrule=0pt,
         left=4pt,right=4pt,top=2pt,bottom=2pt,
         fontupper=\color{white}\sffamily\bfseries\small
