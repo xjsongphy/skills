@@ -12,18 +12,26 @@
 \usepackage{hyperref}
 \usepackage{bookmark}
 \usepackage[most]{tcolorbox}
-\usepackage{fontspec}
+\tcbuselibrary{theorems}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc,matrix,fit,backgrounds}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{biblatex}
 
 % 页面设置
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 
-% 颜色方案
-\definecolor{titleblue}{RGB}{0,51,102}       % 章/节标题
-\definecolor{defgreen}{RGB}{34,139,34}        % 定义/记号
-\definecolor{thmorange}{RGB}{230,126,0}       % 定理/命题/引理/推论/证明
-\definecolor{exblue}{RGB}{70,130,180}         % 例
-\definecolor{remgray}{RGB}{200,200,200}       % 注
+% 自定义颜色
+\definecolor{titleblue}{RGB}{0,51,102}       % 章/节标题 - 蓝色
+\definecolor{defgreen}{RGB}{34,139,34}        % 定义/记号 - 绿色
+\definecolor{thmorange}{RGB}{230,126,0}       % 定理/命题/引理/证明 - 橙色
+\definecolor{exblue}{RGB}{70,130,180}         % 例 - 蓝色
+\definecolor{remgray}{RGB}{200,200,200}       % 注 - 灰色
 \definecolor{linkblue}{RGB}{0,70,140}
+\definecolor{exercisehead}{RGB}{139,69,19}    % 练习 - 棕色
 
 % 超链接设置
 \hypersetup{
@@ -32,20 +40,18 @@
     filecolor=magenta,
     urlcolor=cyan,
     citecolor=thmorange,
+    pdftitle={数学教材},
+    pdfauthor={教材作者},
 }
 
-% 节标题格式 - 蓝色
+% 节标题格式
 \titleformat{\chapter}[display]
 {\normalfont\huge\bfseries\color{titleblue}}
 {\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titleformat{\section}
 {\normalfont\Large\bfseries\color{titleblue}}
-{\color{titleblue}\S\thesection}{0.8em}{}
+{\color{titleblue}\thesection}{0.8em}{}
 [\color{titleblue!40}\titlerule]
-\titleformat{\subsection}
-{\normalfont\large\bfseries\color{titleblue}}
-{\color{titleblue!85}\thesubsection}{0.6em}{}
-[\vspace{2pt}\color{titleblue!30}\rule{\linewidth}{0.4pt}]
 
 % 页眉页脚
 \pagestyle{fancy}
@@ -55,214 +61,93 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \setlength{\headheight}{28pt}
 
-% 定理环境（带编号标题）
-\newtheorem{theorem}{定理}[section]
-\newtheorem{lemma}{引理}[section]
-\newtheorem{proposition}{命题}[section]
-\newtheorem{corollary}{推论}[section]
-\newtheorem{definition}{定义}[section]
-\newtheorem{example}{例}[section]
-\newtheorem{remark}{注}[section]
-\newtheorem{notation}{记号}[section]
-
-% 自定义框样式（带标题栏）
-% 定义/记号 - 绿色
-\tcolorboxenvironment{definition}{
-    enhanced,
-    breakable,
-    colback=defgreen!8,
-    colframe=defgreen,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=defgreen,
-        colframe=defgreen,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
+% --- 定理环境统一样式 ---
+\tcbset{
+    my_thm_base/.style={
+        enhanced,
+        breakable,
+        arc=6pt,                      % 外框圆角
+        outer arc=6pt,
+        boxrule=1pt,                  % 边框线宽
+        width=\textwidth,
+        center,
+        left=10pt, right=10pt, top=15pt, bottom=8pt,
+        before skip=18pt, after skip=15pt,
+        fontupper=\rmfamily,          % 正文直体
+        fonttitle=\bfseries\sffamily, % 标题粗体等线
+        coltitle=white,
+        separator sign none,
+        titlerule=0pt,
+        toptitle=1mm, bottomtitle=1mm,
     }
 }
 
-\tcolorboxenvironment{notation}{
-    enhanced,
-    breakable,
-    colback=defgreen!8,
-    colframe=defgreen,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=defgreen,
-        colframe=defgreen,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% --- 定义/定理环境（编号 + 标题格式）---
+% 标题格式："编号 标题"（例如："2.2.1 抛硬币计数"）
 
-% 定理/命题/引理/推论/证明 - 橙色
-\tcolorboxenvironment{theorem}{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% 定义环境（绿色）
+\newtcbtheorem[number within=section]{definition}{}{%
+    my_thm_base, colframe=defgreen, colback=defgreen!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{def}
 
-\tcolorboxenvironment{lemma}{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% 记号环境（绿色）
+\newtcbtheorem[number within=section, use counter from=definition]{notation}{}{%
+    my_thm_base, colframe=defgreen, colback=defgreen!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{not}
 
-\tcolorboxenvironment{proposition}{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% 定理环境（橙色）
+\newtcbtheorem[number within=section]{theorem}{}{%
+    my_thm_base, colframe=thmorange, colback=thmorange!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{thm}
 
-\tcolorboxenvironment{corollary}{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% 引理环境（橙色）
+\newtcbtheorem[number within=section, use counter from=theorem]{lemma}{}{%
+    my_thm_base, colframe=thmorange, colback=thmorange!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{lem}
 
-% 证明 - 橙色框，等线字体，细体
-\newtcolorbox{proofboxed}[1][]{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    },
-    fontupper=\sffamily\fontseries{l}\selectfont,
+% 命题环境（橙色）
+\newtcbtheorem[number within=section, use counter from=theorem]{proposition}{}{%
+    my_thm_base, colframe=thmorange, colback=thmorange!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{prop}
+
+% 例环境（蓝色）
+\newtcbtheorem[number within=section]{example}{}{%
+    my_thm_base, colframe=exblue, colback=exblue!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{ex}
+
+% 练习环境（棕色）
+\newtcbtheorem[number within=section]{exercise}{}{%
+    my_thm_base, colframe=exercisehead, colback=exercisehead!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{exer}
+
+% 注
+\newtcolorbox{remarkbox}[1][]{
+    enhanced, breakable, colback=remgray!20, colframe=remgray!20,
+    boxrule=0pt, arc=4pt, left=6pt, right=6pt, top=6pt, bottom=6pt,
+    before skip=10pt, after skip=10pt, fontupper=\sffamily\small,
     title={#1}
 }
+\newenvironment{remark}[1][]{\begin{remarkbox}[注：#1]}{\end{remarkbox}}
 
+% 证明（无冒号，使用 \quad 间隔）
 \renewenvironment{proof}[1][\proofname]{%
-    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1：}
+    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1\quad}
 }{%
     \par\medskip
 }
 
-% 例 - 蓝色
-\tcolorboxenvironment{example}{
-    enhanced,
-    breakable,
-    colback=exblue!8,
-    colframe=exblue,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=exblue,
-        colframe=exblue,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
-
-% 注 - 灰色，无边框，无标题
-\tcolorboxenvironment{remark}{
-    enhanced,
-    breakable,
-    colback=remgray!30,
-    colframe=remgray!30,
-    boxrule=0pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=6pt,bottom=6pt,
-    before skip=10pt,after skip=10pt,
-    fontupper=\sffamily\small
-}
-
-% 段落设置
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0.35em}
 
 % 自定义命令
-\newcommand{\E}{\mathbb{E}}
-\newcommand{\Var}{\mathrm{Var}}
-\newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Prob}{\mathbb{P}}
-\newcommand{\bits}{\mathrm{bits}}
-\newcommand{\nats}{\mathrm{nats}}
-\newcommand{\Ent}{\mathrm{H}}
 
 \begin{document}
 
@@ -276,10 +161,18 @@
 %
 % 让我们从最基本的概念开始...
 %
-% \begin{definition}[向量空间]
+% \begin{definition}{向量空间}{def:vector_space}
 % 域 $\mathbb{F}$ 上的向量空间 $V$ 是...
 % \end{definition}
 %
 % 这个定义刻画了...
+%
+% \begin{theorem}{基定理}{thm:basis}
+% 每个向量空间都有基。
+% \end{theorem}
+%
+% \begin{proof}
+% 证明由佐恩引理可得...
+% \end{proof}
 
 \end{document}

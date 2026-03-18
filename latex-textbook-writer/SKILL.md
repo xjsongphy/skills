@@ -1,5 +1,5 @@
 ---
-name: LaTeX Textbook Writer
+name: laTeX-textbook-writer
 description: Professional math textbook writing assistant using XeLaTeX with proper formatting, structure, and narrative style. Supports definition/theorem boxes, section heading formats, and English/Chinese templates.
 ---
 
@@ -23,13 +23,38 @@ Use this Skill when creating or modifying:
 - Professional styling for academic papers
 - Projects requiring Chinese/English mathematical typesetting
 
+## Language Settings (Critical!)
+
+When using `ctex` package for Chinese support, theorem names and figure captions automatically become Chinese. **Always add these overrides for English documents:**
+
+```latex
+\usepackage{ctex}
+\usepackage{amsmath,amssymb,amsthm}
+\renewcommand{\proofname}{Proof}      % Force English "Proof"
+\usepackage{caption}
+\captionsetup{figurename=Figure,tablename=Table}  % Force English captions
+```
+
 ## Color Scheme
 
 - **Definitions/Notation**: Green `RGB(34,139,34)`
 - **Theorems/Propositions/Lemmas/Corollaries/Proofs**: Orange `RGB(230,126,0)`
 - **Chapter/Section Titles**: Blue `RGB(0,51,102)`
 - **Examples**: Blue `RGB(70,130,180)`
+- **Exercises**: Brown `RGB(139,69,19)`
 - **Remarks**: Gray `RGB(200,200,200)` (no border, no title)
+
+## Box Style Specifications
+
+All theorem/definition/example boxes use `\newtcbtheorem` with:
+- **Title inside border** (no separate boxed title bar for cleaner look)
+- **Title format**: "2.2.1 Coin Flip Counting" (number, then title)
+- **Title font**: Sans-serif bold white text on colored background
+- **Content font**: Upright/roman (not italic)
+- **Padding**: left=10pt, right=10pt, top=15pt, bottom=8pt
+- **Border**: 1pt colored line with 6pt rounded corners
+- **Title spacing**: toptitle=1mm, bottomtitle=1mm
+- **Syntax**: `\begin{definition}{Title}{label}` (two arguments, not `[Title]`)
 
 ## Core Writing Principles
 
@@ -40,7 +65,7 @@ Use this Skill when creating or modifying:
 **BAD** (boxes without introduction):
 ```latex
 \section{Groups}
-\begin{definition}[Group]
+\begin{definition}{Group}{def:group}
 ...
 \end{definition}
 ```
@@ -50,7 +75,7 @@ Use this Skill when creating or modifying:
 \section{Groups}
 Group theory studies groups, the most fundamental algebraic structures. This section introduces the definition and basic properties of groups.
 
-\begin{definition}[Group]
+\begin{definition}{Group}{def:group}
 A group is a set $G$ with a binary operation satisfying...
 \end{definition}
 
@@ -146,7 +171,7 @@ Let $V$ be a vector space. The \textbf{Hahn-Banach theorem} states...
 ```latex
 Introduce the concept with background and motivation.
 
-\begin{definition}[Concept Name]
+\begin{definition}{Concept Name}{def:concept}
 Formal definition.
 \end{definition}
 
@@ -157,7 +182,7 @@ Explain the meaning and intuition behind the definition.
 ```latex
 Set up the context for the proposition.
 
-\begin{proposition}[Proposition Name]
+\begin{proposition}{Proposition Name}{prop:name}
 Statement.
 \end{proposition}
 
@@ -177,9 +202,11 @@ Before considering content complete:
 3. [ ] Proofs are coherent narratives, not step lists
 4. [ ] **No bullets or numbered lists in main narrative text** (only in examples/exercises)
 5. [ ] **No italics** - use bold for emphasis/proper nouns
-6. [ ] All referenceable items have `\label{}`
-7. [ ] All cross-references use `\ref{}`
-8. [ ] Document compiles without errors
+6. [ ] All environments use new syntax: `\begin{definition}{Title}{label}` (not `[Title]`)
+7. [ ] All referenceable items have unique labels in second argument
+8. [ ] All cross-references use `\ref{}`
+9. [ ] **For English documents**: Added `\renewcommand{\proofname}{Proof}` and `\captionsetup{figurename=Figure,tablename=Table}`
+10. [ ] Document compiles without errors
 
 ## Compilation
 
@@ -195,3 +222,40 @@ xelatex -interaction=nonstopmode main.tex
 - `references/format-zh.tex`: Chinese textbook template
 
 These templates contain complete preamble setup, color definitions, and box styles ready to copy into your project.
+
+## Environment Syntax Reference
+
+**New syntax (using `\newtcbtheorem`):**
+```latex
+% Definition with label
+\begin{definition}{Title}{def:label}
+    Content here...
+\end{definition}
+
+% Theorem with label
+\begin{theorem}{Title}{thm:label}
+    Statement here...
+\end{theorem}
+
+% Example with label
+\begin{example}{Title}{ex:label}
+    Content here...
+\end{example}
+
+% Remark (different syntax, no label)
+\begin{remark}[Optional Title]
+    Content here...
+\end{remark}
+
+% Proof (inline style, no colon)
+\begin{proof}
+    Proof content here...
+\end{proof}
+```
+
+**Important notes:**
+- Two arguments: `{Title}{label}` instead of `[Title]`
+- Second argument is required (use descriptive labels like `def:vector_space`)
+- The box title shows "Number Title" (e.g., "2.2.1 Coin Flip Counting")
+- Proof environment uses `\quad` (two spaces) instead of colon after "Proof"
+- Remark environment still uses optional `[Title]` syntax (no label needed)

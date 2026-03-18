@@ -4,26 +4,37 @@
 \documentclass[12pt,a4paper,openany]{book}
 \usepackage{ctex}
 \usepackage{amsmath,amssymb,amsthm}
+\renewcommand{\proofname}{Proof}      % Force English "Proof" instead of Chinese
 \usepackage{geometry}
 \usepackage{xcolor}
+\usepackage{caption}
+\captionsetup{figurename=Figure,tablename=Table}  % Force English figure/table names
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{bookmark}
 \usepackage[most]{tcolorbox}
-\usepackage{fontspec}
+\tcbuselibrary{theorems}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc,matrix,fit,backgrounds}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{biblatex}
 
 % Page setup
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 
-% Color scheme
-\definecolor{titleblue}{RGB}{0,51,102}       % Chapter/Section titles
-\definecolor{defgreen}{RGB}{34,139,34}        % Definitions/Notation
-\definecolor{thmorange}{RGB}{230,126,0}       % Theorems/Propositions/Lemmas/Corollaries/Proofs
-\definecolor{exblue}{RGB}{70,130,180}         % Examples
-\definecolor{remgray}{RGB}{200,200,200}       % Remarks
+% Custom colors
+\definecolor{titleblue}{RGB}{0,51,102}
+\definecolor{defgreen}{RGB}{34,139,34}
+\definecolor{thmorange}{RGB}{230,126,0}
+\definecolor{exblue}{RGB}{70,130,180}
+\definecolor{remgray}{RGB}{200,200,200}
 \definecolor{linkblue}{RGB}{0,70,140}
+\definecolor{exercisehead}{RGB}{139,69,19}
 
 % Hyperlink setup
 \hypersetup{
@@ -32,20 +43,18 @@
     filecolor=magenta,
     urlcolor=cyan,
     citecolor=thmorange,
+    pdftitle={Mathematics Textbook},
+    pdfauthor={Author Name},
 }
 
-% Section title formatting - Blue
+% Section title formatting
 \titleformat{\chapter}[display]
 {\normalfont\huge\bfseries\color{titleblue}}
 {\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titleformat{\section}
 {\normalfont\Large\bfseries\color{titleblue}}
-{\color{titleblue}\S\thesection}{0.8em}{}
+{\color{titleblue}\thesection}{0.8em}{}
 [\color{titleblue!40}\titlerule]
-\titleformat{\subsection}
-{\normalfont\large\bfseries\color{titleblue}}
-{\color{titleblue!85}\thesubsection}{0.6em}{}
-[\vspace{2pt}\color{titleblue!30}\rule{\linewidth}{0.4pt}]
 
 % Header/footer
 \pagestyle{fancy}
@@ -55,214 +64,93 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \setlength{\headheight}{28pt}
 
-% Theorem environments with numbered titles
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{corollary}{Corollary}[section]
-\newtheorem{definition}{Definition}[section]
-\newtheorem{example}{Example}[section]
-\newtheorem{remark}{Remark}[section]
-\newtheorem{notation}{Notation}[section]
-
-% Custom box styles with title header
-% Definition/Notation - Green
-\tcolorboxenvironment{definition}{
-    enhanced,
-    breakable,
-    colback=defgreen!8,
-    colframe=defgreen,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=defgreen,
-        colframe=defgreen,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
+% --- Core theorem environment style ---
+\tcbset{
+    my_thm_base/.style={
+        enhanced,
+        breakable,
+        arc=6pt,
+        outer arc=6pt,
+        boxrule=1pt,
+        width=\textwidth,
+        center,
+        left=10pt, right=10pt, top=15pt, bottom=8pt,
+        before skip=18pt, after skip=15pt,
+        fontupper=\rmfamily,
+        fonttitle=\bfseries\sffamily,
+        coltitle=white,
+        separator sign none,
+        titlerule=0pt,
+        toptitle=1mm, bottomtitle=1mm,
     }
 }
 
-\tcolorboxenvironment{notation}{
-    enhanced,
-    breakable,
-    colback=defgreen!8,
-    colframe=defgreen,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=defgreen,
-        colframe=defgreen,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% --- Definition/Theorem environments (Numbered with title format) ---
+% Title format: "Number Title" (e.g., "2.2.1 Coin Flip Counting")
 
-% Theorem/Proposition/Lemma/Corollary/Proof - Orange
-\tcolorboxenvironment{theorem}{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% Definition environment (green)
+\newtcbtheorem[number within=section]{definition}{}{%
+    my_thm_base, colframe=defgreen, colback=defgreen!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{def}
 
-\tcolorboxenvironment{lemma}{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% Notation environment (green)
+\newtcbtheorem[number within=section, use counter from=definition]{notation}{}{%
+    my_thm_base, colframe=defgreen, colback=defgreen!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{not}
 
-\tcolorboxenvironment{proposition}{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% Theorem environment (orange)
+\newtcbtheorem[number within=section]{theorem}{}{%
+    my_thm_base, colframe=thmorange, colback=thmorange!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{thm}
 
-\tcolorboxenvironment{corollary}{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
+% Lemma environment (orange)
+\newtcbtheorem[number within=section, use counter from=theorem]{lemma}{}{%
+    my_thm_base, colframe=thmorange, colback=thmorange!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{lem}
 
-% Proof - Orange box with title, sans-serif, lighter weight
-\newtcolorbox{proofboxed}[1][]{
-    enhanced,
-    breakable,
-    colback=thmorange!8,
-    colframe=thmorange,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=thmorange,
-        colframe=thmorange,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    },
-    fontupper=\sffamily\fontseries{l}\selectfont,
+% Proposition environment (orange)
+\newtcbtheorem[number within=section, use counter from=theorem]{proposition}{}{%
+    my_thm_base, colframe=thmorange, colback=thmorange!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{prop}
+
+% Example environment (blue)
+\newtcbtheorem[number within=section]{example}{}{%
+    my_thm_base, colframe=exblue, colback=exblue!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{ex}
+
+% Exercise environment (brown)
+\newtcbtheorem[number within=section]{exercise}{}{%
+    my_thm_base, colframe=exercisehead, colback=exercisehead!5,
+    title={\thetcbcounter\quad \tcbtitle}
+}{exer}
+
+% Remark
+\newtcolorbox{remarkbox}[1][]{
+    enhanced, breakable, colback=remgray!20, colframe=remgray!20,
+    boxrule=0pt, arc=4pt, left=6pt, right=6pt, top=6pt, bottom=6pt,
+    before skip=10pt, after skip=10pt, fontupper=\sffamily\small,
     title={#1}
 }
+\newenvironment{remark}[1][]{\begin{remarkbox}[Remark: #1]}{\end{remarkbox}}
 
+% Proof (no colon, use \quad for spacing)
 \renewenvironment{proof}[1][\proofname]{%
-    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1:}
+    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1\quad}
 }{%
     \par\medskip
 }
 
-% Example - Blue
-\tcolorboxenvironment{example}{
-    enhanced,
-    breakable,
-    colback=exblue!8,
-    colframe=exblue,
-    boxrule=1pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=18pt,bottom=6pt,
-    before skip=12pt,after skip=12pt,
-    attach boxed title to top left={yshift=-3mm,xshift=3mm},
-    boxed title style={
-        colback=exblue,
-        colframe=exblue,
-        arc=4pt,
-        boxrule=0pt,
-        left=4pt,right=4pt,top=2pt,bottom=2pt,
-        fontupper=\color{white}\sffamily\bfseries\small
-    }
-}
-
-% Remark - Gray, no border, no title
-\tcolorboxenvironment{remark}{
-    enhanced,
-    breakable,
-    colback=remgray!30,
-    colframe=remgray!30,
-    boxrule=0pt,
-    arc=4pt,
-    left=6pt,right=6pt,top=6pt,bottom=6pt,
-    before skip=10pt,after skip=10pt,
-    fontupper=\sffamily\small
-}
-
-% Paragraph settings
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0.35em}
 
 % Custom commands
-\newcommand{\E}{\mathbb{E}}
-\newcommand{\Var}{\mathrm{Var}}
-\newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Prob}{\mathbb{P}}
-\newcommand{\bits}{\mathrm{bits}}
-\newcommand{\nats}{\mathrm{nats}}
-\newcommand{\Ent}{\mathrm{H}}
 
 \begin{document}
 
@@ -270,16 +158,24 @@
 % Example:
 % \chapter{Introduction}
 %
-% This chapter introduces...
+% This chapter introduces the fundamental concepts...
 %
 % \section{Basic Concepts}
 %
-% Let us begin with...
+% Let us begin with the foundational definitions.
 %
-% \begin{definition}[Vector Space]
+% \begin{definition}{Vector Space}{def:vector_space}
 % A vector space $V$ over a field $\mathbb{F}$ is...
 % \end{definition}
 %
-% This definition captures...
+% This definition captures the essential properties...
+%
+% \begin{theorem}{Basis Theorem}{thm:basis}
+% Every vector space has a basis.
+% \end{theorem}
+%
+% \begin{proof}
+% The proof follows from Zorn's Lemma...
+% \end{proof}
 
 \end{document}
