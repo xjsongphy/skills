@@ -29,7 +29,7 @@
 \definecolor{defgreen}{RGB}{34,139,34}        % 定义/记号 - 绿色
 \definecolor{thmorange}{RGB}{230,126,0}       % 定理/命题/引理/证明 - 橙色
 \definecolor{exblue}{RGB}{70,130,180}         % 例 - 蓝色
-\definecolor{remgray}{RGB}{200,200,200}       % 注 - 灰色
+\definecolor{remgray}{RGB}{80,80,80}           % 注 - 深灰色
 \definecolor{linkblue}{RGB}{0,70,140}
 \definecolor{exercisehead}{RGB}{139,69,19}    % 练习 - 棕色
 
@@ -83,58 +83,55 @@
 }
 
 % --- 定义/定理环境（编号 + 标题格式）---
-% 标题格式："编号 标题"（例如："2.2.1 抛硬币计数"）
+% 标题格式："编号 类型名：标题"（例如："2.2.1 定义：实向量空间"）
 
 % 定义环境（绿色）
 \newtcbtheorem[number within=section]{definition}{}{%
     my_thm_base, colframe=defgreen, colback=defgreen!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad 定义：\tcbtitle}
 }{def}
 
 % 记号环境（绿色）
 \newtcbtheorem[number within=section, use counter from=definition]{notation}{}{%
     my_thm_base, colframe=defgreen, colback=defgreen!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad 记号：\tcbtitle}
 }{not}
 
 % 定理环境（橙色）
 \newtcbtheorem[number within=section]{theorem}{}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad 定理：\tcbtitle}
 }{thm}
 
 % 引理环境（橙色）
 \newtcbtheorem[number within=section, use counter from=theorem]{lemma}{}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad 引理：\tcbtitle}
 }{lem}
 
 % 命题环境（橙色）
-\newtcbtheorem[number within=section, use counter from=theorem]{proposition}{}{%
+\newtcbtheorem[number within=section]{proposition}{}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad 命题：\tcbtitle}
 }{prop}
 
 % 例环境（蓝色）
 \newtcbtheorem[number within=section]{example}{}{%
     my_thm_base, colframe=exblue, colback=exblue!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad 例：\tcbtitle}
 }{ex}
 
 % 练习环境（棕色）
 \newtcbtheorem[number within=section]{exercise}{}{%
     my_thm_base, colframe=exercisehead, colback=exercisehead!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad 练习：\tcbtitle}
 }{exer}
 
-% 注
-\newtcolorbox{remarkbox}[1][]{
-    enhanced, breakable, colback=remgray!20, colframe=remgray!20,
-    boxrule=0pt, arc=4pt, left=6pt, right=6pt, top=6pt, bottom=6pt,
-    before skip=10pt, after skip=10pt, fontupper=\sffamily\small,
-    title={#1}
-}
-\newenvironment{remark}[1][]{\begin{remarkbox}[注：#1]}{\end{remarkbox}}
+% 注环境（深灰色）
+\newtcbtheorem[number within=section]{remark}{}{%
+    my_thm_base, colframe=remgray, colback=remgray!5,
+    title={\thesection.\arabic{tcbcounter}\quad 注：\tcbtitle}
+}{rem}
 
 % 证明（无冒号，使用 \quad 间隔）
 \renewenvironment{proof}[1][\proofname]{%

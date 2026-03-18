@@ -32,7 +32,7 @@
 \definecolor{defgreen}{RGB}{34,139,34}
 \definecolor{thmorange}{RGB}{230,126,0}
 \definecolor{exblue}{RGB}{70,130,180}
-\definecolor{remgray}{RGB}{200,200,200}
+\definecolor{remgray}{RGB}{80,80,80}           % Remark - Dark gray
 \definecolor{linkblue}{RGB}{0,70,140}
 \definecolor{exercisehead}{RGB}{139,69,19}
 
@@ -86,58 +86,55 @@
 }
 
 % --- Definition/Theorem environments (Numbered with title format) ---
-% Title format: "Number Title" (e.g., "2.2.1 Coin Flip Counting")
+% Title format: "Number Type: Title" (e.g., "2.2.1 Definition: Real Vector Space")
 
 % Definition environment (green)
 \newtcbtheorem[number within=section]{definition}{}{%
     my_thm_base, colframe=defgreen, colback=defgreen!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad Definition: \tcbtitle}
 }{def}
 
 % Notation environment (green)
 \newtcbtheorem[number within=section, use counter from=definition]{notation}{}{%
     my_thm_base, colframe=defgreen, colback=defgreen!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad Notation: \tcbtitle}
 }{not}
 
 % Theorem environment (orange)
 \newtcbtheorem[number within=section]{theorem}{}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad Theorem: \tcbtitle}
 }{thm}
 
 % Lemma environment (orange)
 \newtcbtheorem[number within=section, use counter from=theorem]{lemma}{}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad Lemma: \tcbtitle}
 }{lem}
 
 % Proposition environment (orange)
-\newtcbtheorem[number within=section, use counter from=theorem]{proposition}{}{%
+\newtcbtheorem[number within=section]{proposition}{}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad Proposition: \tcbtitle}
 }{prop}
 
 % Example environment (blue)
 \newtcbtheorem[number within=section]{example}{}{%
     my_thm_base, colframe=exblue, colback=exblue!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad Example: \tcbtitle}
 }{ex}
 
 % Exercise environment (brown)
 \newtcbtheorem[number within=section]{exercise}{}{%
     my_thm_base, colframe=exercisehead, colback=exercisehead!5,
-    title={\thetcbcounter\quad \tcbtitle}
+    title={\thesection.\arabic{tcbcounter}\quad Exercise: \tcbtitle}
 }{exer}
 
-% Remark
-\newtcolorbox{remarkbox}[1][]{
-    enhanced, breakable, colback=remgray!20, colframe=remgray!20,
-    boxrule=0pt, arc=4pt, left=6pt, right=6pt, top=6pt, bottom=6pt,
-    before skip=10pt, after skip=10pt, fontupper=\sffamily\small,
-    title={#1}
-}
-\newenvironment{remark}[1][]{\begin{remarkbox}[Remark: #1]}{\end{remarkbox}}
+% Remark environment (dark gray)
+\newtcbtheorem[number within=section]{remark}{}{%
+    my_thm_base, colframe=remgray, colback=remgray!5,
+    title={\thesection.\arabic{tcbcounter}\quad Remark: \tcbtitle}
+}{rem}
 
 % Proof (no colon, use \quad for spacing)
 \renewenvironment{proof}[1][\proofname]{%
@@ -149,26 +146,23 @@
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0.35em}
 
-% Custom commands
-\newcommand{\Prob}{\mathbb{P}}
-
 \begin{document}
 
-% Your content here
+% Your content goes here
 % Example:
-% \chapter{Introduction}
+% \chapter{Vector Spaces}
 %
-% This chapter introduces the fundamental concepts...
+% This chapter introduces the basic concepts of vector spaces...
 %
-% \section{Basic Concepts}
+% \section{Definitions and Basic Properties}
 %
-% Let us begin with the foundational definitions.
+% Let's start with the most fundamental concept...
 %
 % \begin{definition}{Vector Space}{def:vector_space}
 % A vector space $V$ over a field $\mathbb{F}$ is...
 % \end{definition}
 %
-% This definition captures the essential properties...
+% This definition captures...
 %
 % \begin{theorem}{Basis Theorem}{thm:basis}
 % Every vector space has a basis.
