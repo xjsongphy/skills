@@ -86,58 +86,66 @@
 % 标题格式："编号 类型名：标题"（例如："2.2.1 定义：实向量空间"）
 
 % 定义环境（绿色）
-\newtcbtheorem[number within=section]{definition}{}{%
+\newtcbtheorem[number within=section]{definition}{定义}{%
     my_thm_base, colframe=defgreen, colback=defgreen!5,
-    title={\thesection.\arabic{tcbcounter}\quad 定义：\tcbtitle}
+    separator sign={：},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{def}
 
 % 记号环境（绿色）
-\newtcbtheorem[number within=section, use counter from=definition]{notation}{}{%
+\newtcbtheorem[number within=section, use counter from=definition]{notation}{记号}{%
     my_thm_base, colframe=defgreen, colback=defgreen!5,
-    title={\thesection.\arabic{tcbcounter}\quad 记号：\tcbtitle}
+    separator sign={：},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{not}
 
 % 定理环境（橙色）
-\newtcbtheorem[number within=section]{theorem}{}{%
+\newtcbtheorem[number within=section]{theorem}{定理}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thesection.\arabic{tcbcounter}\quad 定理：\tcbtitle}
+    separator sign={：},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{thm}
 
 % 引理环境（橙色）
-\newtcbtheorem[number within=section, use counter from=theorem]{lemma}{}{%
+\newtcbtheorem[number within=section, use counter from=theorem]{lemma}{引理}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thesection.\arabic{tcbcounter}\quad 引理：\tcbtitle}
+    separator sign={：},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{lem}
 
 % 命题环境（橙色）
-\newtcbtheorem[number within=section]{proposition}{}{%
+\newtcbtheorem[number within=section]{proposition}{命题}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thesection.\arabic{tcbcounter}\quad 命题：\tcbtitle}
+    separator sign={：},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{prop}
 
 % 例环境（蓝色）
-\newtcbtheorem[number within=section]{example}{}{%
+\newtcbtheorem[number within=section]{example}{例}{%
     my_thm_base, colframe=exblue, colback=exblue!5,
-    title={\thesection.\arabic{tcbcounter}\quad 例：\tcbtitle}
+    separator sign={：},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{ex}
 
 % 练习环境（棕色）
-\newtcbtheorem[number within=section]{exercise}{}{%
+\newtcbtheorem[number within=section]{exercise}{练习}{%
     my_thm_base, colframe=exercisehead, colback=exercisehead!5,
-    title={\thesection.\arabic{tcbcounter}\quad 练习：\tcbtitle}
+    separator sign={：},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{exer}
 
 % 注环境（深灰色）
-\newtcbtheorem[number within=section]{remark}{}{%
+\newtcbtheorem[number within=section]{remark}{注}{%
     my_thm_base, colframe=remgray, colback=remgray!5,
-    title={\thesection.\arabic{tcbcounter}\quad 注：\tcbtitle}
+    separator sign={：},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{rem}
 
-% 证明（无冒号，使用 \quad 间隔）
+% 证明（无冒号，使用 \quad 间隔，带方块结束符）
 \renewenvironment{proof}[1][\proofname]{%
     \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1\quad}
 }{%
-    \par\medskip
+    \hfill\qed
 }
 
 \setlength{\parindent}{2em}

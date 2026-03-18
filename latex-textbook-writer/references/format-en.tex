@@ -89,58 +89,66 @@
 % Title format: "Number Type: Title" (e.g., "2.2.1 Definition: Real Vector Space")
 
 % Definition environment (green)
-\newtcbtheorem[number within=section]{definition}{}{%
+\newtcbtheorem[number within=section]{definition}{Definition}{%
     my_thm_base, colframe=defgreen, colback=defgreen!5,
-    title={\thesection.\arabic{tcbcounter}\quad Definition: \tcbtitle}
+    separator sign={:},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{def}
 
 % Notation environment (green)
-\newtcbtheorem[number within=section, use counter from=definition]{notation}{}{%
+\newtcbtheorem[number within=section, use counter from=definition]{notation}{Notation}{%
     my_thm_base, colframe=defgreen, colback=defgreen!5,
-    title={\thesection.\arabic{tcbcounter}\quad Notation: \tcbtitle}
+    separator sign={:},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{not}
 
 % Theorem environment (orange)
-\newtcbtheorem[number within=section]{theorem}{}{%
+\newtcbtheorem[number within=section]{theorem}{Theorem}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thesection.\arabic{tcbcounter}\quad Theorem: \tcbtitle}
+    separator sign={:},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{thm}
 
 % Lemma environment (orange)
-\newtcbtheorem[number within=section, use counter from=theorem]{lemma}{}{%
+\newtcbtheorem[number within=section, use counter from=theorem]{lemma}{Lemma}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thesection.\arabic{tcbcounter}\quad Lemma: \tcbtitle}
+    separator sign={:},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{lem}
 
 % Proposition environment (orange)
-\newtcbtheorem[number within=section]{proposition}{}{%
+\newtcbtheorem[number within=section]{proposition}{Proposition}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
-    title={\thesection.\arabic{tcbcounter}\quad Proposition: \tcbtitle}
+    separator sign={:},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{prop}
 
 % Example environment (blue)
-\newtcbtheorem[number within=section]{example}{}{%
+\newtcbtheorem[number within=section]{example}{Example}{%
     my_thm_base, colframe=exblue, colback=exblue!5,
-    title={\thesection.\arabic{tcbcounter}\quad Example: \tcbtitle}
+    separator sign={:},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{ex}
 
 % Exercise environment (brown)
-\newtcbtheorem[number within=section]{exercise}{}{%
+\newtcbtheorem[number within=section]{exercise}{Exercise}{%
     my_thm_base, colframe=exercisehead, colback=exercisehead!5,
-    title={\thesection.\arabic{tcbcounter}\quad Exercise: \tcbtitle}
+    separator sign={:},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{exer}
 
 % Remark environment (dark gray)
-\newtcbtheorem[number within=section]{remark}{}{%
+\newtcbtheorem[number within=section]{remark}{Remark}{%
     my_thm_base, colframe=remgray, colback=remgray!5,
-    title={\thesection.\arabic{tcbcounter}\quad Remark: \tcbtitle}
+    separator sign={:},
+    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{rem}
 
-% Proof (no colon, use \quad for spacing)
+% Proof (no colon, use \quad for spacing, with QED square)
 \renewenvironment{proof}[1][\proofname]{%
     \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1\quad}
 }{%
-    \par\medskip
+    \hfill\qed
 }
 
 \setlength{\parindent}{2em}
