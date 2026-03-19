@@ -146,7 +146,7 @@
     borderline north={1pt}{0pt}{black!50},
     borderline south={1pt}{0pt}{black},
     coltitle=black,           % Title color
-    fonttitle=\sffamily,      % Sans-serif title
+    fonttitle=\sffamily\bfseries,      % Sans-serif bold title
     description font=\sffamily,
     attach title to upper,
     after title={\par\smallskip},
@@ -168,11 +168,11 @@
     title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{rem}
 
-% Proof (no colon, use \quad for spacing, with QED square)
+% Proof (no colon, use \quad for spacing, with QED square, blank line after)
 \renewenvironment{proof}[1][\proofname]{%
-    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1\quad}
+    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1\quad}\small
 }{%
-    \hfill\qed
+    \hfill\qed\par\medskip
 }
 
 % Paragraph indentation and spacing
