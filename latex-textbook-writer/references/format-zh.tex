@@ -24,6 +24,9 @@
 % 页面设置
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 
+% 关闭 subsection 编号
+\setcounter{secnumdepth}{1}
+
 % 自定义颜色
 \definecolor{titleblue}{RGB}{0,51,102}       % 章/节标题 - 蓝色
 \definecolor{defgreen}{RGB}{34,139,34}        % 定义/记号 - 绿色
@@ -52,6 +55,9 @@
 {\normalfont\Large\bfseries\color{titleblue}}
 {\color{titleblue}\thesection}{0.8em}{}
 [\color{titleblue!40}\titlerule]
+\titleformat{\subsection}
+{\normalfont\large\sffamily\color{titleblue}}
+{}{0em}{}
 
 % 页眉页脚
 \pagestyle{fancy}
@@ -66,24 +72,21 @@
     my_thm_base/.style={
         enhanced,
         breakable,
-        arc=6pt,                      % 外框圆角
+        arc=6pt,
         outer arc=6pt,
-        boxrule=1pt,                  % 边框线宽
+        boxrule=1pt,
         width=\textwidth,
         center,
         left=10pt, right=10pt, top=15pt, bottom=8pt,
-        before skip=18pt, after skip=15pt,
-        fontupper=\rmfamily,          % 正文直体
-        fonttitle=\bfseries\sffamily, % 标题粗体等线
+        before skip=22pt, after skip=20pt,
+        fontupper=\rmfamily,
+        fonttitle=\bfseries\sffamily,
         coltitle=white,
         separator sign none,
         titlerule=0pt,
         toptitle=1mm, bottomtitle=1mm,
     }
 }
-
-% --- 定义/定理环境（编号 + 标题格式）---
-% 标题格式："编号 类型名：标题"（例如："2.2.1 定义：实向量空间"）
 
 % 定义环境（绿色）
 \newtcbtheorem[number within=section]{definition}{定义}{%
@@ -120,11 +123,29 @@
     title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{prop}
 
-% 例环境（蓝色）
-\newtcbtheorem[number within=section]{example}{例}{%
-    my_thm_base, colframe=exblue, colback=exblue!5,
-    separator sign={：},
-    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
+% 例环境（上下横线风格 + 等线标题）
+\newtcbtheorem[number within=section]{example}{}{%
+    enhanced,
+    breakable,
+    frame hidden,             % 隐藏外框
+    interior hidden,          % 隐藏背景色
+    sharp corners,            % 直角
+    boxrule=0pt,              % 基础边框厚度
+    left=15pt, right=15pt,    % 左右留白
+    top=12pt, bottom=12pt,    % 内部上下间距
+    toptitle=2pt,            % 标题与顶部横线的间距
+    before skip=12pt,        % 盒子与上方段落的间距
+    after skip=12pt,         % 盒子与下方段落的间距
+    % 设置上下两条横线（起始灰色，末尾黑色）
+    borderline north={1pt}{0pt}{black!50},
+    borderline south={1pt}{0pt}{black},
+    coltitle=black,           % 标题颜色
+    fonttitle=\sffamily,      % 标题等线
+    description font=\sffamily,
+    attach title to upper,
+    after title={\par\smallskip},
+    separator sign none,
+    title={\thesection.\arabic{tcbcounter}\quad 例：\tcbtitle},
 }{ex}
 
 % 练习环境（棕色）
@@ -141,18 +162,19 @@
     title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{rem}
 
-% 证明（无冒号，使用 \quad 间隔，带方块结束符）
+% 证明
 \renewenvironment{proof}[1][\proofname]{%
     \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1\quad}
 }{%
     \hfill\qed
 }
 
+% 首行缩进2字符，段间距适中
 \setlength{\parindent}{2em}
-\setlength{\parskip}{0.35em}
+\setlength{\parskip}{0pt plus 0.1em}
 
-% 自定义命令
-\newcommand{\Prob}{\mathbb{P}}
+% 允许页面底部不对齐（避免行间距被拉伸）
+\raggedbottom
 
 \begin{document}
 

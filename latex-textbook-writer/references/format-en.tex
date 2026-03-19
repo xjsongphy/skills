@@ -27,6 +27,9 @@
 % Page setup
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 
+% Disable subsection numbering
+\setcounter{secnumdepth}{1}
+
 % Custom colors
 \definecolor{titleblue}{RGB}{0,51,102}
 \definecolor{defgreen}{RGB}{34,139,34}
@@ -55,6 +58,9 @@
 {\normalfont\Large\bfseries\color{titleblue}}
 {\color{titleblue}\thesection}{0.8em}{}
 [\color{titleblue!40}\titlerule]
+\titleformat{\subsection}
+{\normalfont\large\sffamily\color{titleblue}}
+{}{0em}{}
 
 % Header/footer
 \pagestyle{fancy}
@@ -75,7 +81,7 @@
         width=\textwidth,
         center,
         left=10pt, right=10pt, top=15pt, bottom=8pt,
-        before skip=18pt, after skip=15pt,
+        before skip=22pt, after skip=20pt,
         fontupper=\rmfamily,
         fonttitle=\bfseries\sffamily,
         coltitle=white,
@@ -123,11 +129,29 @@
     title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{prop}
 
-% Example environment (blue)
-\newtcbtheorem[number within=section]{example}{Example}{%
-    my_thm_base, colframe=exblue, colback=exblue!5,
-    separator sign={:},
-    title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
+% Example environment (horizontal lines style)
+\newtcbtheorem[number within=section]{example}{}{%
+    enhanced,
+    breakable,
+    frame hidden,             % Hide outer frame
+    interior hidden,          % Hide background color
+    sharp corners,            % Sharp corners
+    boxrule=0pt,              % Base border thickness
+    left=15pt, right=15pt,    % Left/right padding
+    top=12pt, bottom=12pt,    % Internal vertical spacing
+    toptitle=2pt,            % Spacing between title and top line
+    before skip=12pt,        % Spacing before box
+    after skip=12pt,         % Spacing after box
+    % Top and bottom horizontal lines
+    borderline north={1pt}{0pt}{black!50},
+    borderline south={1pt}{0pt}{black},
+    coltitle=black,           % Title color
+    fonttitle=\sffamily,      % Sans-serif title
+    description font=\sffamily,
+    attach title to upper,
+    after title={\par\smallskip},
+    separator sign none,
+    title={\thesection.\arabic{tcbcounter}\quad Example: \tcbtitle},
 }{ex}
 
 % Exercise environment (brown)
@@ -151,8 +175,12 @@
     \hfill\qed
 }
 
+% Paragraph indentation and spacing
 \setlength{\parindent}{2em}
-\setlength{\parskip}{0.35em}
+\setlength{\parskip}{0pt plus 0.1em}
+
+% Allow ragged bottom (prevents line spacing from being stretched)
+\raggedbottom
 
 \begin{document}
 
