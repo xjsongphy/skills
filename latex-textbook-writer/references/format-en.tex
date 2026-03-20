@@ -50,16 +50,16 @@
     pdfauthor={Author Name},
 }
 
-% Section title formatting (sans-serif, no bold)
+% Section title formatting (sans-serif + bold)
 \titleformat{\chapter}[display]
-{\sffamily\huge\color{titleblue}}
-{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+{\sffamily\huge\bfseries\color{titleblue}}
+{\chaptertitlename\ \thechapter}{20pt}{\Huge\bfseries}
 \titleformat{\section}
-{\sffamily\Large\color{titleblue}}
+{\sffamily\Large\bfseries\color{titleblue}}
 {\color{titleblue}\thesection}{0.8em}{}
 [\color{titleblue!40}\titlerule]
 \titleformat{\subsection}
-{\sffamily\large\color{titleblue}}
+{\sffamily\large\bfseries\color{titleblue}}
 {}{0em}{}
 
 % Header/footer
