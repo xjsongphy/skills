@@ -49,16 +49,16 @@
     pdfauthor={教材作者},
 }
 
-% 节标题格式（使用等线字体）
+% 节标题格式（标题用等线，无粗体；正文用宋体）
 \titleformat{\chapter}[display]
-{\sffamily\huge\bfseries\color{titleblue}}
+{\sffamily\huge\color{titleblue}}
 {\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titleformat{\section}
-{\sffamily\Large\bfseries\color{titleblue}}
+{\sffamily\Large\color{titleblue}}
 {\color{titleblue}\thesection}{0.8em}{}
 [\color{titleblue!40}\titlerule]
 \titleformat{\subsection}
-{\sffamily\large\bfseries\color{titleblue}}
+{\sffamily\large\color{titleblue}}
 {}{0em}{}
 
 % 页眉页脚
@@ -81,8 +81,8 @@
         center,
         left=10pt, right=10pt, top=15pt, bottom=8pt,
         before skip=22pt, after skip=20pt,
-        fontupper=\rmfamily,
-        fonttitle=\bfseries\sffamily,
+        fontupper=\rmfamily,          % 正文用衬线字体（宋体）
+        fonttitle=\bfseries\sffamily, % 标题用等线+粗体
         coltitle=white,
         separator sign none,
         titlerule=0pt,
@@ -125,7 +125,7 @@
     title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{prop}
 
-% 例环境（上下横线风格 + 等线标题加粗，内容使用SimSun）
+% 例环境（上下横线风格）
 \newtcbtheorem[number within=section]{example}{}{%
     enhanced,
     breakable,
@@ -141,10 +141,9 @@
     % 设置上下两条横线（起始灰色，末尾黑色）
     borderline north={1pt}{0pt}{black!50},
     borderline south={1pt}{0pt}{black},
-    coltitle=black,           % 标题颜色
-    fonttitle={\bfseries\CJKfontspec{DengXian}},      % 标题等线加粗
-    fontupper={\CJKfontspec{SimSun}},      % 内容使用SimSun
-    description font={\CJKfontspec{DengXian}},
+    coltitle=black,               % 标题颜色
+    fonttitle=\bfseries\sffamily, % 标题用等线+粗体
+    fontupper=\rmfamily,          % 正文用宋体
     attach title to upper,
     after title={\par\smallskip},
     separator sign none,
@@ -165,9 +164,9 @@
     title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{rem}
 
-% 证明（使用SimSun字体，结束后有空行）
+% 证明（标题粗体，正文宋体）
 \renewenvironment{proof}[1][\proofname]{%
-    \par\medskip\noindent{\sffamily\color{thmorange}\textbf{#1}\quad}{\small\CJKfontspec{SimSun}}
+    \par\medskip\noindent{\sffamily\color{thmorange}\textbf{#1}\quad}{\small}
 }{%
     \hfill\qed\par\medskip
 }

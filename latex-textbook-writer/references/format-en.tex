@@ -50,16 +50,16 @@
     pdfauthor={Author Name},
 }
 
-% Section title formatting
+% Section title formatting (sans-serif, no bold)
 \titleformat{\chapter}[display]
-{\normalfont\huge\bfseries\color{titleblue}}
+{\sffamily\huge\color{titleblue}}
 {\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titleformat{\section}
-{\normalfont\Large\bfseries\color{titleblue}}
+{\sffamily\Large\color{titleblue}}
 {\color{titleblue}\thesection}{0.8em}{}
 [\color{titleblue!40}\titlerule]
 \titleformat{\subsection}
-{\normalfont\large\sffamily\color{titleblue}}
+{\sffamily\large\color{titleblue}}
 {}{0em}{}
 
 % Header/footer
@@ -82,17 +82,14 @@
         center,
         left=10pt, right=10pt, top=15pt, bottom=8pt,
         before skip=22pt, after skip=20pt,
-        fontupper=\rmfamily,
-        fonttitle=\bfseries\sffamily,
+        fontupper=\rmfamily,          % Main text uses serif font
+        fonttitle=\bfseries\sffamily, % Box titles use sans-serif + bold
         coltitle=white,
         separator sign none,
         titlerule=0pt,
         toptitle=1mm, bottomtitle=1mm,
     }
 }
-
-% --- Definition/Theorem environments (Numbered with title format) ---
-% Title format: "Number Type: Title" (e.g., "2.2.1 Definition: Real Vector Space")
 
 % Definition environment (green)
 \newtcbtheorem[number within=section]{definition}{Definition}{%
@@ -145,9 +142,9 @@
     % Top and bottom horizontal lines
     borderline north={1pt}{0pt}{black!50},
     borderline south={1pt}{0pt}{black},
-    coltitle=black,           % Title color
-    fonttitle=\sffamily\bfseries,      % Sans-serif bold title
-    description font=\sffamily,
+    coltitle=black,               % Title color
+    fonttitle=\bfseries\sffamily, % Sans-serif bold title
+    fontupper=\rmfamily,          % Main text uses serif
     attach title to upper,
     after title={\par\smallskip},
     separator sign none,
@@ -168,9 +165,9 @@
     title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
 }{rem}
 
-% Proof (no colon, use \quad for spacing, with QED square, blank line after)
+% Proof (bold label, serif text)
 \renewenvironment{proof}[1][\proofname]{%
-    \par\medskip\noindent\textbf{\sffamily\color{thmorange}#1\quad}\small
+    \par\medskip\noindent{\sffamily\color{thmorange}\textbf{#1}\quad}{\small}
 }{%
     \hfill\qed\par\medskip
 }
