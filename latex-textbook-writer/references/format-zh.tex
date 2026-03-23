@@ -2,10 +2,10 @@
 % 保存为 main.tex 或包含到项目中
 
 \documentclass[12pt,a4paper,openany]{book}
-\usepackage[fontset=none]{ctex}
-\setCJKmainfont{SimSun}
-\setCJKsansfont{DengXian}
+% 使用 ctex 宏包，自动检测并配置中文字体（支持 Windows/macOS/Linux）
+\usepackage{ctex}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
 \usepackage{geometry}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
