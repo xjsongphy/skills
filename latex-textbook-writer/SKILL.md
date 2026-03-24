@@ -273,26 +273,28 @@ project/
 
 ```latex
 % 附录B 参考答案
-\appendix
 \chapter{参考答案}
 
 \section{作业一参考答案}
 
-\noindent\textbf{1.} Answer content...
-
 \begin{enumerate}
-    \item Subanswer (a)...
+    \item \begin{enumerate}
+        \item Subanswer (a)...
 
-    \item Subanswer (b)...
+        \item Subanswer (b)...
+    \end{enumerate}
+
+    \item \begin{enumerate}
+        \item Next subanswer...
+    \end{enumerate}
 \end{enumerate}
-
-\noindent\textbf{2.} Next answer...
 ```
 
 **Important:**
 - Do NOT repeat questions - only provide answers
-- Use `\noindent\textbf{N.}` for answer numbering (matches question numbers)
-- Use nested enumerate for subanswers if needed
+- Use `\begin{enumerate}...\end{enumerate}` for auto-numbering (1., 2., 3., ...)
+- Nested enumerate for subanswers if needed
+- No section titles within enumerate - let numbering speak for itself
 
 ### Translation Guide
 
