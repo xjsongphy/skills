@@ -30,7 +30,8 @@ When using `ctex` package for Chinese support, theorem names and figure captions
 ```latex
 \usepackage{ctex}
 \usepackage{amsmath,amssymb,amsthm}
-\renewcommand{\proofname}{Proof}      % Force English "Proof"
+\renewcommand{\proofname}{Proof}         % Force English "Proof"
+\renewcommand{\contentsname}{Contents}   % Force English "Contents" instead of "目录"
 \usepackage{caption}
 \captionsetup{figurename=Figure,tablename=Table}  % Force English captions
 ```
