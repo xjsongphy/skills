@@ -224,6 +224,94 @@ xelatex -interaction=nonstopmode main.tex
 
 These templates contain complete preamble setup, color definitions, and box styles ready to copy into your project.
 
+## Exercise and Answer Appendices
+
+If an `习题/` (exercises) directory exists in the project, create two appendix files:
+
+### File Structure
+
+```
+project/
+├── main.tex          # Main document
+├── exercise.tex      # Appendix: Exercises (自动编号, no narrative text)
+├── answers.tex       # Appendix: Reference Answers (答案 only, no questions repeated)
+└── 习题/             # Exercise source files (Markdown format)
+    ├── hw1.md
+    ├── hw2.md
+    └── ...
+```
+
+### exercise.tex Format
+
+```latex
+% 附录A 习题
+\appendix
+\chapter{习题}
+
+\section{作业一}
+
+\begin{enumerate}
+    \item Question content here...
+
+    \begin{enumerate}
+        \item Subquestion (a)
+        \item Subquestion (b)
+    \end{enumerate}
+
+    \item Next question...
+\end{enumerate}
+```
+
+**Important:**
+- Use `\appendix` before first `\chapter{}`
+- Use `\begin{enumerate}...\end{enumerate}` for auto-numbering (1., 2., 3., ...)
+- No narrative text like "习题1" or "Problem 1" - let enumerate handle numbering
+- Nested enumerate for subquestions (a, b, c...)
+- In main.tex, include after chapters: `\include{exercise}` and `\include{answers}`
+
+### answers.tex Format
+
+```latex
+% 附录B 参考答案
+\appendix
+\chapter{参考答案}
+
+\section{作业一参考答案}
+
+\noindent\textbf{1.} Answer content...
+
+\begin{enumerate}
+    \item Subanswer (a)...
+
+    \item Subanswer (b)...
+\end{enumerate}
+
+\noindent\textbf{2.} Next answer...
+```
+
+**Important:**
+- Do NOT repeat questions - only provide answers
+- Use `\noindent\textbf{N.}` for answer numbering (matches question numbers)
+- Use nested enumerate for subanswers if needed
+
+### Translation Guide
+
+When translating from English problem sets to Chinese:
+
+| English | Chinese |
+|---------|---------|
+| Problem Set 1 | 作业一 |
+| Problem 1 | 1. (use enumerate) |
+| (a), (b), (c) | (a), (b), (c) (nested enumerate) |
+| Compute/Calculate | 计算 |
+| Show/Prove/Demonstrate | 证明/说明 |
+| Determine | 判断/确定 |
+| Isomorphic | 同构 |
+| Dimension | 维数 |
+| Independent constraint equations | 独立约束方程 |
+| Matrix Lie groups | 矩阵李群 |
+| Conjugacy classes | 共轭类 |
+
 ## Environment Syntax Reference
 
 **New syntax (using `\newtcbtheorem`):**
