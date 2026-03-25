@@ -272,10 +272,13 @@ If an `习题/` (exercises) directory exists in the project, create two appendix
 
 ```
 project/
-├── main.tex          # Main document
-├── exercise.tex      # Appendix: Exercises (自动编号, no narrative text)
-├── answers.tex       # Appendix: Reference Answers (答案 only, no questions repeated)
-└── 习题/             # Exercise source files (Markdown format)
+├── main.tex              # Main document
+├── chapters/             # Chapter and appendix files
+│   ├── chapter01.tex     # Chapter files
+│   ├── chapter02.tex
+│   ├── exercise.tex      # Appendix: Exercises (自动编号, no narrative text)
+│   └── answers.tex       # Appendix: Reference Answers (答案 only, no questions repeated)
+└── 习题/                 # Exercise source files (Markdown format)
     ├── hw1.md
     ├── hw2.md
     └── ...
@@ -307,7 +310,7 @@ project/
 - Use `\begin{enumerate}...\end{enumerate}` for auto-numbering (1., 2., 3., ...)
 - No narrative text like "习题1" or "Problem 1" - let enumerate handle numbering
 - Nested enumerate for subquestions (a, b, c...)
-- In main.tex, include after chapters: `\include{exercise}` and `\include{answers}`
+- In main.tex, include after chapters: `\include{chapters/exercise}` and `\include{chapters/answers}`
 
 ### answers.tex Format
 
