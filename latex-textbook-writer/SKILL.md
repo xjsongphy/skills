@@ -140,6 +140,45 @@ Let $V$ be a vector space. The \textbf{Hahn-Banach theorem} states...
 
 **NEVER use bullets or numbered lists in main narrative text.**
 
+### 6. Chinese Quote Marks (CRITICAL for Chinese Documents!)
+
+**When writing Chinese text in LaTeX (with `ctex` package), ALWAYS use proper quote marks:**
+
+**Chinese Double Quotes:**
+- Left double quote: `` ``, `` (two backticks)
+- Right double quote: `''` (two single quotes/apostrophes)
+
+**Chinese Single Quotes:**
+- Left single quote: `` ` `` (one backtick)
+- Right single quote: `'` (one single quote/apostrophe)
+
+**How to type (with Chinese input method):**
+- Press backtick key (`` ` ``) twice for left double quote: ``
+- Press apostrophe key (`'`) twice for right double quote: ''
+- Press backtick key once for left single quote: `
+- Press apostrophe key once for right single quote: '
+
+**Examples:**
+```latex
+% CORRECT - Chinese quotes
+我们关于``接近''和``连续''的概念...
+这是一个``简单的定义。
+
+% INCORRECT - ASCII straight quotes
+我们关于"接近"和"连续"的概念...
+这是一个"简单"的定义。
+
+% INCORRECT - Corner brackets (do NOT use in LaTeX)
+我们关于「接近」和「连续」的概念...
+```
+
+**Why this matters:**
+- LaTeX with `ctex` package renders `` `` and `''` as proper Chinese quotation marks ("" and "")
+- Using ASCII straight quotes (`"`) will display as ugly straight quotes in the PDF
+- Using corner brackets (`「」`) is not standard for LaTeX Chinese typesetting
+
+**IMPORTANT:** Always use `` `` and `''` for quotes in Chinese text, never use `"`, `「`, or `」`!
+
 ## Box Title Format
 
 **English format**:
@@ -207,7 +246,8 @@ Before considering content complete:
 7. [ ] All referenceable items have unique labels in second argument
 8. [ ] All cross-references use `\ref{}`
 9. [ ] **For English documents**: Added `\renewcommand{\proofname}{Proof}` and `\captionsetup{figurename=Figure,tablename=Table}`
-10. [ ] Document compiles without errors
+10. [ ] **For Chinese documents**: All quotes use `` `` and `''`, NOT `"`, `「`, or `」`
+11. [ ] Document compiles without errors
 
 ## Compilation
 
