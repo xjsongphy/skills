@@ -247,7 +247,8 @@ Before considering content complete:
 8. [ ] All cross-references use `\ref{}`
 9. [ ] **For English documents**: Added `\renewcommand{\proofname}{Proof}` and `\captionsetup{figurename=Figure,tablename=Table}`
 10. [ ] **For Chinese documents**: All quotes use `` `` and `''`, NOT `"`, `「`, or `」`
-11. [ ] Document compiles without errors
+11. [ ] **For answers.tex**: Each solution uses \textbf{解：}/\textbf{Solution:} and shows detailed reasoning process, not just final answer
+12. [ ] Document compiles without errors
 
 ## Compilation
 
@@ -321,23 +322,53 @@ project/
 \section{作业一参考答案}
 
 \begin{enumerate}
-    \item \begin{enumerate}
-        \item Subanswer (a)...
+    \item \textbf{解：} [详细解题过程，类似正文的叙述方式]
 
-        \item Subanswer (b)...
+    \begin{enumerate}
+        \item \textbf{解：} [子问题的详细解答...]
+
+        \item \textbf{解：} [另一个子问题的详细解答...]
     \end{enumerate}
 
-    \item \begin{enumerate}
-        \item Next subanswer...
-    \end{enumerate}
+    \item \textbf{解：} [下一题的详细解答...]
 \end{enumerate}
 ```
 
-**Important:**
-- Do NOT repeat questions - only provide answers
-- Use `\begin{enumerate}...\end{enumerate}` for auto-numbering (1., 2., 3., ...)
-- Nested enumerate for subanswers if needed
-- No section titles within enumerate - let numbering speak for itself
+**Critical: Solutions MUST follow narrative style (类似正文的叙述方式)**
+
+解答不是简单的答案堆砌，而是应该像正文一样具有完整的推理过程和叙述逻辑。每个解答应包括：
+
+1. **以 \textbf{解：} 开头** - 明确标记解答开始
+2. **阐明解题思路** - 说明使用的方法、定理或策略
+3. **逐步推导过程** - 展示关键步骤，中间计算不要省略
+4. **逻辑连接** - 使用"因此"、"从而"、"由于"、"注意到"等连接词
+5. **最终结论** - 清晰地给出答案
+
+**示例风格：**
+
+```latex
+\item \textbf{解：} $USp(2n)$ 是 $Sp(2n,\mathbb{C})$ 与 $SU(2n)$ 的交集。从 $SU(2n)$（实维数 $4n^{2}-1$）出发，在酉群框架下辛约束给出 $2n^{2}-n$ 个独立实约束。因此 $USp(2n)$ 的维数为 $(4n^{2}-1) - (2n^{2}-n) = 2n^{2}+n = n(2n+1)$。
+```
+
+**反面示例（应避免）：**
+
+```latex
+\item \textbf{答：} $n(2n+1)$。
+```
+
+**书写要点：**
+- \textbf{解：} 而非 \textbf{答：} - 强调过程而非仅结果
+- 不要重复题目内容，直接开始解答
+- 使用完整的数学句子和段落，而非要点列表
+- 关键步骤需解释理由（"因为...所以..."、"注意到...从而..."）
+- 复杂计算可分多段叙述，保持逻辑清晰
+- 可使用 \begin{proof}...\end{proof} 环境包含证明类解答
+
+**For English documents:** Use \textbf{Solution:} instead of \textbf{解：}
+
+```latex
+\item \textbf{Solution:} $USp(2n)$ is the intersection of $Sp(2n,\mathbb{C})$ and $SU(2n)$. Starting from $SU(2n)$ (real dimension $4n^{2}-1$), the symplectic constraints in the unitary framework give $2n^{2}-n$ independent real constraints. Therefore, the dimension of $USp(2n)$ is $(4n^{2}-1) - (2n^{2}-n) = 2n^{2}+n = n(2n+1)$.
+```
 
 ### Translation Guide
 
