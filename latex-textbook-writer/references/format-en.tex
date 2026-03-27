@@ -179,6 +179,12 @@
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0pt plus 0.1em}
 
+% Paragraph indentation in enumerate environments (for answers.tex appendix)
+\setlist[enumerate]{%
+  listparindent=\parindent,  % First-line indent for paragraphs within list items
+  parsep=0pt plus 0.1em      % Paragraph spacing
+}
+
 % Allow ragged bottom (prevents line spacing from being stretched)
 \raggedbottom
 
@@ -207,5 +213,30 @@
 % \begin{proof}
 % The proof follows from Zorn's Lemma...
 % \end{proof}
+
+% === Answer Appendix Format (optional) ===
+% If you have an answers.tex appendix, use this format:
+%
+% \chapter{Reference Answers}
+%
+% \section{Problem Set 1 Solutions}
+%
+% \begin{enumerate}
+%     \item \textbf{Solution:} First problem solution...
+%
+%     Multi-paragraph solutions work with automatic indentation:
+%
+%     This is the second paragraph, automatically indented.
+%
+%     \begin{enumerate}
+%         \item \textbf{Solution:} Subproblem (a)...
+%         \item \textbf{Solution:} Subproblem (b)...
+%     \end{enumerate}
+%
+%     \item \textbf{Solution:} Second problem solution...
+% \end{enumerate}
+%
+% Note: Paragraphs within \item automatically indent due to
+% \setlist[enumerate]{listparindent=\parindent} in preamble.
 
 \end{document}

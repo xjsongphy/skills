@@ -175,6 +175,12 @@
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0pt plus 0.1em}
 
+% enumerate 环境中的段落缩进设置（用于 answers.tex 等附录）
+\setlist[enumerate]{%
+  listparindent=\parindent,  % 列表项内段落的首行缩进
+  parsep=0pt plus 0.1em      % 段落间距
+}
+
 % 允许页面底部不对齐（避免行间距被拉伸）
 \raggedbottom
 
@@ -203,6 +209,31 @@
 % \begin{proof}
 % 证明由佐恩引理可得...
 % \end{proof}
+
+% === 附录格式（可选）===
+% 如果有参考答案附录 answers.tex，使用以下格式：
+%
+% \chapter{参考答案}
+%
+% \section{作业一参考答案}
+%
+% \begin{enumerate}
+%     \item \textbf{解：} 第一题的解答...
+%
+%     多段解答自动缩进：
+%
+%     这是第二段，会自动缩进。
+%
+%     \begin{enumerate}
+%         \item \textbf{解：} 子问题 的解答...
+%         \item \textbf{解：} 子问题 的解答...
+%     \end{enumerate}
+%
+%     \item \textbf{解：} 第二题的解答...
+% \end{enumerate}
+%
+% 注意：由于导言区设置了 \setlist[enumerate]{listparindent=\parindent}，
+% \item 中的段落会自动首行缩进，无需手动添加 \indent。
 
 % 【重要】中文引号使用说明：
 % 在 LaTeX 中使用中文引号时，请使用以下格式：
