@@ -341,19 +341,41 @@ project/
 1. **以 \textbf{解：} 开头** - 明确标记解答开始
 2. **阐明解题思路** - 说明使用的方法、定理或策略
 3. **逐步推导过程** - 展示关键步骤，中间计算不要省略
-4. **逻辑连接** - 使用"因此"、"从而"、"由于"、"注意到"等连接词
+4. **逻辑连接** - 使用"因此"、"从而"、"由于"、"注意到"、"现在"等连接词
 5. **最终结论** - 清晰地给出答案
 
-**示例风格：**
+**示例风格（直接切入主题）：**
 
 ```latex
-\item \textbf{解：} $USp(2n)$ 是 $Sp(2n,\mathbb{C})$ 与 $SU(2n)$ 的交集。从 $SU(2n)$（实维数 $4n^{2}-1$）出发，在酉群框架下辛约束给出 $2n^{2}-n$ 个独立实约束。因此 $USp(2n)$ 的维数为 $(4n^{2}-1) - (2n^{2}-n) = 2n^{2}+n = n(2n+1)$。
+\item \textbf{解：} 设 $M \in USp(2n)$ 是 $2n \times 2n$ 复矩阵，分块为 $n \times n$ 子阵：
+        \begin{equation*}
+        M = \begin{pmatrix} A & B \\ C & D \end{pmatrix}, \quad J = \begin{pmatrix} 0 & I_n \\ -I_n & 0 \end{pmatrix}
+        \end{equation*}
+        $M$ 必须同时满足酉性 $M^{\dagger}M = I$ 和辛性 $M^{T}JM = J$。由酉性知 $M^{-1} = M^{\dagger}$，代入辛性方程得 $JM = \bar{M}J$。展开分块乘法得到 $D = \bar{A}$ 和 $C = -\bar{B}$。因此 $USp(2n)$ 中的矩阵必须具有如下形式：
+        \begin{equation*}
+        M = \begin{pmatrix} A & B \\ -\bar{B} & \bar{A} \end{pmatrix}
+        \end{equation*}
+        此时独立的复变量仅由 $A$ 和 $B$ 提供，总共有 $2n^{2}$ 个复变量，对应 $4n^{2}$ 个实参数。
+
+        现在我们将此形式代入酉条件 $M^{\dagger}M = I$：
+        \begin{equation*}
+        \begin{pmatrix} A^{\dagger} & -B^{T} \\ B^{\dagger} & A^{T} \end{pmatrix} \begin{pmatrix} A & B \\ -\bar{B} & \bar{A} \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix}
+        \end{equation*}
+        这给出两个独立的矩阵方程。对角块方程 $A^{\dagger}A + B^{T}\bar{B} = I$ 是埃尔米特矩阵方程，其对角线提供 $n$ 个实约束，非对角线提供 $\frac{n(n-1)}{2}$ 个复约束，共 $n^{2}$ 个实约束。非对角块方程 $A^{\dagger}B - B^{T}\bar{A} = 0$ 意味着 $A^{\dagger}B$ 是对称矩阵，其反对称部分必须为零，给出 $n(n-1)$ 个实约束。
+
+        因此总约束数为 $n^{2} + n(n-1) = 2n^{2}-n$ 个实约束。从初始的 $4n^{2}$ 个实参数中减去这些约束，得到 $USp(2n)$ 的实维数：
+        \begin{equation*}
+        \dim_{\mathbb{R}} USp(2n) = 4n^{2} - (2n^{2}-n) = 2n^{2} + n = n(2n+1)
+        \end{equation*}
 ```
 
 **反面示例（应避免）：**
 
 ```latex
-\item \textbf{答：} $n(2n+1)$。
+\item \textbf{解：} 我们的目标是计算 $USp(2n)$ 的维数。首先，让我们来了解一下这个群的构成...（太多铺垫）
+\item \textbf{解：} 我们可以看到，由于酉条件，矩阵块之间有约束关系...（主观判断）
+\item \textbf{解：} 经过详细分析（此处省略繁琐的分块计算），维数为 $n(2n+1)$...（跳跃推导）
+\item \textbf{答：} $n(2n+1)$。（只有结果）
 ```
 
 **书写要点：**
@@ -403,6 +425,41 @@ When translating from English problem sets to Chinese:
 | Independent constraint equations | 独立约束方程 |
 | Matrix Lie groups | 矩阵李群 |
 | Conjugacy classes | 共轭类 |
+
+## Figures and Illustrations
+
+Figures should be stored in separate files under a `figures/` directory, not inline in chapter `.tex` files. This keeps chapter files clean and manageable.
+
+### Figure File Structure
+
+```
+project/
+├── figures/              # All illustration files
+│   ├── draw_xxx.py       # Python scripts (matplotlib) to generate figures
+│   ├── xxx.png           # Generated images
+│   └── ...
+├── chapters/
+│   ├── chapter01.tex     # Uses \includegraphics{figures/xxx.png}
+│   └── ...
+```
+
+### Creating Figures
+
+Use **Python scripts** (`.py` files in `figures/`) with `matplotlib` to create all figures. Output as PNG (200 DPI, white background) and include via `\includegraphics`.
+
+```latex
+\begin{center}
+\includegraphics[width=0.85\textwidth]{figures/xxx.png}
+\end{center}
+```
+
+### Python Figure Guidelines
+
+- Use `matplotlib` and `numpy`
+- Font: `SimHei` or `Arial Unicode MS` for Chinese text
+- Save as PNG with `dpi=200, bbox_inches='tight', facecolor='white'`
+- Add comments at the top of the file explaining what the figure illustrates
+- File naming: `draw_xxx.py` for scripts, `xxx.png` for output
 
 ## Environment Syntax Reference
 
