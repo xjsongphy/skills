@@ -31,7 +31,7 @@ When using `ctex` package for Chinese support, theorem names and figure captions
 \usepackage{ctex}
 \usepackage{amsmath,amssymb,amsthm}
 \renewcommand{\proofname}{Proof}         % Force English "Proof"
-\renewcommand{\contentsname}{Contents}   % Force English "Contents" instead of "目录"
+\renewcommand{\contentsname}{Contents}   % Force English "Contents"
 \usepackage{caption}
 \captionsetup{figurename=Figure,tablename=Table}  % Force English captions
 ```
@@ -145,14 +145,14 @@ Let $V$ be a vector space. The \textbf{Hahn-Banach theorem} states...
 **When writing Chinese text in LaTeX (with `ctex` package), ALWAYS use proper quote marks:**
 
 **Chinese Double Quotes:**
-- Left double quote: `` ``, `` (two backticks)
+- Left double quote: `` `` `` (two backticks)
 - Right double quote: `''` (two single quotes/apostrophes)
 
 **Chinese Single Quotes:**
 - Left single quote: `` ` `` (one backtick)
 - Right single quote: `'` (one single quote/apostrophe)
 
-**How to type (with Chinese input method):**
+**How to type:**
 - Press backtick key (`` ` ``) twice for left double quote: ``
 - Press apostrophe key (`'`) twice for right double quote: ''
 - Press backtick key once for left single quote: `
@@ -161,23 +161,14 @@ Let $V$ be a vector space. The \textbf{Hahn-Banach theorem} states...
 **Examples:**
 ```latex
 % CORRECT - Chinese quotes
-我们关于``接近''和``连续''的概念...
-这是一个``简单的定义。
+The concept of ``closeness'' and ``continuity''...
+This is a ``simple'' definition.
 
-% INCORRECT - ASCII straight quotes
-我们关于"接近"和"连续"的概念...
-这是一个"简单"的定义。
-
-% INCORRECT - Corner brackets (do NOT use in LaTeX)
-我们关于「接近」和「连续」的概念...
+% INCORRECT - ASCII straight quotes (ugly in PDF)
+The concept of "closeness" and "continuity"...
 ```
 
-**Why this matters:**
-- LaTeX with `ctex` package renders `` `` and `''` as proper Chinese quotation marks ("" and "")
-- Using ASCII straight quotes (`"`) will display as ugly straight quotes in the PDF
-- Using corner brackets (`「」`) is not standard for LaTeX Chinese typesetting
-
-**IMPORTANT:** Always use `` `` and `''` for quotes in Chinese text, never use `"`, `「`, or `」`!
+**IMPORTANT:** Always use `` `` and `''` for quotes in Chinese text, never use `"`, corner brackets, or any other form!
 
 ## Box Title Format
 
@@ -187,10 +178,10 @@ Let $V$ be a vector space. The \textbf{Hahn-Banach theorem} states...
 - "1.10 Notation: n"
 - "1.44 Example: A Sum That Is Not Direct"
 
-**Chinese format**:
+**Chinese format** (for Chinese documents):
 - "1.22 定义：实向量空间"
-- "1.14 F^3 中加法的可交换性"
-- "1.10 记号：n"
+- "1.14 $F^3$ 中加法的可交换性"
+- "1.10 记号：$n$"
 - "1.44 例：一个不是直和的和"
 
 ## Section Numbering Format
@@ -207,7 +198,7 @@ Let $V$ be a vector space. The \textbf{Hahn-Banach theorem} states...
 
 ## Standard Patterns
 
-### Pattern 1: Narrative → Definition → Explanation
+### Pattern 1: Narrative -> Definition -> Explanation
 ```latex
 Introduce the concept with background and motivation.
 
@@ -218,7 +209,7 @@ Formal definition.
 Explain the meaning and intuition behind the definition.
 ```
 
-### Pattern 2: Proposition → Proof → Consequence Narrative
+### Pattern 2: Proposition -> Proof -> Consequence Narrative
 ```latex
 Set up the context for the proposition.
 
@@ -246,8 +237,8 @@ Before considering content complete:
 7. [ ] All referenceable items have unique labels in second argument
 8. [ ] All cross-references use `\ref{}`
 9. [ ] **For English documents**: Added `\renewcommand{\proofname}{Proof}` and `\captionsetup{figurename=Figure,tablename=Table}`
-10. [ ] **For Chinese documents**: All quotes use `` `` and `''`, NOT `"`, `「`, or `」`
-11. [ ] **For answers.tex**: Each solution uses \textbf{解：}/\textbf{Solution:} and shows detailed reasoning process, not just final answer
+10. [ ] **For Chinese documents**: All quotes use `` `` and `''`, NOT `"` or corner brackets
+11. [ ] **For answers.tex**: Each solution uses `\textbf{解：}` / `\textbf{Solution:}` and shows detailed reasoning
 12. [ ] Document compiles without errors
 
 ## Compilation
@@ -275,10 +266,10 @@ If an `习题/` (exercises) directory exists in the project, create two appendix
 project/
 ├── main.tex              # Main document
 ├── chapters/             # Chapter and appendix files
-│   ├── chapter01.tex     # Chapter files
+│   ├── chapter01.tex
 │   ├── chapter02.tex
-│   ├── exercise.tex      # Appendix: Exercises (自动编号, no narrative text)
-│   └── answers.tex       # Appendix: Reference Answers (答案 only, no questions repeated)
+│   ├── exercise.tex      # Appendix: Exercises (auto-numbered, no narrative text)
+│   └── answers.tex       # Appendix: Reference Answers (solutions only, no questions repeated)
 └── 习题/                 # Exercise source files (Markdown format)
     ├── hw1.md
     ├── hw2.md
@@ -288,7 +279,7 @@ project/
 ### exercise.tex Format
 
 ```latex
-% 附录A 习题
+% Appendix A: Exercises
 \appendix
 \chapter{习题}
 
@@ -309,100 +300,99 @@ project/
 **Important:**
 - Use `\appendix` before first `\chapter{}`
 - Use `\begin{enumerate}...\end{enumerate}` for auto-numbering (1., 2., 3., ...)
-- No narrative text like "习题1" or "Problem 1" - let enumerate handle numbering
+- No narrative text like "Problem 1" - let enumerate handle numbering
 - Nested enumerate for subquestions (a, b, c...)
 - In main.tex, include after chapters: `\include{chapters/exercise}` and `\include{chapters/answers}`
 
 ### answers.tex Format
 
 ```latex
-% 附录B 参考答案
+% Appendix B: Reference Answers
 \chapter{参考答案}
 
 \section{作业一参考答案}
 
 \begin{enumerate}
-    \item \textbf{解：} [详细解题过程，类似正文的叙述方式]
+    \item \textbf{解：} [Detailed solution process, narrative style like main text]
 
     \begin{enumerate}
-        \item \textbf{解：} [子问题的详细解答...]
+        \item \textbf{解：} [Detailed solution for subproblem...]
 
-        \item \textbf{解：} [另一个子问题的详细解答...]
+        \item \textbf{解：} [Another subproblem solution...]
     \end{enumerate}
 
-    \item \textbf{解：} [下一题的详细解答...]
+    \item \textbf{解：} [Next problem solution...]
 \end{enumerate}
 ```
 
-**Critical: Solutions MUST follow narrative style (类似正文的叙述方式)**
+**Critical: Solutions MUST follow narrative style (like the main text)**
 
-解答不是简单的答案堆砌，而是应该像正文一样具有完整的推理过程和叙述逻辑。每个解答应包括：
+Solutions are NOT just answer dumps. They should have complete reasoning and narrative logic like the main text. Each solution should include:
 
-1. **以 \textbf{解：} 开头** - 明确标记解答开始
-2. **阐明解题思路** - 说明使用的方法、定理或策略
-3. **逐步推导过程** - 展示关键步骤，中间计算不要省略
-4. **逻辑连接** - 使用"因此"、"从而"、"由于"、"注意到"、"现在"等连接词
-5. **最终结论** - 清晰地给出答案
+1. **Start with `\textbf{解：}`** - clearly mark the solution start
+2. **State the approach** - method, theorem, or strategy used
+3. **Step-by-step derivation** - show key steps, do not skip intermediate calculations
+4. **Logical connectors** - use "therefore", "hence", "since", "note that", "now", etc.
+5. **Final conclusion** - clearly state the answer
 
-**示例风格（直接切入主题）：**
+**Example style (direct, no preamble):**
 
 ```latex
-\item \textbf{解：} 设 $M \in USp(2n)$ 是 $2n \times 2n$ 复矩阵，分块为 $n \times n$ 子阵：
+\item \textbf{解：} Let $M \in USp(2n)$ be a $2n \times 2n$ complex matrix, partitioned into $n \times n$ blocks:
         \begin{equation*}
         M = \begin{pmatrix} A & B \\ C & D \end{pmatrix}, \quad J = \begin{pmatrix} 0 & I_n \\ -I_n & 0 \end{pmatrix}
         \end{equation*}
-        $M$ 必须同时满足酉性 $M^{\dagger}M = I$ 和辛性 $M^{T}JM = J$。由酉性知 $M^{-1} = M^{\dagger}$，代入辛性方程得 $JM = \bar{M}J$。展开分块乘法得到 $D = \bar{A}$ 和 $C = -\bar{B}$。因此 $USp(2n)$ 中的矩阵必须具有如下形式：
+        $M$ must satisfy both unitarity $M^{\dagger}M = I$ and symplecticity $M^{T}JM = J$. From unitarity, $M^{-1} = M^{\dagger}$. Substituting into the symplectic equation gives $JM = \bar{M}J$. Expanding the block multiplication yields $D = \bar{A}$ and $C = -\bar{B}$. Therefore matrices in $USp(2n)$ must have the form:
         \begin{equation*}
         M = \begin{pmatrix} A & B \\ -\bar{B} & \bar{A} \end{pmatrix}
         \end{equation*}
-        此时独立的复变量仅由 $A$ 和 $B$ 提供，总共有 $2n^{2}$ 个复变量，对应 $4n^{2}$ 个实参数。
 
-        现在我们将此形式代入酉条件 $M^{\dagger}M = I$：
+        Now substitute this form into the unitarity condition $M^{\dagger}M = I$:
         \begin{equation*}
         \begin{pmatrix} A^{\dagger} & -B^{T} \\ B^{\dagger} & A^{T} \end{pmatrix} \begin{pmatrix} A & B \\ -\bar{B} & \bar{A} \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix}
         \end{equation*}
-        这给出两个独立的矩阵方程。对角块方程 $A^{\dagger}A + B^{T}\bar{B} = I$ 是埃尔米特矩阵方程，其对角线提供 $n$ 个实约束，非对角线提供 $\frac{n(n-1)}{2}$ 个复约束，共 $n^{2}$ 个实约束。非对角块方程 $A^{\dagger}B - B^{T}\bar{A} = 0$ 意味着 $A^{\dagger}B$ 是对称矩阵，其反对称部分必须为零，给出 $n(n-1)$ 个实约束。
+        This yields two independent matrix equations. The diagonal block equation $A^{\dagger}A + B^{T}\bar{B} = I$ is a Hermitian matrix equation, providing $n$ real constraints on the diagonal and $\frac{n(n-1)}{2}$ complex constraints off-diagonal, totaling $n^{2}$ real constraints. The off-diagonal block equation $A^{\dagger}B - B^{T}\bar{A} = 0$ means $A^{\dagger}B$ is symmetric, giving $n(n-1)$ real constraints.
 
-        因此总约束数为 $n^{2} + n(n-1) = 2n^{2}-n$ 个实约束。从初始的 $4n^{2}$ 个实参数中减去这些约束，得到 $USp(2n)$ 的实维数：
+        Therefore the total number of constraints is $n^{2} + n(n-1) = 2n^{2}-n$. Subtracting from $4n^{2}$ initial real parameters gives the real dimension of $USp(2n)$:
         \begin{equation*}
         \dim_{\mathbb{R}} USp(2n) = 4n^{2} - (2n^{2}-n) = 2n^{2} + n = n(2n+1)
         \end{equation*}
 ```
 
-**反面示例（应避免）：**
+**Anti-examples (avoid):**
 
 ```latex
-\item \textbf{解：} 我们的目标是计算 $USp(2n)$ 的维数。首先，让我们来了解一下这个群的构成...（太多铺垫）
-\item \textbf{解：} 我们可以看到，由于酉条件，矩阵块之间有约束关系...（主观判断）
-\item \textbf{解：} 经过详细分析（此处省略繁琐的分块计算），维数为 $n(2n+1)$...（跳跃推导）
-\item \textbf{答：} $n(2n+1)$。（只有结果）
+\item \textbf{解：} Our goal is to compute the dimension of $USp(2n)$. First, let us understand the structure of this group... (too much preamble)
+\item \textbf{解：} We can see that, due to the unitarity condition, there are constraints between the matrix blocks... (vague, no actual derivation)
+\item \textbf{解：} After detailed analysis (omitting the tedious block computation), the dimension is $n(2n+1)$... (skipping steps)
+\item \textbf{答：} $n(2n+1)$. (result only, no process)
 ```
 
-**书写要点：**
-- \textbf{解：} 而非 \textbf{答：} - 强调过程而非仅结果
-- 不要重复题目内容，直接开始解答
-- 使用完整的数学句子和段落，而非要点列表
-- 关键步骤需解释理由（"因为...所以..."、"注意到...从而..."）
-- 复杂计算可分多段叙述，保持逻辑清晰
-- 可使用 \begin{proof}...\end{proof} 环境包含证明类解答
+**Writing guidelines:**
+- Use `\textbf{解：}` (not `\textbf{答：}`) to emphasize process over result
+- Do not repeat the question - start the solution directly
+- Use complete mathematical sentences and paragraphs, not bullet points
+- Explain reasoning at key steps ("since...therefore...", "note that...hence...")
+- Split long computations into multiple paragraphs for clarity
+- May use `\begin{proof}...\end{proof}` for proof-type solutions
 
-**段落分隔（重要）：**
+**Paragraph separation (important):**
 
-在 LaTeX 中，空行用于创建段落分隔。长解答应适当分段以提高可读性：
+In LaTeX, blank lines create paragraph breaks. Long solutions should be split into paragraphs for readability:
 
 ```latex
-\item \textbf{解：} 辛群 $Sp(2n,\mathbb{R})$ 由满足 $M^{T}\Omega M = \Omega$ 的矩阵构成，其中 $\Omega$ 是标准辛形式。这个方程给出 $\frac{(2n)(2n-1)}{2} = n(2n-1)$ 个独立实约束，因为反对称矩阵有 $\frac{N(N-1)}{2}$ 个独立分量。
+\item \textbf{解：} The symplectic group $Sp(2n,\mathbb{R})$ consists of matrices satisfying $M^{T}\Omega M = \Omega$, where $\Omega$ is the standard symplectic form. This equation gives $\frac{(2n)(2n-1)}{2} = n(2n-1)$ independent real constraints.
 
-一般线性群 $GL(2n,\mathbb{R})$ 的维数是 $(2n)^{2} = 4n^{2}$，因此 $Sp(2n,\mathbb{R})$ 的维数为 $4n^{2} - n(2n-1) = 2n^{2} + n = n(2n+1)$。
+The general linear group $GL(2n,\mathbb{R})$ has dimension $(2n)^{2} = 4n^{2}$, so $Sp(2n,\mathbb{R})$ has dimension $4n^{2} - n(2n-1) = 2n^{2} + n = n(2n+1)$.
 ```
 
-**分段原则：**
-- 一个逻辑段落说明一个主要观点或步骤
-- 段落间使用空行分隔（LaTeX 中按两次 Enter 键）
-- 每段开头可以适当承接上文，使用"因此"、"故"、"从而"等
-- 公式独立成段时使用 `$$...$$` 或 `\[...\]`
+**Paragraph principles:**
+- One logical paragraph = one main point or step
+- Separate paragraphs with blank lines (press Enter twice in LaTeX)
+- Use transitional words at paragraph starts: "therefore", "hence", "now"
+- Standalone formulas use `$$...$$` or `\[...\]`
 
-**For English documents:** Use \textbf{Solution:} instead of \textbf{解：}
+**For English documents:** Use `\textbf{Solution:}` instead of `\textbf{解：}`
 
 ```latex
 \item \textbf{Solution:} $USp(2n)$ is the intersection of $Sp(2n,\mathbb{C})$ and $SU(2n)$. Starting from $SU(2n)$ (real dimension $4n^{2}-1$), the symplectic constraints in the unitary framework give $2n^{2}-n$ independent real constraints. Therefore, the dimension of $USp(2n)$ is $(4n^{2}-1) - (2n^{2}-n) = 2n^{2}+n = n(2n+1)$.
@@ -428,38 +418,40 @@ When translating from English problem sets to Chinese:
 
 ## Figures and Illustrations
 
-Figures should be stored in separate files under a `figures/` directory, not inline in chapter `.tex` files. This keeps chapter files clean and manageable.
+Figures can be created using **TikZ code inline** in chapter `.tex` files, or using **Python scripts** (matplotlib) stored in a `figures/` directory.
 
-### Figure File Structure
+### TikZ Figures (inline in chapter files)
 
-```
-project/
-├── figures/              # All illustration files
-│   ├── draw_xxx.py       # Python scripts (matplotlib) to generate figures
-│   ├── xxx.png           # Generated images
-│   └── ...
-├── chapters/
-│   ├── chapter01.tex     # Uses \includegraphics{figures/xxx.png}
-│   └── ...
-```
-
-### Creating Figures
-
-Use **Python scripts** (`.py` files in `figures/`) with `matplotlib` to create all figures. Output as PNG (200 DPI, white background) and include via `\includegraphics`.
+For mathematical diagrams (group-algebra relationships, commutative diagrams, etc.), use TikZ code directly in chapter `.tex` files:
 
 ```latex
 \begin{center}
-\includegraphics[width=0.85\textwidth]{figures/xxx.png}
+\begin{tikzpicture}[
+    box/.style={draw, rounded corners=4pt, ...},
+    ...
+]
+    \node[box] (A) at (0,0) {$SU(2)$};
+    ...
+    \draw[->, thick] (A) -- (B);
+\end{tikzpicture}
 \end{center}
 ```
 
-### Python Figure Guidelines
+### Python Figures (external scripts)
 
-- Use `matplotlib` and `numpy`
-- Font: `SimHei` or `Arial Unicode MS` for Chinese text
+For plots, curves, and complex illustrations, use Python scripts:
+
+```
+project/
+├── figures/              # Python scripts and generated images
+│   ├── draw_xxx.py       # matplotlib scripts
+│   ├── xxx.png           # Generated images
+│   └── ...
+```
+
+- **Runtime**: `conda run -n py313 python figures/draw_xxx.py`
 - Save as PNG with `dpi=200, bbox_inches='tight', facecolor='white'`
-- Add comments at the top of the file explaining what the figure illustrates
-- File naming: `draw_xxx.py` for scripts, `xxx.png` for output
+- Include via `\includegraphics[width=0.85\textwidth]{figures/xxx.png}`
 
 ## Environment Syntax Reference
 
