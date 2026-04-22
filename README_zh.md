@@ -44,6 +44,22 @@ Claude Code 专用技能集合，提升 AI 在特定任务中的表现。
 
 ---
 
+### latex-compile
+
+**用途**：LaTeX 编译助手（XeLaTeX）
+
+**特点**：
+- VSCode LaTeX Workshop 标准编译命令
+- 常见编译错误诊断
+- 快速诊断命令
+- 编译工作流指导
+
+**适用场景**：LaTeX 项目编译、错误诊断、交叉引用问题
+
+**调用方式**：`/latex-compile`
+
+---
+
 ### update-skill
 
 **用途**：根据对话反馈更新现有 skills
@@ -67,6 +83,8 @@ skills/
 ├── latex-textbook-writer/    # LaTeX 教材编写
 │   └── SKILL.md
 ├── md-report-writer/         # Markdown 报告编写
+│   └── SKILL.md
+├── latex-compile/            # LaTeX 编译助手
 │   └── SKILL.md
 ├── update-skill/             # Skill 更新工具
 │   └── SKILL.md
