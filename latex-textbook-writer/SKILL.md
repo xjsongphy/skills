@@ -170,6 +170,29 @@ The concept of "closeness" and "continuity"...
 
 **IMPORTANT:** Always use `` `` and `''` for quotes in Chinese text, never use `"`, corner brackets, or any other form!
 
+### 7. Specify Variable Domains Before Formulas
+
+**ALWAYS** state which set each variable belongs to **before** writing formulas, not after.
+
+**BAD** (domain specified after formula):
+```latex
+We can verify
+$$
+\langle \operatorname{ad}_{X}(Y), Z \rangle = \langle Y, \operatorname{ad}_{X^{*}}(Z) \rangle
+$$
+for $X \in \mathfrak{r}$ and $Y, Z \in \mathfrak{g}$.
+```
+
+**GOOD** (domain specified first):
+```latex
+Take any $X \in \mathfrak{r}$ and $Y, Z \in \mathfrak{g}$. We can verify
+$$
+\langle \operatorname{ad}_{X}(Y), Z \rangle = \langle Y, \operatorname{ad}_{X^{*}}(Z) \rangle
+$$
+```
+
+Use phrases like: "Take any...", "For...", "Let...", "For any...".
+
 ## Box Title Format
 
 **English format**:
@@ -238,8 +261,9 @@ Before considering content complete:
 8. [ ] All cross-references use `\ref{}`
 9. [ ] **For English documents**: Added `\renewcommand{\proofname}{Proof}` and `\captionsetup{figurename=Figure,tablename=Table}`
 10. [ ] **For Chinese documents**: All quotes use `` `` and `''`, NOT `"` or corner brackets
-11. [ ] **For answers.tex**: Each solution uses `\textbf{解：}` / `\textbf{Solution:}` and shows detailed reasoning
-12. [ ] Document compiles without errors
+11. [ ] **Variable domains specified BEFORE formulas**, not after
+12. [ ] **For answers.tex**: Each solution uses `\textbf{解：}` / `\textbf{Solution:}` and shows detailed reasoning
+13. [ ] Document compiles without errors
 
 ## Compilation
 
