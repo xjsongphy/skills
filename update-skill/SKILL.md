@@ -28,11 +28,11 @@ Example:
 /update-skill md-report-writer
 ```
 
-The skill will:
-1. Scan the conversation for feedback and corrections
+When called, the AI will:
+1. Manually review the conversation for feedback and corrections
 2. Read the target skill file
-3. Identify which guidelines need updating
-4. Apply updates to the skill
+3. Identify which guidelines need updating based on the conversation
+4. Manually apply updates to the skill file
 5. Commit changes to git
 
 ## What Gets Updated
@@ -66,18 +66,20 @@ The skill looks for these types of feedback in the conversation:
 
 ## Process
 
-1. **Analyze Conversation**: Scan for user feedback, corrections, and refinement requests
+When you invoke `/update-skill <skill-name>`, the AI will:
 
-2. **Read Target Skill**: Load the skill file to understand current guidelines
+1. **Review the conversation** to identify your feedback, corrections, and refinements
 
-3. **Identify Changes**: Match feedback to specific guidelines or sections that need updating
+2. **Read the target skill file** to understand current guidelines
 
-4. **Update Skill**: Modify the skill file to incorporate the learned preferences
+3. **Identify what needs updating** by matching your feedback to specific guidelines
+
+4. **Update the skill file** manually based on what was learned
    - Add new guidelines if needed
    - Clarify ambiguous existing guidelines
-   - Add examples from the conversation
+   - Add examples from the conversation if helpful
 
-5. **Git Commit**: Commit with descriptive message explaining what was learned
+5. **Commit to git** with a descriptive message explaining what was learned
 
 ## Example Scenarios
 
