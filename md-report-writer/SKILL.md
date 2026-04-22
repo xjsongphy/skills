@@ -197,33 +197,12 @@ Whenever making claims or presenting analysis, **embed relevant code snippets an
 The algorithm achieves good performance. It uses advanced techniques.
 ```
 
-**GOOD** (supported with embedded code):
-```markdown
-The algorithm achieves good performance by leveraging memoization. The cache lookup function uses a hash table with O(1) average access time:
-
-```python
-def cache_lookup(key):
-    if key in cache:
-        return cache[key]
-    value = expensive_computation(key)
-    cache[key] = value
-    return value
-```
-
-This design eliminates redundant computations in the inner loop by storing previously computed results.
-```
-
-**GOOD** (supported with literature):
-```markdown
-Exponential smoothing provides reliable forecasts for non-stationary time series. According to Hyndman and Athanasopoulos (2018), the method's weighting scheme gives more importance to recent observations while preserving historical trends. This property makes it particularly suitable for demand forecasting in retail environments.
-```
-
-**GOOD** (code + paper combined):
+**GOOD** (simple code with variable annotations):
 ```markdown
 The attention mechanism computes relevance scores between query and key vectors. The implementation follows the scaled dot-product formulation:
 
 ```python
-def attention(Q, K, V):
+def attention(Q, K, V):  # Q=query, K=key, V=value
     scores = Q @ K.T / sqrt(d_k)
     weights = softmax(scores, axis=-1)
     return weights @ V
@@ -232,9 +211,39 @@ def attention(Q, K, V):
 Dividing by $\sqrt{d_k}$ prevents the softmax function from entering regions of extremely small gradients, which was identified as a critical issue in Vaswani et al. (2017).
 ```
 
+**GOOD** (complex code with detailed explanation):
+```markdown
+The parser handles operator precedence by maintaining two stacks: one for operands and one for operators. When encountering an operator, the algorithm compares its precedence with the operator on top of the stack.
+
+```python
+def apply_operator(operators, operands):
+    """Pop one operator and two operands, compute, push result."""
+    op = operators.pop()
+    right = operands.pop()
+    left = operands.pop()
+    
+    if op == '+':
+        result = left + right
+    elif op == '*':
+        result = left * right
+    # ... other operators
+    
+    operands.append(result)
+```
+
+The `apply_operator` function implements the core reduction step. It pops the most recent operator (stack discipline ensures this is the operator with highest precedence among pending operations) and its two operands. The computation is performed and the result is pushed back onto the operand stack, effectively replacing the subexpression with its value. This process repeats until all operators are consumed, leaving the final result as the sole operand.
+```
+
+**GOOD** (supported with literature):
+```markdown
+Exponential smoothing provides reliable forecasts for non-stationary time series. According to Hyndman and Athanasopoulos (2018), the method's weighting scheme gives more importance to recent observations while preserving historical trends. This property makes it particularly suitable for demand forecasting in retail environments.
+```
+
 **Guidelines**:
 - Embed core code snippets directly in the report using code blocks
 - Keep code snippets focused (only relevant parts, not entire files)
+- **Simple code**: Annotate variable names briefly in comments
+- **Complex code**: Explain the algorithm's logic, data flow, and design decisions in prose
 - Explain how the code demonstrates your point
 - Cite papers for theoretical foundations and established results
 - Connect implementation choices to theoretical justification
