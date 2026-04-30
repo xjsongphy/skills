@@ -60,6 +60,41 @@ These skills provide professional guidance for Claude Code in specific domains, 
 
 ---
 
+### syncthing-cleanup
+
+**Purpose**: Clean up unexpected items in Syncthing sync folders
+
+**Features**:
+- Automatically identify and clean conflict files (`.sync-conflict-*`)
+- Delete empty directories in encrypted folders
+- Clean temporary files (`*.swp`, `*~`, `.DS_Store`, `Thumbs.db`, `*.tmp`)
+- Remove broken symbolic links
+- Integrated with Syncthing REST API for automatic rescan after cleanup
+- Includes executable Python cleanup script
+- Supports dry-run mode to preview deletions
+- Cross-platform support (Linux, macOS, Windows WSL)
+
+**Use Cases**: Syncthing showing unexpected items, sync conflicts, periodic cleanup of sync folders
+
+**Invoke**: `/syncthing-cleanup`
+
+**Script Usage**:
+```bash
+# Interactive mode
+python3 scripts/cleanup_syncthing.py
+
+# Preview mode
+python3 scripts/cleanup_syncthing.py --dry-run
+
+# Automatic cleanup
+python3 scripts/cleanup_syncthing.py --yes
+
+# Clean specific folders
+python3 scripts/cleanup_syncthing.py --folders ~/Develop ~/Codes
+```
+
+---
+
 ## Repository Structure
 
 ```
@@ -70,6 +105,15 @@ skills/
 │   └── SKILL.md
 ├── update-skill/             # Skill update utility
 │   └── SKILL.md
+├── syncthing-cleanup/        # Syncthing cleanup utility
+│   ├── SKILL.md
+│   ├── scripts/
+│   │   ├── cleanup_syncthing.py
+│   │   └── test_skill.py
+│   ├── references/
+│   │   └── implementation_details.md
+│   └── evals/
+│       └── evals.json
 └── README.md                 # This file
 ```
 

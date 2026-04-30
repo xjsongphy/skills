@@ -1,0 +1,38 @@
+{
+  "skill_name": "syncthing-cleanup",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我的 Syncthing 显示有意外项目，帮我清理一下",
+      "expected_output": "The skill should locate Syncthing configuration, identify unexpected items in sync folders, and provide cleanup instructions or run the cleanup script",
+      "files": [],
+      "assertions": [
+        "The skill identifies the Syncthing configuration location",
+        "The skill explains what types of items will be cleaned (conflicts, empty dirs, temp files, symlinks)",
+        "The skill offers to run the cleanup script or provides manual cleanup steps"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Clean up Syncthing conflict files in my ~/Develop folder",
+      "expected_output": "The skill should run cleanup targeting conflict files in the specified folder",
+      "files": [],
+      "assertions": [
+        "The skill runs the cleanup script with --folders ~/Develop --types conflicts",
+        "The skill explains what the script is doing",
+        "The skill reports the results of the cleanup"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I want to see what files would be deleted before cleaning",
+      "expected_output": "The skill should run cleanup in dry-run mode to show what would be deleted without actually deleting",
+      "files": [],
+      "assertions": [
+        "The skill uses the --dry-run flag",
+        "The skill shows a preview of items that would be deleted",
+        "The skill explains that no files were actually deleted"
+      ]
+    }
+  ]
+}
