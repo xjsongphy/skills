@@ -162,20 +162,38 @@ English: The concept of "manifold" generalizes Euclidean space.
 
 ### 7. Direct, Professional Tone
 
-**AVOID** conversational filler and meta-commentary:
+**AVOID** conversational filler and meta-commentary in both English and Chinese.
 
-**BAD**:
+**English BAD**:
 ```markdown
 In this section, we will explore the concept of manifolds.
 As we can see from the above equation...
 It is interesting to note that...
+It is worth noting that...
 ```
+
+**Chinese BAD** — 以下词语是中文技术写作中的高频填充词，**禁止使用**：
+
+| 禁用词 | 替换方式 |
+|--------|---------|
+| 关键 | 删除，或用 **bold** 标注具体术语 |
+| 根本 | 删除，直接陈述事实 |
+| 显著 | 用具体数字替代（如"偏差 0.3%"） |
+| 极其/非常/十分 | 删除，让数据说话 |
+| 特别/尤其 | 删除，或直接说明区别 |
+| 值得注意的是 | 直接写结论 |
+| 不难发现/可以看出 | 删除，直接给出结果 |
+| 总而言之/综上所述 | 在报告中直接收尾，不用过渡句 |
+| 非常重要 | 删除，或用 **bold** 标注 |
+
+**原则**：如果删掉某个形容词后句子仍然成立且信息无损，则该形容词是填充词，应当删除。让数据和事实自己说话。
 
 **GOOD**:
 ```markdown
 A manifold generalizes the notion of Euclidean space to curved geometries.
 The equation above establishes the relationship between curvature and topology.
-The presence of a non-zero Ricci tensor implies...
+The measured value of 9.81 m/s² deviates from the theoretical prediction by 0.1%.
+实验测得重力加速度为 9.81 m/s²，与理论值 9.80 m/s² 的偏差为 0.1%。
 ```
 
 ### 8. Complete, Standalone Sentences
@@ -306,7 +324,7 @@ Before considering content complete:
 4. [ ] **No bullets or numbered lists in main narrative** (only for structured data)
 5. [ ] **No italics** — use bold for emphasis
 6. [ ] All sentences are complete and grammatically correct
-7. [ ] No conversational filler ("we will explore", "as we can see")
+7. [ ] No conversational filler — English or Chinese (see banned words list in section 7)
 8. [ ] **For Chinese documents**: All quotes use Chinese double quotes ""
 9. [ ] Paragraphs are separated by blank lines for readability
 10. [ ] Technical terms are introduced before being used
