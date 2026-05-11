@@ -11,6 +11,17 @@ LaTeX compilation assistant for XeLaTeX projects, handling compilation errors, c
 
 This skill provides the standard XeLaTeX compilation workflow for LaTeX projects, including error diagnosis and fixes.
 
+## When to Use
+
+**Use when:**
+- Compiling `.tex` files with XeLaTeX
+- Encountering LaTeX compilation errors (environment mismatch, undefined references, Chinese character issues)
+- Diagnosing compilation warnings or failed builds
+
+**Don't use when:**
+- Compiling with pdfLaTeX or LuaLaTeX (commands differ)
+- Setting up a new LaTeX project from scratch (use latex-textbook-writer templates instead)
+
 ## Standard Compilation Commands
 
 **VSCode LaTeX Workshop recipe (XeLaTeX):**

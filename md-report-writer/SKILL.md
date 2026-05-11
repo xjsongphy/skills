@@ -7,6 +7,10 @@ description: Use when writing reports or long-form documents in Markdown that re
 
 Professional assistant for writing reports using Markdown with focus on narrative flow and coherent explanations.
 
+## Overview
+
+This skill enforces **narrative-first writing** for Markdown reports: explanatory text before technical content, prose that weaves through data and code, bold for emphasis (never italics), and direct professional tone. Derived from academic textbook writing principles.
+
 ## Core Writing Principles
 
 ### 1. Narrative Flow (Most Important!)

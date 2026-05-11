@@ -217,11 +217,6 @@ API endpoints used:
 - `GET /rest/db/status?folder=<id>` - Folder status
 - `POST /rest/db/scan?folder=<id>` - Trigger folder scan
 
-## Related Skills
-
-- **syncthing-monitor** - Monitor Syncthing sync status and conflicts
-- **file-sync** - General file synchronization utilities
-
 ## Best Practices
 
 1. **Run dry-run first** - Always preview with `--dry-run` before actual cleanup
