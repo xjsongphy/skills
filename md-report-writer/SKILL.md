@@ -303,7 +303,7 @@ Before considering content complete:
 5. [ ] **No italics** — use bold for emphasis
 6. [ ] All sentences are complete and grammatically correct
 7. [ ] No conversational filler ("we will explore", "as we can see")
-8. [ ] **For Chinese documents**: All quotes use 「」 and 『』
+8. [ ] **For Chinese documents**: All quotes use Chinese double quotes ""
 9. [ ] Paragraphs are separated by blank lines for readability
 10. [ ] Technical terms are introduced before being used
 
