@@ -1,6 +1,6 @@
 ---
 name: latex-compile
-description: LaTeX compilation assistant for XeLaTeX projects. Handles compilation errors, cross-references, and diagnostics.
+description: Use when compiling LaTeX documents with XeLaTeX, or encountering compilation errors, missing cross-references, or diagnostic warnings.
 ---
 
 # LaTeX Compile

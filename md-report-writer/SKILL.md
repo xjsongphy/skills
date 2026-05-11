@@ -1,6 +1,6 @@
 ---
 name: md-report-writer
-description: Professional report writing assistant using Markdown. Focuses on narrative flow, coherent explanations, and academic writing style adapted from textbook writing principles.
+description: Use when writing reports or long-form documents in Markdown that require narrative flow, coherent explanations, and academic writing style.
 ---
 
 # Markdown Report Writer

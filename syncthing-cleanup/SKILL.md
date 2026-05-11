@@ -1,6 +1,6 @@
 ---
 name: syncthing-cleanup
-description: Clean up unexpected items in Syncthing sync folders. Use this skill whenever the user mentions "Syncthing", "sync conflicts", "unexpected items", or wants to clean up their synchronized folders. This skill handles conflict files (.sync-conflict-*), empty directories, temporary files, and other artifacts that accumulate in Syncthing folders.
+description: Use when cleaning up Syncthing sync folders with conflict files (.sync-conflict-*), empty directories, temporary files, or other unexpected artifacts.
 ---
 
 # Syncthing Cleanup

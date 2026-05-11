@@ -1,6 +1,6 @@
 ---
 name: update-skill
-description: Update existing skills based on conversation feedback. Analyzes the conversation to identify user corrections and improvements, then applies them to the relevant skill file for future use.
+description: Use when updating existing skills based on conversation feedback, user corrections, or identified improvements.
 ---
 
 # Update Skill

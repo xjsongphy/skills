@@ -1,6 +1,6 @@
 ---
-name: laTeX-textbook-writer
-description: Professional math textbook writing assistant using XeLaTeX with proper formatting, structure, and narrative style. Supports definition/theorem boxes, section heading formats, and English/Chinese templates.
+name: latex-textbook-writer
+description: Use when writing math textbook content in XeLaTeX, including definitions, theorems, proofs, and section formatting in English or Chinese.
 ---
 
 # LaTeX Textbook Writer
@@ -262,8 +262,9 @@ Before considering content complete:
 9. [ ] **For English documents**: Added `\renewcommand{\proofname}{Proof}` and `\captionsetup{figurename=Figure,tablename=Table}`
 10. [ ] **For Chinese documents**: All quotes use `` `` and `''`, NOT `"` or corner brackets
 11. [ ] **Variable domains specified BEFORE formulas**, not after
-12. [ ] **For answers.tex**: Each solution uses `\textbf{解：}` / `\textbf{Solution:}` and shows detailed reasoning
-13. [ ] Document compiles without errors
+12. [ ] **For answers.tex**: Each solution uses `\textbf{解：}` / `\textbf{Solution:}` with **one formula per line** format
+13. [ ] **For answers.tex**: No paragraph contains multiple inline formulas - use display math for each formula
+14. [ ] Document compiles without errors
 
 ## Compilation
 
@@ -281,6 +282,8 @@ xelatex -interaction=nonstopmode main.tex
 These templates contain complete preamble setup, color definitions, and box styles ready to copy into your project.
 
 ## Exercise and Answer Appendices
+
+**IMPORTANT FORMAT REQUIREMENT**: All solutions in `answers.tex` must use **"one formula per line" (一行一公式)** format. Each formula should be on its own line using display math (`$$...$$` or `\begin{equation*}...\end{equation*}`). Never stack multiple inline formulas in one paragraph.
 
 If an `习题/` (exercises) directory exists in the project, create two appendix files:
 
@@ -337,7 +340,7 @@ project/
 \section{作业一参考答案}
 
 \begin{enumerate}
-    \item \textbf{解：} [Detailed solution process, narrative style like main text]
+    \item \textbf{解：} [Detailed solution process, step-by-step format]
 
     \begin{enumerate}
         \item \textbf{解：} [Detailed solution for subproblem...]
@@ -349,78 +352,103 @@ project/
 \end{enumerate}
 ```
 
-**Critical: Solutions MUST follow narrative style (like the main text)**
+**CRITICAL: "One Formula Per Line" Format (一行一公式)**
 
-Solutions are NOT just answer dumps. They should have complete reasoning and narrative logic like the main text. Each solution should include:
+Solutions must use **display math for EACH formula**, with step-by-step derivation. **DO NOT** stack multiple inline formulas in one paragraph.
 
-1. **Start with `\textbf{解：}`** - clearly mark the solution start
-2. **State the approach** - method, theorem, or strategy used
-3. **Step-by-step derivation** - show key steps, do not skip intermediate calculations
-4. **Logical connectors** - use "therefore", "hence", "since", "note that", "now", etc.
-5. **Final conclusion** - clearly state the answer
-
-**Example style (direct, no preamble):**
-
+**CORRECT format** (一行一公式):
 ```latex
-\item \textbf{解：} Let $M \in USp(2n)$ be a $2n \times 2n$ complex matrix, partitioned into $n \times n$ blocks:
+\item \textbf{解：} We need to find $\alpha \in \mathfrak{h}$ such that
         \begin{equation*}
-        M = \begin{pmatrix} A & B \\ C & D \end{pmatrix}, \quad J = \begin{pmatrix} 0 & I_n \\ -I_n & 0 \end{pmatrix}
+        \langle \alpha, H \rangle = 2a
         \end{equation*}
-        $M$ must satisfy both unitarity $M^{\dagger}M = I$ and symplecticity $M^{T}JM = J$. From unitarity, $M^{-1} = M^{\dagger}$. Substituting into the symplectic equation gives $JM = \bar{M}J$. Expanding the block multiplication yields $D = \bar{A}$ and $C = -\bar{B}$. Therefore matrices in $USp(2n)$ must have the form:
-        \begin{equation*}
-        M = \begin{pmatrix} A & B \\ -\bar{B} & \bar{A} \end{pmatrix}
-        \end{equation*}
+        for $H = aH_{1} + bH_{2}$.
 
-        Now substitute this form into the unitarity condition $M^{\dagger}M = I$:
+        Let $\alpha = cH_{1}$. Then
         \begin{equation*}
-        \begin{pmatrix} A^{\dagger} & -B^{T} \\ B^{\dagger} & A^{T} \end{pmatrix} \begin{pmatrix} A & B \\ -\bar{B} & \bar{A} \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix}
+        \langle cH_{1}, aH_{1} + bH_{2} \rangle = ca\langle H_{1}, H_{1} \rangle
         \end{equation*}
-        This yields two independent matrix equations. The diagonal block equation $A^{\dagger}A + B^{T}\bar{B} = I$ is a Hermitian matrix equation, providing $n$ real constraints on the diagonal and $\frac{n(n-1)}{2}$ complex constraints off-diagonal, totaling $n^{2}$ real constraints. The off-diagonal block equation $A^{\dagger}B - B^{T}\bar{A} = 0$ means $A^{\dagger}B$ is symmetric, giving $n(n-1)$ real constraints.
-
-        Therefore the total number of constraints is $n^{2} + n(n-1) = 2n^{2}-n$. Subtracting from $4n^{2}$ initial real parameters gives the real dimension of $USp(2n)$:
+        Since
         \begin{equation*}
-        \dim_{\mathbb{R}} USp(2n) = 4n^{2} - (2n^{2}-n) = 2n^{2} + n = n(2n+1)
+        \langle H_{1}, H_{1} \rangle = 2,
+        \end{equation*}
+        we have
+        \begin{equation*}
+        \langle cH_{1}, aH_{1} + bH_{2} \rangle = 2ca
+        \end{equation*}
+        For this to equal $2a$, we need
+        \begin{equation*}
+        c = 1
+        \end{equation*}
+        Therefore
+        \begin{equation*}
+        \boxed{\alpha = H_{1}}
         \end{equation*}
 ```
 
-**Anti-examples (avoid):**
-
+**WRONG format** (一段话堆砌公式 - **禁止**):
 ```latex
-\item \textbf{解：} Our goal is to compute the dimension of $USp(2n)$. First, let us understand the structure of this group... (too much preamble)
-\item \textbf{解：} We can see that, due to the unitarity condition, there are constraints between the matrix blocks... (vague, no actual derivation)
-\item \textbf{解：} After detailed analysis (omitting the tedious block computation), the dimension is $n(2n+1)$... (skipping steps)
-\item \textbf{答：} $n(2n+1)$. (result only, no process)
+\item \textbf{解：} We need to find $\alpha \in \mathfrak{h}$ such that $\langle \alpha, H \rangle = 2a$ for $H = aH_{1} + bH_{2}$. Let $\alpha = cH_{1}$, then $\langle cH_{1}, aH_{1} + bH_{2} \rangle = ca\langle H_{1}, H_{1} \rangle = 2ca$ since $\langle H_{1}, H_{1} \rangle = 2$. For this to equal $2a$, we need $c = 1$, therefore $\alpha = H_{1}$.
 ```
 
-**Writing guidelines:**
-- Use `\textbf{解：}` (not `\textbf{答：}`) to emphasize process over result
-- Do not repeat the question - start the solution directly
-- Use complete mathematical sentences and paragraphs, not bullet points
-- Explain reasoning at key steps ("since...therefore...", "note that...hence...")
-- Split long computations into multiple paragraphs for clarity
-- May use `\begin{proof}...\end{proof}` for proof-type solutions
+**Key principles for solution formatting (IMPORTANT!):**
 
-**Paragraph separation (important):**
+1. **Each formula on its own line** - Use `$$...$$` or `\begin{equation*}...\end{equation*}` for EVERY formula
+2. **Step-by-step derivation** - Show each intermediate step as a separate display formula
+3. **Minimal text between formulas** - Short phrases like "Then", "Since", "Therefore" are OK, but keep them brief
+4. **Use `\boxed{}` for final answers** - Clearly mark the final result
+5. **No formula stacking in paragraphs** - Never write `... $A$ ... $B$ ... $C$` in one paragraph
 
-In LaTeX, blank lines create paragraph breaks. Long solutions should be split into paragraphs for readability:
+**Example with algebraic derivation:**
 
 ```latex
-\item \textbf{解：} The symplectic group $Sp(2n,\mathbb{R})$ consists of matrices satisfying $M^{T}\Omega M = \Omega$, where $\Omega$ is the standard symplectic form. This equation gives $\frac{(2n)(2n-1)}{2} = n(2n-1)$ independent real constraints.
+\item \textbf{解：} Compute the dimension of $Sp(2n, \mathbb{R})$. A matrix $M \in Sp(2n, \mathbb{R})$ satisfies
+        \begin{equation*}
+        M^{T}\Omega M = \Omega
+        \end{equation*}
+        where $\Omega$ is the standard symplectic form. This gives
+        \begin{equation*}
+        \frac{(2n)(2n-1)}{2} = n(2n-1)
+        \end{equation*}
+        independent real constraints.
 
-The general linear group $GL(2n,\mathbb{R})$ has dimension $(2n)^{2} = 4n^{2}$, so $Sp(2n,\mathbb{R})$ has dimension $4n^{2} - n(2n-1) = 2n^{2} + n = n(2n+1)$.
+        Since $GL(2n, \mathbb{R})$ has dimension
+        \begin{equation*}
+        (2n)^{2} = 4n^{2},
+        \end{equation*}
+        the dimension of $Sp(2n, \mathbb{R})$ is
+        \begin{equation*}
+        \boxed{\dim Sp(2n, \mathbb{R}) = 4n^{2} - n(2n-1) = n(2n+1)}
+        \end{equation*}
 ```
-
-**Paragraph principles:**
-- One logical paragraph = one main point or step
-- Separate paragraphs with blank lines (press Enter twice in LaTeX)
-- Use transitional words at paragraph starts: "therefore", "hence", "now"
-- Standalone formulas use `$$...$$` or `\[...\]`
 
 **For English documents:** Use `\textbf{Solution:}` instead of `\textbf{解：}`
 
+**Anti-examples to avoid:**
+
 ```latex
-\item \textbf{Solution:} $USp(2n)$ is the intersection of $Sp(2n,\mathbb{C})$ and $SU(2n)$. Starting from $SU(2n)$ (real dimension $4n^{2}-1$), the symplectic constraints in the unitary framework give $2n^{2}-n$ independent real constraints. Therefore, the dimension of $USp(2n)$ is $(4n^{2}-1) - (2n^{2}-n) = 2n^{2}+n = n(2n+1)$.
+% WRONG - too much preamble
+\item \textbf{解：} Our goal is to compute the dimension of $USp(2n)$. First, let us understand the structure...
+
+% WRONG - vague, no actual derivation
+\item \textbf{解：} We can see that, due to the unitarity condition, there are constraints...
+
+% WRONG - skipping steps
+\item \textbf{解：} After detailed analysis (omitting the tedious block computation), the dimension is...
+
+% WRONG - result only, no process
+\item \textbf{答：} $n(2n+1)$.
+
+% WRONG - formulas stacked in paragraph
+\item \textbf{解：} Compute $\langle \alpha, H \rangle = 2a$ for $H = aH_1 + bH_2$. Let $\alpha = cH_1$, then $\langle cH_1, H \rangle = 2ca$ since $\langle H_1, H_1 \rangle = 2$, so $c=1$ and $\alpha = H_1$.
 ```
+
+**Additional writing guidelines:**
+- Use `\textbf{解：}` (not `\textbf{答：}`) to emphasize process over result
+- Do not repeat the question - start the solution directly
+- May use `\begin{proof}...\end{proof}` for proof-type solutions
+- Keep text between formulas minimal - just "Then", "Since", "Therefore", etc.
+- Use blank lines to separate major steps in long derivations
 
 ### Translation Guide
 
