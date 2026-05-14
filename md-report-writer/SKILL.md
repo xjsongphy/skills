@@ -49,6 +49,8 @@ PrimFunc 是 TVM 低层中间表示 TIR（Tensor IR）的核心 IR 单元。它�
 
 **Rule**: Each new term gets its own sentence. Define first, then use. Never define inside parentheses `（...）`.
 
+**Critical Rule for Important Concepts**: Core abstractions such as IR nodes, data structures, compiler primitives, and architectural components **MUST receive standalone definitions** with concrete examples. An inline parenthetical `（像这样一句话带过）` is never acceptable for a concept that the reader needs to understand to follow the subsequent analysis. Such concepts deserve at minimum one full sentence of definition, and ideally a dedicated paragraph that covers what the concept is, where it sits in the system, and what concrete form it takes. If the concept has a source-level definition (e.g., a C++ class or Python object), cite the source file and line number as part of the definition. A reader who skips parenthetical asides should still be able to understand every important term.
+
 ### 3. Narrative Should Weave Through Content
 
 The goal is **narrative-content-narrative-content-narrative**, not **narrative-content-content-content-narrative**.
