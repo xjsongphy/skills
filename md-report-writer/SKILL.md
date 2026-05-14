@@ -1,15 +1,11 @@
 ---
 name: md-report-writer
-description: Use when writing reports or long-form documents in Markdown that require narrative flow, coherent explanations, and academic writing style.
+description: Professional report writing assistant using Markdown. Focuses on narrative flow, coherent explanations, noun-definition-first style, code interpretation, and proper Mermaid diagram usage.
 ---
 
 # Markdown Report Writer
 
 Professional assistant for writing reports using Markdown with focus on narrative flow and coherent explanations.
-
-## Overview
-
-This skill enforces **narrative-first writing** for Markdown reports: explanatory text before technical content, prose that weaves through data and code, bold for emphasis (never italics), and direct professional tone. Derived from academic textbook writing principles.
 
 ## Core Writing Principles
 
@@ -37,7 +33,23 @@ The experiment yielded three key metrics that demonstrate the effectiveness of t
 - Metric C: 789 — confirms the theoretical prediction
 ```
 
-### 2. Narrative Should Weave Through Content
+### 2. Define Before Use (Noun-First Principle)
+
+**EVERY technical term must be defined in narrative before it is used in code, diagrams, or subsequent text.** Never introduce a term inside parentheses or assume the reader knows it.
+
+**BAD** (parenthetical dump, undefined terms):
+```markdown
+PrimFunc 是 TIR（Tensor IR，TVM 的低层中间表示）层的核心 IR 单元，包含循环嵌套和 buffer（TIR 中表示一块有形状和数据类型的线性内存区域，通过多维索引访问）访问代码。这些 PrimFunc 尚未被分配 tiling（将循环拆分为多层 tile）策略。
+```
+
+**GOOD** (narrative definition, one term at a time):
+```markdown
+PrimFunc 是 TVM 低层中间表示 TIR（Tensor IR）的核心 IR 单元。它包含完整的循环嵌套，循环体内是对 buffer 的读写。buffer 是 TIR 层的数据容器：一个有形状和数据类型的内存块，通过多维索引访问其中元素。此时 PrimFunc 只描述了纯计算逻辑，尚未涉及并行执行策略。接下来的关键步骤是确定 tiling：将大循环按 tile 拆分成多层嵌套，以利用缓存局部性和并行能力。
+```
+
+**Rule**: Each new term gets its own sentence. Define first, then use. Never define inside parentheses `（...）`.
+
+### 3. Narrative Should Weave Through Content
 
 The goal is **narrative-content-narrative-content-narrative**, not **narrative-content-content-content-narrative**.
 
@@ -83,7 +95,46 @@ This implementation achieves linear time complexity O(n) since each element is v
 The efficiency characteristics make this approach suitable for real-time applications where latency must be minimized.
 ```
 
-### 3. Explanations as Coherent Narratives
+### 4. Code Blocks Require Pre-Explanation and Post-Explanation
+
+**EVERY code block must be wrapped: narrative before explains what the code does and why it matters, narrative after unpacks what the code reveals.**
+
+**BAD** (bare code block, no interpretation):
+```markdown
+The ApplyDefaultSchedule pass processes each function:
+
+```python
+@module_pass(opt_level=0, name="ApplyDefaultSchedule")
+class ApplyDefaultSchedule:
+    def transform_module(self, mod, ctx):
+        for g_var, func in mod.functions_items():
+            if isinstance(func, tirx.PrimFunc) and not _is_scheduled(func):
+                sch = _apply_rules(func, target, self.rules, tunable=False)
+```
+```
+
+**GOOD** (code explained line by line):
+```markdown
+The ApplyDefaultSchedule pass processes each function in the module. The implementation logic is directly visible in `transform_module`:
+
+```python
+@module_pass(opt_level=0, name="ApplyDefaultSchedule")
+class ApplyDefaultSchedule:
+    def transform_module(self, mod, ctx):
+        for g_var, func in mod.functions_items():
+            # 条件①：必须是 PrimFunc（TIR 函数），而非 Relax 函数
+            # 条件②：_is_scheduled 检查已标记函数，跳过避免重复
+            if isinstance(func, tirx.PrimFunc) and not _is_scheduled(func):
+                # _apply_rules 逐条尝试规则，tunable=False 只返回确定结果
+                sch = _apply_rules(func, target, self.rules, tunable=False)
+```
+
+The `isinstance` check filters out non-TIR functions. `_is_scheduled` reads `func.attrs["tirx.is_scheduled"]` — a boolean flag set by any scheduling pass that has already processed this function. `_apply_rules` tries each rule in priority order; `tunable=False` means each rule returns a single deterministic schedule rather than multiple variants for search.
+```
+
+**Rule for code citations**: Every code block must cite its source with file path and line number. Use the format `（源码位置：path/to/file.cc line N）` or `（源码：path/to/file.py）`.
+
+### 5. Explanations as Coherent Narratives
 
 Technical explanations should flow as continuous text, not step-by-step lists.
 
@@ -99,7 +150,7 @@ Technical explanations should flow as continuous text, not step-by-step lists.
 The algorithm begins by initializing the tracking variables to their default values. Once the initialization is complete, the main loop iterates through each element of the input array, applying the transformation rule sequentially. After all elements have been processed, the function returns the accumulated result.
 ```
 
-### 4. Use Bold for Emphasis, Not Italics
+### 6. Use Bold for Emphasis, Not Italics
 
 **DO NOT use italics** in technical reports. Use **bold** for:
 - Emphasis on important concepts
@@ -116,7 +167,7 @@ The *algorithm* uses *dynamic programming* to solve the problem.
 The **algorithm** uses **dynamic programming** to solve the problem.
 ```
 
-### 5. Bulleted and Numbered Lists
+### 7. Bulleted and Numbered Lists
 
 **ONLY use bullets and numbered lists when:**
 - Items have no inherent order and can be read independently
@@ -129,237 +180,113 @@ The **algorithm** uses **dynamic programming** to solve the problem.
 - Argument development
 - Cause-effect relationships
 
-**BAD** (bullets as narrative):
-```markdown
-## System Design
-
-The system has three main components:
-- The frontend handles user interaction.
-- The backend processes requests.
-- The database stores information.
-
-These components work together to provide functionality.
-```
-
-**GOOD** (narrative explanation):
-```markdown
-## System Design
-
-The system comprises three main components that work in concert. The frontend handles user interaction and provides the visual interface through which users submit requests. These requests are processed by the backend, which contains the business logic and application rules. Finally, the database persists information and ensures data integrity across sessions. This three-tier architecture enables separation of concerns and independent scaling of each layer.
-```
-
-### 6. Quote Marks
+### 8. Quote Marks
 
 - **English**: Use ASCII double quotes `""`
 - **中文**: Use Chinese double quotes `""` (输入中文引号，会自动变为中文标点)
 
-**Examples:**
-```markdown
-English: The concept of "manifold" generalizes Euclidean space.
+### 9. Direct, Professional Tone
 
-中文: 这个概念被称为"流形"，它是现代几何学的基础。
-```
+**AVOID** conversational filler and meta-commentary:
 
-### 7. Direct, Professional Tone
-
-**AVOID** conversational filler and meta-commentary in both English and Chinese.
-
-**English BAD**:
+**BAD**:
 ```markdown
 In this section, we will explore the concept of manifolds.
 As we can see from the above equation...
 It is interesting to note that...
-It is worth noting that...
 ```
-
-**Chinese BAD** — 以下词语是中文技术写作中的高频填充词，**禁止使用**：
-
-| 禁用词 | 替换方式 |
-|--------|---------|
-| 关键 | 删除，或用 **bold** 标注具体术语 |
-| 根本 | 删除，直接陈述事实 |
-| 显著 | 用具体数字替代（如"偏差 0.3%"） |
-| 极其/非常/十分 | 删除，让数据说话 |
-| 特别/尤其 | 删除，或直接说明区别 |
-| 值得注意的是 | 直接写结论 |
-| 不难发现/可以看出 | 删除，直接给出结果 |
-| 总而言之/综上所述 | 在报告中直接收尾，不用过渡句 |
-| 非常重要 | 删除，或用 **bold** 标注 |
-
-**原则**：如果删掉某个形容词后句子仍然成立且信息无损，则该形容词是填充词，应当删除。让数据和事实自己说话。
 
 **GOOD**:
 ```markdown
 A manifold generalizes the notion of Euclidean space to curved geometries.
 The equation above establishes the relationship between curvature and topology.
-The measured value of 9.81 m/s² deviates from the theoretical prediction by 0.1%.
-实验测得重力加速度为 9.81 m/s²，与理论值 9.80 m/s² 的偏差为 0.1%。
+The presence of a non-zero Ricci tensor implies...
 ```
 
-### 8. Complete, Standalone Sentences
+### 10. Complete, Standalone Sentences
 
-Each sentence should be grammatically complete and express one clear thought.
+Each sentence should be grammatically complete and express one clear thought. No sentence fragments.
 
-**BAD** (sentence fragments):
-```markdown
-The algorithm. Which processes data. And returns results.
+## Mermaid Diagram Guidelines
+
+### When to Use Mermaid
+
+Use Mermaid diagrams for:
+- Flowcharts showing process logic (graph TD/LR)
+- Architecture diagrams showing component relationships
+- Decision trees
+
+Use plain text (tree or indented list) for:
+- File/directory structures
+- Simple hierarchical lists
+
+### Diagram Style Rules
+
+1. **Keep node text concise**: Each node should be at most 2 short lines. Move detailed explanation to the surrounding narrative.
+2. **Colors for emphasis, not for decoration**: Use `stroke` with `stroke-width` for key nodes. Avoid `fill` colors (invisible in dark mode). Use the default transparent background for most nodes.
+3. **Direction**: Use `graph TD` for top-down flow (processes, pipelines). Use `graph LR` for left-to-right flow (data pipelines, comparisons). Prefer `graph TD` as default — it's the most reliably rendered.
+4. **Subgraphs**: Use `subgraph` only when grouping is semantically meaningful. Avoid `direction TB` inside subgraphs with `graph LR` (mixed directions render unreliably across renderers).
+5. **Arrows between subgraphs**: When connecting subgraphs, use node-to-node arrows (from bottom of one to top of next) rather than subgraph-to-subgraph arrows.
+
+**BAD** (too much text in nodes, fill colors):
+```mermaid
+graph TD
+    A["ConvertLayout pass<br/>配置 desired_layouts={conv2d: [NHWC, OHWI], ...}"] --> B["LayoutConvertMutator<br/>按代码顺序依次处理每个 binding"]
+    style A fill:#e1f5fe
 ```
 
-**GOOD**:
-```markdown
-The algorithm processes input data and returns transformed results. It operates in linear time relative to the input size.
-```
-
-### 9. Embed Code and Cite Literature to Support Claims
-
-Whenever making claims or presenting analysis, **embed relevant code snippets and cite papers** to support your arguments. Integrate these references into your narrative flow.
-
-**BAD** (unsupported claims):
-```markdown
-The algorithm achieves good performance. It uses advanced techniques.
-```
-
-**GOOD** (simple code with variable annotations):
-```markdown
-The attention mechanism computes relevance scores between query and key vectors. The implementation follows the scaled dot-product formulation:
-
-```python
-def attention(Q, K, V):  # Q=query, K=key, V=value
-    scores = Q @ K.T / sqrt(d_k)
-    weights = softmax(scores, axis=-1)
-    return weights @ V
-```
-
-Dividing by $\sqrt{d_k}$ prevents the softmax function from entering regions of extremely small gradients, which was identified as a critical issue in Vaswani et al. (2017).
-```
-
-**GOOD** (complex code with detailed explanation):
-```markdown
-The parser handles operator precedence by maintaining two stacks: one for operands and one for operators. When encountering an operator, the algorithm compares its precedence with the operator on top of the stack.
-
-```python
-def apply_operator(operators, operands):
-    """Pop one operator and two operands, compute, push result."""
-    op = operators.pop()
-    right = operands.pop()
-    left = operands.pop()
+**GOOD** (concise nodes, stroke-only emphasis, narrative carries the detail):
+```mermaid
+graph TD
+    A[ConvertLayout pass] --> B[LayoutConvertMutator]
+    B --> C[遍历每个 Binding]
+    C --> D[阶段一: Infer]
+    D --> E[阶段二: Rewrite]
     
-    if op == '+':
-        result = left + right
-    elif op == '*':
-        result = left * right
-    # ... other operators
-    
-    operands.append(result)
+    style A stroke:#0288d1,stroke-width:3px
+    style E stroke:#d81b60,stroke-width:2px
 ```
 
-The `apply_operator` function implements the core reduction step. It pops the most recent operator (stack discipline ensures this is the operator with highest precedence among pending operations) and its two operands. The computation is performed and the result is pushed back onto the operand stack, effectively replacing the subexpression with its value. This process repeats until all operators are consumed, leaving the final result as the sole operand.
+## Source Citation Format
+
+All source code references must include file path and line number:
+
+```
+源码位置：src/relax/transform/convert_layout.cc line 116
+源码：python/tvm/s_tir/dlight/base/transform.py line 46-78
 ```
 
-**GOOD** (supported with literature):
-```markdown
-Exponential smoothing provides reliable forecasts for non-stationary time series. According to Hyndman and Athanasopoulos (2018), the method's weighting scheme gives more importance to recent observations while preserving historical trends. This property makes it particularly suitable for demand forecasting in retail environments.
+For academic papers, use standard citation format:
 ```
-
-**Guidelines**:
-- Embed core code snippets directly in the report using code blocks
-- Keep code snippets focused (only relevant parts, not entire files)
-- **Simple code**: Annotate variable names briefly in comments
-- **Complex code**: Explain the algorithm's logic, data flow, and design decisions in prose
-- Explain how the code demonstrates your point
-- Cite papers for theoretical foundations and established results
-- Connect implementation choices to theoretical justification
+Tianqi Chen et al., "TVM: An Automated End-to-End Optimizing Compiler for Deep Learning", OSDI 2018
+```
 
 ## Standard Patterns
 
 ### Pattern 1: Question → Answer → Explanation
 
-```markdown
-## Problem Statement
-
-How can we efficiently compute the eigenvalues of a large sparse matrix?
-
-## Solution
-
-The power iteration method provides an efficient approximation for the dominant eigenvalue. This approach exploits the matrix's sparsity by using matrix-vector multiplication rather than full matrix decomposition.
-
-The method converges geometrically, with the rate of convergence determined by the ratio of the largest to second-largest eigenvalues. In practice, convergence is achieved within a few dozen iterations for most practical problems.
-```
-
 ### Pattern 2: Observation → Analysis → Implication
 
-```markdown
-## Experimental Results
-
-Measurements reveal a 40% reduction in processing time compared to the baseline method.
-
-## Analysis
-
-The improvement stems from two factors. First, the optimized data structure reduces cache misses by 60%. Second, the parallel implementation utilizes all available CPU cores, achieving near-linear scaling up to 8 threads.
-
-## Implications
-
-These results suggest that the proposed method is suitable for deployment in production environments where latency is critical. The resource efficiency also enables deployment on lower-cost hardware without significant performance degradation.
-```
-
 ### Pattern 3: Definition → Example → Generalization
-
-```markdown
-## Convex Optimization
-
-A convex optimization problem minimizes a convex function over a convex set. This structure guarantees that any local minimum is also a global minimum.
-
-Consider the problem of minimizing $f(x) = x^2$ over the real numbers. The function is convex, and the unique minimum occurs at $x = 0$. No other local minima exist.
-
-This property extends to higher dimensions and more complex convex functions, making convex optimization tractable where general optimization is not.
-```
 
 ## Quality Checklist
 
 Before considering content complete:
 
 1. [ ] Every section has introductory text before technical content
-2. [ ] Narrative weaves through content (not content dump)
-3. [ ] Explanations are coherent narratives, not itemized steps
-4. [ ] **No bullets or numbered lists in main narrative** (only for structured data)
-5. [ ] **No italics** — use bold for emphasis
-6. [ ] All sentences are complete and grammatically correct
-7. [ ] No conversational filler — English or Chinese (see banned words list in section 7)
-8. [ ] **For Chinese documents**: All quotes use Chinese double quotes ""
-9. [ ] Paragraphs are separated by blank lines for readability
-10. [ ] Technical terms are introduced before being used
-
-## Math and Code in Markdown
-
-### Inline Math
-```markdown
-The energy is given by $E = mc^2$.
-```
-
-### Display Math
-```markdown
-The normalization condition:
-
-$$
-\int_{-\infty}^{\infty} |\psi(x)|^2 dx = 1
-$$
-
-must be satisfied for any valid wave function.
-```
-
-### Code Blocks
-```markdown
-The implementation uses a simple loop:
-
-```python
-def fibonacci(n):
-    if n <= 1:
-        return n
-    return fibonacci(n-1) + fibonacci(n-2)
-```
-
-This recursive definition follows directly from the mathematical recurrence relation.
-```
+2. [ ] Every technical term is defined in narrative before first use — no parenthetical definitions `（...）`
+3. [ ] Every code block has both pre-explanation (what & why) and post-explanation (what it reveals)
+4. [ ] Every code block cites source file path and line number
+5. [ ] Narrative weaves through content (not content dump)
+6. [ ] Explanations are coherent narratives, not itemized steps
+7. [ ] **No bullets or numbered lists in main narrative** (only for structured data)
+8. [ ] **No italics** — use bold for emphasis
+9. [ ] All sentences are complete and grammatically correct
+10. [ ] No conversational filler
+11. [ ] **For Chinese documents**: All quotes use Chinese double quotes ""
+12. [ ] Paragraphs are separated by blank lines for readability
+13. [ ] Mermaid diagrams have concise nodes, stroke-only colors, correct direction
+14. [ ] Mermaid diagrams do not use `fill` colors (dark mode invisible)
 
 ## Document Metadata
 
@@ -377,27 +304,4 @@ For Chinese reports:
 # 标题
 
 **作者**: 姓名 | **日期**: YYYY年MM月DD日 | **状态**: 草稿/定稿
-```
-
-## Writing Reports to Files
-
-When generating a complete report, use the `Write` tool to save it to a `.md` file:
-
-1. Determine the appropriate filename (e.g., `report.md`, `progress-report-2025-04-22.md`)
-2. Use the `Write` tool with the absolute path
-3. The file should contain the complete report with proper Markdown formatting
-
-**Example**:
-```markdown
-# Progress Report: Project X
-
-**Author**: Name | **Date**: 2025-04-22
-
-## Overview
-
-[Content follows the narrative principles above...]
-
-## Conclusion
-
-[Summary]
 ```
