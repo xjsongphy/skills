@@ -11,6 +11,8 @@ LaTeX compilation assistant for XeLaTeX projects, handling compilation errors, c
 
 This skill provides the standard XeLaTeX compilation workflow for LaTeX projects, including error diagnosis and fixes.
 
+**Important: When users invoke this skill, they typically have compilation problems that need solving. Always display sufficient error information for diagnosis — do not over-filter the output!**
+
 ## When to Use
 
 **Use when:**
@@ -132,41 +134,95 @@ l.123 \begin{remark}
 
 ## Quick Diagnosis Commands
 
-### Check all remark environments
+**⚠️ Important: When diagnosing compilation errors, do not over-filter the output! Error information may be anywhere in the output. Using `head` or `tail` may miss critical errors.**
+
+### Recommended Error Diagnosis Methods
+
+**Method 1: Show all errors and warnings (recommended)**
 ```bash
+xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex 2>&1 | grep -E "Error|! |Warning"
+```
+This displays all errors, warnings, and fatal errors starting with `!`.
+
+**Method 2: Limit line count but don't use head/tail**
+```bash
+xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex 2>&1 | grep -E "Error|! " | head -50
+```
+If the output is truly too large, you can use `head -50` to limit to the first 50 errors, but never use `tail`!
+
+**Method 3: Check specific types of errors**
+```bash
+# Check all environment mismatch errors
+grep -E "begin|end" main.tex | grep -v "%"
+
+# Check remark environments in specific files
 grep -n "begin{remark}\|end{remark}" chapters/*.tex
 ```
 
-### View specific line range
+### Not Recommended (will miss errors)
+
+❌ **Don't do this:**
+```bash
+# Only see last 10 lines, will miss errors in the middle
+xelatex ... 2>&1 | tail -10
+
+# Only see first 30 lines, won't see later errors
+xelatex ... 2>&1 | head -30
+
+# Only see last 20 lines, may miss main errors
+xelatex ... 2>&1 | tail -20
+```
+
+### Other Useful Diagnostic Commands
+
+**View specific line range:**
 ```bash
 sed -n '1500,1550p' chapters/chapter02.tex
 ```
 
-### View compilation error summary
+**Check specific labels:**
 ```bash
-xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex 2>&1 | grep -E "Error|Warning" | head -20
-```
-
-### View last few lines (success/fail status)
-```bash
-xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex 2>&1 | tail -10
+grep -n "label{eq:" chapters/*.tex | sort | uniq -d
 ```
 
 ## Compilation Workflow
 
-### Standard compilation (recommended)
+**⚠️ Important Principle: When users invoke this skill, they have compilation problems. Must display sufficient error information to help diagnose!**
+
+### Step 1: Get Complete Error Information
+
+**Recommended approach: Show all errors without using head/tail**
 ```bash
-xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex && \
+xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex 2>&1 | grep -E "Error|! "
+```
+
+**If output is truly too large (over 100 lines), you can limit the count:**
+```bash
+xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex 2>&1 | grep -E "Error|! " | head -50
+```
+
+**❌ Never use tail to view errors:**
+```bash
+# Wrong! This will miss most errors
+xelatex ... 2>&1 | tail -10
+```
+
+### Step 2: Diagnose Problems Based on Error Messages
+
+After viewing error messages, locate the specific file and line number:
+- Error format: `./filename.tex:line_number: error_description`
+- Use Read tool to view content around that line
+
+### Step 3: Fix Errors and Recompile
+
+After fixing errors, recompile to verify:
+```bash
 xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex
 ```
 
-### Compilation with error filtering
+### Standard Two-Pass Compilation (only after first pass succeeds)
 ```bash
-xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex 2>&1 | grep -E "Error|! " | head -30
-```
-
-### Full compilation output (for debugging)
-```bash
+xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex && \
 xelatex -synctex=1 -interaction=nonstopmode -file-line-error main.tex
 ```
 
