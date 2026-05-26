@@ -95,6 +95,24 @@ python3 scripts/cleanup_syncthing.py --folders ~/Develop ~/Codes
 
 ---
 
+### experiment-report-writer
+
+**Purpose**: Professional LaTeX experiment report writing assistant for physics and engineering
+
+**Features**:
+- Narrative flow (explanation before technical content)
+- Define-before-use principle for variables and units
+- Professional academic tone with complete sentences
+- Structured report format with proper section ordering
+- LaTeX best practices (equations, figures, tables, units)
+- Todo-driven breakdown strategy for multi-section reports
+
+**Use Cases**: Physics experiment reports, engineering lab reports, academic LaTeX documents
+
+**Invoke**: `/experiment-report-writer`
+
+---
+
 ## Repository Structure
 
 ```
