@@ -8,12 +8,14 @@ description: Use when extracting PDF documents to markdown with mineru-open-api.
 ## Overview
 Use the **extract** command (not flash-extract) for PDF to Markdown conversion. The user has already configured API credentials, so precision extraction is available. Flash-extract is a 20-page preview tool, not for production use.
 
+**⚠️ Default Behavior for this Skill**: Always use `-o` parameter to output to a file. While `mineru-open-api extract` defaults to stdout, **this skill requires file output** to preserve assets and avoid terminal clutter.
+
 ## Quick Reference
 
 | Scenario | Command | Notes |
 |----------|---------|-------|
-| Standard PDF to Markdown | `mineru-open-api extract file.pdf` | Full extraction, all assets |
-| Save to directory | `mineru-open-api extract file.pdf -o ./out/` | Creates structured output |
+| **Extract to file (Recommended)** | `mineru-open-api extract file.pdf -o ./out/` | **Default for this skill** - saves with assets |
+| Extract to stdout | `mineru-open-api extract file.pdf` | Outputs to terminal - NOT recommended |
 | Batch processing | `mineru-open-api extract *.pdf -o ./results/` | Multiple files at once |
 | Specific format | `mineru-open-api extract file.pdf -f md,html` | Multiple output formats |
 | Page range | `mineru-open-api extract file.pdf --pages 1-50` | Extract specific pages |
@@ -52,14 +54,14 @@ digraph mineru_flowchart {
 
 ### Standard Usage
 ```bash
-# Extract to stdout (markdown)
-mineru-open-api extract document.pdf
-
-# Extract to directory with all assets
+# Extract to directory with all assets (RECOMMENDED)
 mineru-open-api extract document.pdf -o ./output/
 
 # Extract multiple formats
 mineru-open-api extract document.pdf -o ./out/ -f md,html,latex
+
+# Extract to stdout (markdown) - NOT recommended, use only for debugging
+mineru-open-api extract document.pdf
 ```
 
 ### Batch Processing
@@ -90,6 +92,7 @@ After configuring the token, extraction will work for documents up to 600 pages 
 
 | Mistake | Problem | Fix |
 |---------|---------|-----|
+| Not using `-o` parameter | Outputs to terminal, loses assets, clutters console | **Always use `-o` to save to file** |
 | Using flash-extract for large PDFs | **20-page hard limit**, truncates content | Always use `extract` for production |
 | Flashing because "faster" | Preview quality, missing assets | User configured API — use it |
 | Silent fallback to flash | Data loss without warning | Prompt user to configure auth |
