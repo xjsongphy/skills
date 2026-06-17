@@ -235,7 +235,17 @@ The presence of a non-zero Ricci tensor implies...
 该设计优先考虑精度提升，而非单纯追求执行速度。
 ```
 
-**AVOID** overusing generic emphasis words like **核心** (core), **关键** (key/critical), **重要** (important) as lazy ways to signal significance. Use them sparingly and only when truly warranted. Most content should stand on its own merit without constant emphasis markers.
+**AVOID** overusing generic emphasis markers. Common overused words include：
+
+| 中文 | 英文 | 使用频率问题 |
+|------|------|--------------|
+| 核心 | core / core idea | 极高频，常用于描述任何设计思想 |
+| 关键 | key / critical / crucial | 过度使用，失去强调效果 |
+| 重要 | important / significant | 成为默认前缀，而非真正强调 |
+| 主要 | main / primary / major | 泛化严重 |
+| 本质 | essence / essential | 常用于概念解释，但多数内容并非真正"本质" |
+
+Use these words sparingly and only when truly warranted. Most content should stand on its own merit without constant emphasis markers.
 
 **BAD** (overused emphasis):
 ```markdown
@@ -245,9 +255,9 @@ The presence of a non-zero Ricci tensor implies...
 
 **GOOD** (measured emphasis):
 ```markdown
-The **design principle** underlying this approach...
-The **main challenge** lies in...
-This represents a significant advancement in...
+该**设计原理**（design principle）采用基于启发式的优化策略。
+该算法面临的**主要难点**（main challenge）在于处理大规模数据。
+这代表了在量子纠错领域的**显著进展**（significant advancement）。
 ```
 
 Use specific, descriptive language instead of generic emphasis tags. Let the content's importance emerge from clear explanation rather than constant labeling.
