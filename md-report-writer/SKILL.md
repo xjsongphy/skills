@@ -159,12 +159,26 @@ The algorithm begins by initializing the tracking variables to their default val
 - Key terms being introduced
 - Warnings and critical notes
 
+**AVOID** starting paragraphs with bold phrase + colon pattern like `**核心思想**：...` or `**关键问题**：...`. This breaks narrative flow. Instead, incorporate the emphasis naturally into full sentences.
+
 **BAD**:
+```markdown
+**核心思想**：该算法使用动态规划解决问题。
+**关键难点**：需要处理大量数据。
+```
+
+**GOOD**:
+```markdown
+该算法的**核心思想**是使用动态规划来解决问题。
+算法面临的**主要难点**在于需要处理大量数据。
+```
+
+**BAD** (italics):
 ```markdown
 The *algorithm* uses *dynamic programming* to solve the problem.
 ```
 
-**GOOD**:
+**GOOD** (bold, naturally integrated):
 ```markdown
 The **algorithm** uses **dynamic programming** to solve the problem.
 ```
@@ -205,7 +219,40 @@ The equation above establishes the relationship between curvature and topology.
 The presence of a non-zero Ricci tensor implies...
 ```
 
-### 10. Complete, Standalone Sentences
+### 10. Avoid Clichéd Expressions and Overused Emphasis Words
+
+**AVOID** repetitive "不是...而是..." (not... but...) constructions. While grammatically correct, overuse creates monotonous sentence rhythm. Express the same idea using varied sentence structures.
+
+**BAD** (repetitive):
+```markdown
+该方法**不是**简单的暴力搜索，**而是**基于启发式的优化。
+这个设计**不是**为了追求速度，**而是**为了提高精度。
+```
+
+**GOOD** (varied):
+```markdown
+该方法采用基于启发式的优化策略，避免了简单暴力搜索的高昂代价。
+该设计优先考虑精度提升，而非单纯追求执行速度。
+```
+
+**AVOID** overusing generic emphasis words like **核心** (core), **关键** (key/critical), **重要** (important) as lazy ways to signal significance. Use them sparingly and only when truly warranted. Most content should stand on its own merit without constant emphasis markers.
+
+**BAD** (overused emphasis):
+```markdown
+**核心**思想是... **关键**步骤是... **重要**挑战是...
+这是**核心**问题... 需要**关键**技术... 这是**重要**突破...
+```
+
+**GOOD** (measured emphasis):
+```markdown
+The **design principle** underlying this approach...
+The **main challenge** lies in...
+This represents a significant advancement in...
+```
+
+Use specific, descriptive language instead of generic emphasis tags. Let the content's importance emerge from clear explanation rather than constant labeling.
+
+### 11. Complete, Standalone Sentences
 
 Each sentence should be grammatically complete and express one clear thought. No sentence fragments.
 
@@ -283,12 +330,15 @@ Before considering content complete:
 6. [ ] Explanations are coherent narratives, not itemized steps
 7. [ ] **No bullets or numbered lists in main narrative** (only for structured data)
 8. [ ] **No italics** — use bold for emphasis
-9. [ ] All sentences are complete and grammatically correct
-10. [ ] No conversational filler
-11. [ ] **For Chinese documents**: All quotes use Chinese double quotes ""
-12. [ ] Paragraphs are separated by blank lines for readability
-13. [ ] Mermaid diagrams have concise nodes, stroke-only colors, correct direction
-14. [ ] Mermaid diagrams do not use `fill` colors (dark mode invisible)
+9. [ ] **No bold phrase + colon at paragraph starts** (e.g., `**核心**：`)
+10. [ ] Varied sentence structure — avoid repetitive "不是...而是..." patterns
+11. [ ] Measured use of emphasis words — avoid overusing **核心**/**关键**/**重要**
+12. [ ] All sentences are complete and grammatically correct
+13. [ ] No conversational filler
+14. [ ] **For Chinese documents**: All quotes use Chinese double quotes ""
+15. [ ] Paragraphs are separated by blank lines for readability
+16. [ ] Mermaid diagrams have concise nodes, stroke-only colors, correct direction
+17. [ ] Mermaid diagrams do not use `fill` colors (dark mode invisible)
 
 ## Document Metadata
 
