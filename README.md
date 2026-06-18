@@ -113,6 +113,25 @@ python3 scripts/cleanup_syncthing.py --folders ~/Develop ~/Codes
 
 ---
 
+### browser
+
+**Purpose**: Control Chrome browser via REST API for browser automation tasks
+
+**Features**:
+- Full Selenium control via HTTP endpoints
+- Anti-detection (background playback, automation hiding)
+- Element find/click/input/screenshot/JS execution
+- Window management (switch/close)
+- Auto random delays to simulate human behavior
+
+**Use Cases**: Web automation, auto-login, course watching, form filling, web scraping with browser
+
+**Invoke**: `/browser`
+
+**Server Project**: `D:\Develop\AgentInBrowser`
+
+---
+
 ## Repository Structure
 
 ```

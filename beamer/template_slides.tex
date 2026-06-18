@@ -1,0 +1,90 @@
+% LaTeX Beamer 模板
+% 根据具体项目修改标题、作者等信息
+\documentclass[10pt,aspectratio=169]{beamer}
+
+% 中文支持
+\usepackage{ctex}
+
+% 常用宏包
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usefonttheme[onlymath]{serif}
+
+% 主题设置
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% 页边距设置
+\setbeamersize{text margin left=1.2cm,text margin right=1.2cm}
+
+% 图片路径（根据实际结构调整）
+\graphicspath{{../images/}}
+
+% 全局行间距
+\renewcommand{\baselinestretch}{1.15}
+
+% 引用设置
+\setbeamertemplate{caption}[numbered]
+
+% 每节开始时显示目录
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{内容提要}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% 标题页信息
+\title[短标题]{完整标题}
+\subtitle{副标题或会议名称}
+\author[作者名]{汇报人：姓名}
+\institute[机构简称]{
+  机构全名或部门名称
+}
+\date{日期或事件}
+
+\begin{document}
+
+% 标题页
+\frame{\titlepage}
+
+% 目录页
+\begin{frame}
+  \frametitle{内容提要}
+  \tableofcontents
+\end{frame}
+
+%=============================================================================
+% 第一部分
+%=============================================================================
+\input{sections/part1_title.tex}
+
+%=============================================================================
+% 第二部分
+%=============================================================================
+\input{sections/part2_title.tex}
+
+%=============================================================================
+% 第N部分
+%=============================================================================
+\input{sections/partN_title.tex}
+
+% 感谢页
+\begin{frame}
+  \centering
+  \Huge{感谢聆听！}
+
+  \vspace{1cm}
+  \Large{欢迎提问与讨论}
+\end{frame}
+
+\end{document}
