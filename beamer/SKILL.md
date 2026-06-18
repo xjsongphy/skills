@@ -215,24 +215,23 @@ slides/
 
 ### 3. Layout and Formatting
 
-**Image sizing rules:**
+**Image sizing guidelines:**
 - Use `keepaspectratio` to prevent distortion
-- Limit height: `height=0.45\textheight` maximum
-- Limit width: `width=0.9\textwidth` maximum
-- Test compile to ensure no overflow
+- Adjust size based on content and layout needs
+- Test compile to ensure proper display
 
-**Recommended image sizes:**
+**Image examples:**
 ```latex
 % Full-width images
 \includegraphics[width=0.85\textwidth,height=0.45\textheight,keepaspectratio]{figure.jpg}
 
 % Column images
-\includegraphics[width=0.95\textwidth,height=0.4\textheight,keepaspectratio]{figure.jpg}
+\includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{figure.jpg}
 ```
 
-**Text density rules:**
-- Use `\vspace{0.2cm}` to separate content blocks
-- Limit frame content to avoid overflow
+**Text layout guidelines:**
+- Use vertical spacing (`\vspace{}`) as needed for content separation
+- Ensure content fits within frame boundaries
 - Use columns for side-by-side content
 - Split long sections across multiple frames
 
@@ -333,13 +332,16 @@ QTurbo通过将全局混合方程系统分解为全局线性方程系统和多�
 
 **Symptoms:** Compilation warnings, content cut off
 
-**Fix:** Always use `keepaspectratio` and reasonable height limits:
+**Fix:** Use `keepaspectratio` to maintain proportions and adjust size as needed:
 ```latex
-% ❌ BAD: No height limit
+% ❌ BAD: May cause overflow
 \includegraphics[width=\textwidth]{figure.jpg}
 
-% ✅ GOOD: Constrained dimensions
+% ✅ GOOD: Use keepaspectratio and reasonable sizing
 \includegraphics[width=0.85\textwidth,height=0.45\textheight,keepaspectratio]{figure.jpg}
+
+% ✅ GOOD: Simple sizing for columns
+\includegraphics[width=\columnwidth,keepaspectratio]{figure.jpg}
 ```
 
 ### ❌ Text Overflow
@@ -406,7 +408,7 @@ Before considering slides complete:
 - [ ] All sections from document included (unless user requested simplification)
 - [ ] Original narrative preserved and accurately represented
 - [ ] No prohibited emphasis words ("核心", "关键", etc.)
-- [ ] All images load correctly with proper sizing
+- [ ] All images load correctly and display properly
 - [ ] No text or image overflow on any frame
 - [ ] Mathematical formulas render correctly
 - [ ] Tables formatted properly with booktabs
