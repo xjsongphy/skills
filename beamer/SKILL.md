@@ -213,7 +213,38 @@ slides/
 - Vary sentence structure to avoid monotony
 - Integrate emphasis naturally into full sentences
 
-### 3. Layout and Formatting
+### 3. Chinese Quote Marks (CRITICAL for Chinese Documents)
+
+**When writing Chinese text in LaTeX Beamer (with `ctex` package), ALWAYS use proper quote marks:**
+
+**Chinese Double Quotes:**
+- Left double quote: `` `` `` (two backticks)
+- Right double quote: `''` (two single quotes/apostrophes)
+
+**Chinese Single Quotes:**
+- Left single quote: `` ` `` (one backtick)
+- Right single quote: `'` (one single quote/apostrophe)
+
+**How to type:**
+- Press backtick key (`` ` ``) twice for left double quote: ``
+- Press apostrophe key (`'`) twice for right double quote: ''
+- Press backtick key once for left single quote: `
+- Press apostrophe key once for right single quote: '
+
+**Examples:**
+```latex
+% ✅ CORRECT - Chinese quotes
+这是一个``简单''的定义
+这个概念称为``接近性''和``连续性''
+
+% ❌ INCORRECT - ASCII straight quotes (ugly in PDF)
+这是一个"简单"的定义
+这个概念称为"接近性"和"连续性"
+```
+
+**IMPORTANT:** Always use `` `` and `''` for quotes in Chinese text, never use `"`, corner brackets, or any other form!
+
+### 4. Layout and Formatting
 
 **Image sizing guidelines:**
 - Use `keepaspectratio` to prevent distortion
