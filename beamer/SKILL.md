@@ -276,7 +276,7 @@ slides/
 \end{columns}
 ```
 
-### 4. Content Completeness
+### 5. Content Completeness
 
 **Default: Include all content from document**
 

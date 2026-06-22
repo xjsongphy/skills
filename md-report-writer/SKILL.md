@@ -5,15 +5,48 @@ description: Professional report writing assistant using Markdown. Focuses on na
 
 # Markdown Report Writer
 
-Professional assistant for writing reports using Markdown with focus on narrative flow and coherent explanations.
+Professional assistant for writing reports using Markdown. **Prefer the shortest explanation that preserves correctness, context, and readability.**
 
 ## Core Writing Principles
 
-### 1. Narrative Flow (Most Important!)
+### 1. Clarity Before Detail
 
-**NEVER** start a section directly with a list, formula, or technical content. **ALWAYS** include explanatory text first.
+Write for clarity first, then add detail only when it helps the reader understand the argument. Do not explain every term or code line by default. Expand when:
 
-**BAD** (abrupt start):
+- The concept is necessary for understanding later reasoning.
+- The user is likely unfamiliar with the term.
+- The code behavior is non-obvious.
+- The conclusion depends on a subtle distinction.
+
+Avoid repeating the same idea in the introduction, explanation, and summary. A section may use one short lead sentence before technical content; it does not need a full paragraph unless the context is genuinely complex.
+
+### 2. Define Important Concepts Before Use
+
+Core concepts must be defined before they are used in analysis, diagrams, or code interpretation. A core concept is a term that the reader must understand to follow the subsequent argument — such as an IR node, compiler pass, data structure, scheduling primitive, hardware component, or mathematical object.
+
+Ordinary technical terms do not always need standalone definitions. Acronym expansion and short clarifications may use parentheses when they do not interrupt the sentence:
+
+```markdown
+TIR（Tensor IR）是 TVM 的低层张量中间表示。
+```
+
+Avoid parenthetical dumps that define several important concepts at once:
+
+```markdown
+<!-- BAD: too many concepts crammed into parentheses -->
+PrimFunc 是 TIR（Tensor IR，TVM 的低层中间表示）层的核心 IR 单元，包含 buffer（TIR 中表示一块有形状和数据类型的线性内存区域，通过多维索引访问）访问代码。这些 PrimFunc 尚未被分配 tiling（将循环拆分为多层 tile）策略。
+
+<!-- GOOD: core concepts get their own sentences, acronyms use light parentheses -->
+PrimFunc 是 TVM 低层中间表示 TIR（Tensor IR）的核心 IR 单元。它包含完整的循环嵌套，循环体内是对 buffer 的读写。buffer 是 TIR 层的数据容器：一个有形状和数据类型的内存块，通过多维索引访问其中元素。接下来的关键步骤是确定 tiling：将大循环按 tile 拆分成多层嵌套，以利用缓存局部性和并行能力。
+```
+
+### 3. Narrative Flow Without Over-Explaining
+
+A section should not start abruptly with a formula, list, table, or code block unless the user explicitly asks for terse notes. Usually, one short lead sentence is enough to introduce the technical content.
+
+After presenting code, data, or a diagram, add only the interpretation needed to connect it to the argument. Do not repeat the same point in the introduction, explanation, and conclusion.
+
+**BAD** (abrupt start, content dump):
 ```markdown
 ## Results
 
@@ -22,84 +55,22 @@ Professional assistant for writing reports using Markdown with focus on narrativ
 - Metric C: 789
 ```
 
-**GOOD** (narrative leads into content):
+**GOOD** (one lead sentence, then content):
 ```markdown
 ## Results
 
-The experiment yielded three key metrics that demonstrate the effectiveness of the proposed method. The following measurements were collected under controlled conditions:
+The experiment yielded three key metrics under controlled conditions:
 
-- Metric A: 123 — indicates baseline performance
-- Metric B: 456 — shows improvement over baseline
+- Metric A: 123 — baseline performance
+- Metric B: 456 — improvement over baseline
 - Metric C: 789 — confirms the theoretical prediction
 ```
 
-### 2. Define Before Use (Noun-First Principle)
+### 4. Explain Code Selectively
 
-**EVERY technical term must be defined in narrative before it is used in code, diagrams, or subsequent text.** Never introduce a term inside parentheses or assume the reader knows it.
+Source code blocks need context before and interpretation after. For short code blocks, one sentence before and one sentence after is sufficient. Use line-by-line explanation only when the code contains non-obvious control flow, hidden assumptions, important API behavior, or implementation details that support the main argument.
 
-**BAD** (parenthetical dump, undefined terms):
-```markdown
-PrimFunc 是 TIR（Tensor IR，TVM 的低层中间表示）层的核心 IR 单元，包含循环嵌套和 buffer（TIR 中表示一块有形状和数据类型的线性内存区域，通过多维索引访问）访问代码。这些 PrimFunc 尚未被分配 tiling（将循环拆分为多层 tile）策略。
-```
-
-**GOOD** (narrative definition, one term at a time):
-```markdown
-PrimFunc 是 TVM 低层中间表示 TIR（Tensor IR）的核心 IR 单元。它包含完整的循环嵌套，循环体内是对 buffer 的读写。buffer 是 TIR 层的数据容器：一个有形状和数据类型的内存块，通过多维索引访问其中元素。此时 PrimFunc 只描述了纯计算逻辑，尚未涉及并行执行策略。接下来的关键步骤是确定 tiling：将大循环按 tile 拆分成多层嵌套，以利用缓存局部性和并行能力。
-```
-
-**Rule**: Each new term gets its own sentence. Define first, then use. Never define inside parentheses `（...）`.
-
-**Critical Rule for Important Concepts**: Core abstractions such as IR nodes, data structures, compiler primitives, and architectural components **MUST receive standalone definitions** with concrete examples. An inline parenthetical `（像这样一句话带过）` is never acceptable for a concept that the reader needs to understand to follow the subsequent analysis. Such concepts deserve at minimum one full sentence of definition, and ideally a dedicated paragraph that covers what the concept is, where it sits in the system, and what concrete form it takes. If the concept has a source-level definition (e.g., a C++ class or Python object), cite the source file and line number as part of the definition. A reader who skips parenthetical asides should still be able to understand every important term.
-
-### 3. Narrative Should Weave Through Content
-
-The goal is **narrative-content-narrative-content-narrative**, not **narrative-content-content-content-narrative**.
-
-After presenting data, code, or results, add:
-- Explanatory text unpacking the meaning
-- Connections to previous findings
-- Context for what comes next
-- Practical or theoretical implications
-
-**BAD** (content dump):
-```markdown
-## Analysis
-
-The algorithm processes input as follows:
-
-```python
-def process(x):
-    return x * 2
-```
-
-Time complexity: O(n)
-
-Space complexity: O(1)
-
-## Conclusion
-
-The algorithm is efficient.
-```
-
-**GOOD** (narrative weaves through):
-```markdown
-## Analysis
-
-The algorithm processes input through a simple transformation. At its core, the function multiplies each input value by two, implementing a linear mapping that preserves the relative ordering of elements.
-
-```python
-def process(x):
-    return x * 2
-```
-
-This implementation achieves linear time complexity O(n) since each element is visited exactly once. The space complexity is O(1) as no additional data structures are allocated — the transformation is performed in place.
-
-The efficiency characteristics make this approach suitable for real-time applications where latency must be minimized.
-```
-
-### 4. Code Blocks Require Pre-Explanation and Post-Explanation
-
-**EVERY code block must be wrapped: narrative before explains what the code does and why it matters, narrative after unpacks what the code reveals.**
+For real source excerpts, cite the file path and line range whenever available. For illustrative examples or pseudocode, label them clearly as examples and do not invent source locations.
 
 **BAD** (bare code block, no interpretation):
 ```markdown
@@ -115,9 +86,9 @@ class ApplyDefaultSchedule:
 ```
 ```
 
-**GOOD** (code explained line by line):
+**GOOD** (context before, interpretation after — line-by-line only for non-obvious logic):
 ```markdown
-The ApplyDefaultSchedule pass processes each function in the module. The implementation logic is directly visible in `transform_module`:
+The ApplyDefaultSchedule pass processes each function in the module. The implementation logic is directly visible in `transform_module`（源码：python/tvm/s_tir/dlight/base/transform.py）:
 
 ```python
 @module_pass(opt_level=0, name="ApplyDefaultSchedule")
@@ -131,35 +102,32 @@ class ApplyDefaultSchedule:
                 sch = _apply_rules(func, target, self.rules, tunable=False)
 ```
 
-The `isinstance` check filters out non-TIR functions. `_is_scheduled` reads `func.attrs["tirx.is_scheduled"]` — a boolean flag set by any scheduling pass that has already processed this function. `_apply_rules` tries each rule in priority order; `tunable=False` means each rule returns a single deterministic schedule rather than multiple variants for search.
+The `isinstance` check filters out non-TIR functions. `_is_scheduled` reads `func.attrs["tirx.is_scheduled"]` — a boolean flag set by any scheduling pass that has already processed this function. `_apply_rules` tries each rule in priority order; `tunable=False` means each rule returns a single deterministic schedule.
 ```
 
-**Rule for code citations**: Every code block must cite its source with file path and line number. Use the format `（源码位置：path/to/file.cc line N）` or `（源码：path/to/file.py）`.
+### 5. Use Lists When They Improve Scanability
 
-### 5. Explanations as Coherent Narratives
+Use narrative paragraphs for causal reasoning, conceptual explanation, and argument development. Use bullets or numbered lists when they improve scanability — especially for constraints, failure modes, design choices, comparisons, checklists, and sequential procedures. Do not avoid lists when they make the structure clearer.
 
-Technical explanations should flow as continuous text, not step-by-step lists.
-
-**BAD**:
+**BAD** (narrative paragraph where a list is clearer):
 ```markdown
-**Step 1**: Initialize the variables.
-**Step 2**: Loop through the array.
-**Step 3**: Return the result.
+The algorithm has several limitations. First, it cannot handle inputs larger than 1GB without chunking. Second, it requires at least 4 CPU cores to be efficient. Third, it does not support streaming mode, which means all data must be in memory at once.
 ```
 
-**GOOD**:
+**GOOD** (list for scanable constraints):
 ```markdown
-The algorithm begins by initializing the tracking variables to their default values. Once the initialization is complete, the main loop iterates through each element of the input array, applying the transformation rule sequentially. After all elements have been processed, the function returns the accumulated result.
+The algorithm has the following limitations:
+
+- Input size capped at 1GB without chunking.
+- Requires at least 4 CPU cores for efficient execution.
+- No streaming mode — all data must fit in memory.
 ```
 
-### 6. Use Bold for Emphasis, Not Italics
+### 6. Use Emphasis Sparingly
 
-**DO NOT use italics** in technical reports. Use **bold** for:
-- Emphasis on important concepts
-- Key terms being introduced
-- Warnings and critical notes
+Use bold only for important concepts, conclusions, or warnings. Do not bold every introduced term. Avoid paragraph openings like `**核心思想**：...`; integrate emphasis naturally into complete sentences.
 
-**AVOID** starting paragraphs with bold phrase + colon pattern like `**核心思想**：...` or `**关键问题**：...`. This breaks narrative flow. Instead, incorporate the emphasis naturally into full sentences.
+Do not use italics for emphasis. Italics may still be used for paper titles, mathematical variables, or conventional notation.
 
 **BAD**:
 ```markdown
@@ -173,96 +141,31 @@ The algorithm begins by initializing the tracking variables to their default val
 算法面临的**主要难点**在于需要处理大量数据。
 ```
 
-**BAD** (italics):
-```markdown
-The *algorithm* uses *dynamic programming* to solve the problem.
-```
+### 7. Maintain a Direct Professional Tone
 
-**GOOD** (bold, naturally integrated):
-```markdown
-The **algorithm** uses **dynamic programming** to solve the problem.
-```
+Avoid conversational filler, meta-commentary, and repetitive transition phrases. Prefer precise claims over generic emphasis words such as "核心", "关键", "重要", "主要", and "本质". Use these words only when they add real meaning.
 
-### 7. Bulleted and Numbered Lists
-
-**ONLY use bullets and numbered lists when:**
-- Items have no inherent order and can be read independently
-- Presenting sequential steps that must be followed
-- Listing features, requirements, or checklist items
-
-**NEVER use bullets or numbered lists for:**
-- Main narrative explanations
-- Technical derivations
-- Argument development
-- Cause-effect relationships
-
-### 8. Quote Marks
-
-- **English**: Use ASCII double quotes `""`
-- **中文**: Use Chinese double quotes `""` (输入中文引号，会自动变为中文标点)
-
-### 9. Direct, Professional Tone
-
-**AVOID** conversational filler and meta-commentary:
+Avoid repetitive "不是...而是..." constructions — overuse creates monotonous sentence rhythm. Express the same idea using varied sentence structures.
 
 **BAD**:
-```markdown
-In this section, we will explore the concept of manifolds.
-As we can see from the above equation...
-It is interesting to note that...
-```
-
-**GOOD**:
-```markdown
-A manifold generalizes the notion of Euclidean space to curved geometries.
-The equation above establishes the relationship between curvature and topology.
-The presence of a non-zero Ricci tensor implies...
-```
-
-### 10. Avoid Clichéd Expressions and Overused Emphasis Words
-
-**AVOID** repetitive "不是...而是..." (not... but...) constructions. While grammatically correct, overuse creates monotonous sentence rhythm. Express the same idea using varied sentence structures.
-
-**BAD** (repetitive):
 ```markdown
 该方法**不是**简单的暴力搜索，**而是**基于启发式的优化。
 这个设计**不是**为了追求速度，**而是**为了提高精度。
 ```
 
-**GOOD** (varied):
+**GOOD**:
 ```markdown
 该方法采用基于启发式的优化策略，避免了简单暴力搜索的高昂代价。
 该设计优先考虑精度提升，而非单纯追求执行速度。
 ```
 
-**AVOID** overusing generic emphasis markers. Common overused words include：
+### 8. Quote Marks
 
-| 中文 | 英文 | 使用频率问题 |
-|------|------|--------------|
-| 核心 | core / core idea | 极高频，常用于描述任何设计思想 |
-| 关键 | key / critical / crucial | 过度使用，失去强调效果 |
-| 重要 | important / significant | 成为默认前缀，而非真正强调 |
-| 主要 | main / primary / major | 泛化严重 |
-| 本质 | essence / essential | 常用于概念解释，但多数内容并非真正"本质" |
+- **中文文档**: 使用中文双引号 "“" 和 "”"，例如："这是一个引用"。
+- **English documents**: Use ASCII double quotes `"` and `"`, e.g., `"This is a quote."`.
+- Do NOT mix Chinese and ASCII quote styles in the same document.
 
-Use these words sparingly and only when truly warranted. Most content should stand on its own merit without constant emphasis markers.
-
-**BAD** (overused emphasis):
-```markdown
-**核心**思想是... **关键**步骤是... **重要**挑战是...
-这是**核心**问题... 需要**关键**技术... 这是**重要**突破...
-```
-
-**GOOD** (measured emphasis):
-```markdown
-该**设计原理**（design principle）采用基于启发式的优化策略。
-该算法面临的**主要难点**（main challenge）在于处理大规模数据。
-这代表了在量子纠错领域的**显著进展**（significant advancement）。
-```
-
-Use specific, descriptive language instead of generic emphasis tags. Let the content's importance emerge from clear explanation rather than constant labeling.
-
-### 11. Complete, Standalone Sentences
+### 9. Complete, Standalone Sentences
 
 Each sentence should be grammatically complete and express one clear thought. No sentence fragments.
 
@@ -270,7 +173,9 @@ Each sentence should be grammatically complete and express one clear thought. No
 
 ### When to Use Mermaid
 
-Use Mermaid diagrams for:
+Use a Mermaid diagram only when it clarifies relationships that are hard to explain in a few sentences. Do not add diagrams merely for decoration. If a process has fewer than four meaningful nodes, explain it in text instead.
+
+Use Mermaid for:
 - Flowcharts showing process logic (graph TD/LR)
 - Architecture diagrams showing component relationships
 - Decision trees
@@ -301,19 +206,21 @@ graph TD
     B --> C[遍历每个 Binding]
     C --> D[阶段一: Infer]
     D --> E[阶段二: Rewrite]
-    
+
     style A stroke:#0288d1,stroke-width:3px
     style E stroke:#d81b60,stroke-width:2px
 ```
 
 ## Source Citation Format
 
-All source code references must include file path and line number:
+For real source excerpts, cite the file path and line range whenever available:
 
 ```
 源码位置：src/relax/transform/convert_layout.cc line 116
 源码：python/tvm/s_tir/dlight/base/transform.py line 46-78
 ```
+
+For illustrative pseudocode or simplified examples, label them clearly as examples — do not invent source locations.
 
 For academic papers, use standard citation format:
 ```
@@ -324,40 +231,45 @@ Tianqi Chen et al., "TVM: An Automated End-to-End Optimizing Compiler for Deep L
 
 ### Pattern 1: Question → Answer → Explanation
 
+Pose the question the reader is asking, then answer it directly, then explain the reasoning. Use for: FAQ-style sections, design rationale, trade-off discussions.
+
 ### Pattern 2: Observation → Analysis → Implication
 
+State what the data or code shows, analyze why it behaves this way, then state what it means for the broader argument. Use for: benchmarking results, profiling data, code behavior walkthroughs.
+
 ### Pattern 3: Definition → Example → Generalization
+
+Define a concept, show a concrete example, then explain the general principle or how it applies elsewhere. Use for: introducing new abstractions, API concepts, algorithm descriptions.
 
 ## Quality Checklist
 
 Before considering content complete:
 
-1. [ ] Every section has introductory text before technical content
-2. [ ] Every technical term is defined in narrative before first use — no parenthetical definitions `（...）`
-3. [ ] Every code block has both pre-explanation (what & why) and post-explanation (what it reveals)
-4. [ ] Every code block cites source file path and line number
-5. [ ] Narrative weaves through content (not content dump)
-6. [ ] Explanations are coherent narratives, not itemized steps
-7. [ ] **No bullets or numbered lists in main narrative** (only for structured data)
-8. [ ] **No italics** — use bold for emphasis
-9. [ ] **No bold phrase + colon at paragraph starts** (e.g., `**核心**：`)
-10. [ ] Varied sentence structure — avoid repetitive "不是...而是..." patterns
-11. [ ] Measured use of emphasis words — avoid overusing **核心**/**关键**/**重要**
-12. [ ] All sentences are complete and grammatically correct
-13. [ ] No conversational filler
-14. [ ] **For Chinese documents**: All quotes use Chinese double quotes ""
-15. [ ] Paragraphs are separated by blank lines for readability
-16. [ ] Mermaid diagrams have concise nodes, stroke-only colors, correct direction
-17. [ ] Mermaid diagrams do not use `fill` colors (dark mode invisible)
+1. [ ] Core concepts are defined before use; ordinary terms are not over-explained
+2. [ ] Every section has at least one lead sentence before technical content
+3. [ ] Code blocks have context before and interpretation after — one sentence each for short blocks
+4. [ ] Real source excerpts cite file path and line number; illustrative code is labeled as such
+5. [ ] Narrative weaves through content without repeating points
+6. [ ] Lists are used for scanable content (constraints, comparisons, checklists); paragraphs for causal reasoning
+7. [ ] No italics for emphasis (ok for paper titles, variables, notation)
+8. [ ] Bold used sparingly for important terms; no `**Keyword**：` paragraph openings
+9. [ ] Varied sentence structure — no repetitive "不是...而是..." patterns
+10. [ ] Emphasis words (核心/关键/重要/主要/本质) used only when they add real meaning
+11. [ ] All sentences are complete and grammatically correct
+12. [ ] No conversational filler or meta-commentary
+13. [ ] Chinese documents use Chinese quotation marks: "“" and "”"
+14. [ ] Paragraphs separated by blank lines
+15. [ ] Mermaid diagrams used only when they clarify relationships; ≥4 meaningful nodes
+16. [ ] Mermaid diagrams: concise nodes, stroke-only emphasis, correct direction, no `fill` colors
 
 ## Document Metadata
 
-Include standard metadata at the top of reports:
+For formal reports, include metadata at the top:
 
 ```markdown
 # Title
 
-**Author**: Name | **Date**: YYYY-MM-DD | **Status**: Draft/Final
+**Author**: Name | **Date**: YYYYY-MM-DD | **Status**: Draft/Final
 ```
 
 For Chinese reports:
@@ -365,5 +277,7 @@ For Chinese reports:
 ```markdown
 # 标题
 
-**作者**: 姓名 | **日期**: YYYY年MM月DD日 | **状态**: 草稿/定稿
+**作者**: 姓名 | **日期**: YYYYY年MM月DD日 | **状态**: 草稿/定稿
 ```
+
+For notes, explanations, and short assignments, omit metadata unless requested.
