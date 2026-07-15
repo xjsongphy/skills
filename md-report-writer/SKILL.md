@@ -152,18 +152,23 @@ Table 1: Performance Metrics
 Table 1 shows the achieved throughput and latency under the test configuration.
 ```
 
-**Figure caption format**: Use HTML centered italic captions below images. Do NOT put titles in [中括号] as they may not be visible to readers.
+**Figure caption format**: Use HTML centered italic captions below images. Do NOT rely on Markdown alt text for titles, as readers may not see it.
 
-**GOOD**:
+**GOOD** (visible caption):
 ```markdown
 <p align="center"><em>Figure 1: Performance comparison across different workloads</em></p>
 ![Figure 1](image.png)
 ```
 
-**BAD**:
+**BAD** (alt text not visible):
+```markdown
+![Figure 1: Performance comparison](image.png)
+```
+
+**Even worse** (bracketed title, also not visible):
 ```markdown
 ![Figure 1](image.png)
-[Figure 1: Performance comparison]  ← Readers may not see this
+[Figure 1: Performance comparison]
 ```
 
 **Key insight**: The goal is not to reduce interpretation length, but to place it where readers can immediately connect the visual/data with its meaning, without scrolling back and forth.
