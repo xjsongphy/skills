@@ -225,10 +225,39 @@ Use Mermaid for:
 - Flowcharts showing process logic (graph TD/LR)
 - Architecture diagrams showing component relationships
 - Decision trees
+- Algorithm workflows with conditional branches and feedback loops
 
 Use plain text (tree or indented list) for:
 - File/directory structures
 - Simple hierarchical lists
+
+**When algorithm flows involve multiple stages, conditions, and feedback paths, use Mermaid to clarify the structure instead of dense paragraphs.**
+
+**BAD** (dense paragraph obscures the flow):
+```markdown
+报错信息的组织方式可以从这条流中理解。候选先被编译和执行；若编译失败，反馈包含编译器诊断；若能编译但运行或数值比较失败，反馈包含相应错误或不一致结果。失败模式提炼器同时看到候选代码与该条反馈，因此它不会只根据一句孤立报错泛化规则，而是将诊断限定在出现该诊断的代码上下文内。论文要求将其压缩为最小约束，例如"不能以某种方式调用某个 Triton 类型"。
+```
+
+**GOOD** (Mermaid flowchart makes the workflow immediately clear):
+```markdown
+报错信息的组织方式遵循以下流程：
+
+```mermaid
+graph TD
+    A[候选代码] --> B[编译和执行]
+    B -->|编译失败| C[反馈: 编译器诊断]
+    B -->|编译成功| D[运行和数值比较]
+    D -->|运行或数值失败| E[反馈: 错误/不一致结果]
+    C --> F[失败模式提炼器]
+    E --> F
+    F --> G[压缩为最小约束]
+    
+    style F stroke:#d81b60,stroke-width:3px
+    style G stroke:#0288d1,stroke-width:2px
+```
+
+失败模式提炼器同时看到候选代码与该条反馈，因此它不会只根据一句孤立报错泛化规则，而是将诊断限定在出现该诊断的代码上下文内。论文要求将其压缩为最小约束，例如"不能以某种方式调用某个 Triton 类型"。
+```
 
 ### Diagram Style Rules
 
