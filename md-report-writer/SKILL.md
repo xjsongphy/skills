@@ -109,7 +109,7 @@ The `isinstance` check filters out non-TIR functions. `_is_scheduled` reads `fun
 
 Figures and tables need context before and interpretation after, just like code blocks. Place interpretation immediately after the figure or table it refers to, not several paragraphs later.
 
-**Guideline**: When a paragraph contains multiple figures or tables, interpret each one right after it appears, then move to the next item. Do not stack multiple figures/tables and then provide all interpretations at the end.
+**Guideline**: When content includes figures, tables, or other visual elements that require interpretation, provide interpretation right after each visual element. Do not stack multiple visuals and then provide all interpretations at the end.
 
 **BAD** (delayed interpretation makes readers search for matching explanations):
 ```markdown
@@ -150,6 +150,20 @@ Table 1: Performance Metrics
 | Latency | 56 | ms |
 
 Table 1 shows the achieved throughput and latency under the test configuration.
+```
+
+**Figure caption format**: Use HTML centered italic captions below images. Do NOT put titles in [中括号] as they may not be visible to readers.
+
+**GOOD**:
+```markdown
+<p align="center"><em>Figure 1: Performance comparison across different workloads</em></p>
+![Figure 1](image.png)
+```
+
+**BAD**:
+```markdown
+![Figure 1](image.png)
+[Figure 1: Performance comparison]  ← Readers may not see this
 ```
 
 **Key insight**: The goal is not to reduce interpretation length, but to place it where readers can immediately connect the visual/data with its meaning, without scrolling back and forth.
