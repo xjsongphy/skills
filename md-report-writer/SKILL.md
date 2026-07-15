@@ -105,7 +105,53 @@ class ApplyDefaultSchedule:
 The `isinstance` check filters out non-TIR functions. `_is_scheduled` reads `func.attrs["tirx.is_scheduled"]` — a boolean flag set by any scheduling pass that has already processed this function. `_apply_rules` tries each rule in priority order; `tunable=False` means each rule returns a single deterministic schedule.
 ```
 
-### 5. Use Lists When They Improve Scanability
+### 5. Control Paragraph Information Density
+
+A single paragraph should focus on one main idea or one level of detail. When a paragraph needs to explain multiple components, data flow stages, or causal relationships, readers struggle to process all information at once.
+
+**Guideline**: If a paragraph contains more than 4-5 distinct information points (especially when they span different dimensions like data flow, control flow, selectivity, and semantic meaning), consider splitting into a list or multiple shorter paragraphs.
+
+**BAD** (information overload — 11 points in one dense paragraph):
+```markdown
+图 2 左侧的 Adapt 按箭头形成一个跨任务闭环。首先，`Seed Program` 与 `Documentation` 提供已有 PyTorch 示例和可用算子说明，二者经由 `Synthesize` 生成新的 `Training Program`；它是可执行的高层参考任务，而不是最终优化目标。随后，agent 根据该任务执行 `Generate Kernel`，尝试写出对应的 Triton 内核。`Testing` 将生成内核与参考任务一起运行，`Get Execution Feedback` 返回编译错误、运行错误或正确性结果。`Extract Failure Patterns` 只从失败候选及其反馈中提炼重复出现的限制；`Clustering` 将语义相近的限制合并，写入 `Update Skill Memory`。最后，更新后的记忆沿 `Injecting` 箭头加入下一轮 `Generate Kernel` 的提示词，使后续候选能够避开已知陷阱。图中的环形箭头表示该过程会在多个合成任务上持续重复，因而记忆是跨任务积累的。
+```
+
+**GOOD** (split into digestible pieces):
+
+Option 1 — Lead sentence + structured list:
+```markdown
+图 2 左侧的 Adapt 形成一个跨任务学习闭环：从合成任务开始，收集失败模式，更新记忆，再注入下一轮生成。该闭环包含四个阶段：
+
+- **任务合成**：`Seed Program` 与 `Documentation` 提供现有 PyTorch 示例和算子说明，经由 `Synthesize` 生成新的 `Training Program`。这些程序是高层参考任务，不是最终优化目标。
+- **内核生成与测试**：agent 根据 `Training Program` 执行 `Generate Kernel`，尝试写出对应的 Triton 内核。`Testing` 将生成内核与参考任务一起运行，`Get Execution Feedback` 返回编译错误、运行错误或正确性结果。
+- **失败模式提取**：`Extract Failure Patterns` 只从失败候选及其反馈中提炼重复出现的限制，忽略成功样本。`Clustering` 将语义相近的限制合并，写入 `Update Skill Memory`。
+- **记忆注入与循环**：更新后的记忆沿 `Injecting` 箭头加入下一轮 `Generate Kernel` 的提示词，使后续候选能够避开已知陷阱。图中的环形箭头表示该过程在多个合成任务上持续重复。
+```
+
+Option 2 — Split by stages (when the diagram is already clear):
+```markdown
+图 2 左侧的 Adapt 形成一个跨任务闭环。
+
+**任务合成阶段**：`Seed Program` 与 `Documentation` 提供已有 PyTorch 示例和可用算子说明，经由 `Synthesize` 生成新的 `Training Program`。它是可执行的高层参考任务，而不是最终优化目标。
+
+**内核生成与验证阶段**：agent 根据 `Training Program` 执行 `Generate Kernel`，尝试写出对应的 Triton 内核。`Testing` 将生成内核与参考任务一起运行，`Get Execution Feedback` 返回编译错误、运行错误或正确性结果。
+
+**失败模式提取阶段**：`Extract Failure Patterns` 只从失败候选及其反馈中提炼重复出现的限制；`Clustering` 将语义相近的限制合并，写入 `Update Skill Memory`。
+
+**记忆注入阶段**：更新后的记忆沿 `Injecting` 箭头加入下一轮 `Generate Kernel` 的提示词，使后续候选能够避开已知陷阱。图中的环形箭头表示该过程会在多个合成任务上持续重复，因而记忆是跨任务积累的。
+```
+
+Option 3 — Simplify (when the diagram already shows most details):
+```markdown
+图 2 左侧的 Adapt 形成跨任务闭环：从 `Seed Program` 与 `Documentation` 合成训练任务开始，经内核生成、测试和反馈收集，提取失败模式并更新记忆。记忆注入下一轮生成，使候选避开已知陷阱。环形箭头表示该过程在多个任务上持续重复，记忆因而跨任务积累。
+```
+
+**Key insight**: The choice between paragraph, list, or multi-section structure depends on:
+- How many distinct information points need to be conveyed
+- Whether the diagram already shows the structure
+- Whether readers need detailed understanding or just the gist
+
+### 6. Use Lists When They Improve Scanability
 
 Use narrative paragraphs for causal reasoning, conceptual explanation, and argument development. Use bullets or numbered lists when they improve scanability — especially for constraints, failure modes, design choices, comparisons, checklists, and sequential procedures. Do not avoid lists when they make the structure clearer.
 
@@ -123,7 +169,7 @@ The algorithm has the following limitations:
 - No streaming mode — all data must fit in memory.
 ```
 
-### 6. Use Emphasis Sparingly
+### 7. Use Emphasis Sparingly
 
 Use bold only for important concepts, conclusions, or warnings. Do not bold every introduced term. Avoid paragraph openings like `**核心思想**：...`; integrate emphasis naturally into complete sentences.
 
@@ -141,7 +187,7 @@ Do not use italics for emphasis. Italics may still be used for paper titles, mat
 算法面临的**主要难点**在于需要处理大量数据。
 ```
 
-### 7. Maintain a Direct Professional Tone
+### 8. Maintain a Direct Professional Tone
 
 Avoid conversational filler, meta-commentary, and repetitive transition phrases. Prefer precise claims over generic emphasis words such as "核心", "关键", "重要", "主要", and "本质". Use these words only when they add real meaning.
 
@@ -159,13 +205,13 @@ Avoid repetitive "不是...而是..." constructions — overuse creates monotono
 该设计优先考虑精度提升，而非单纯追求执行速度。
 ```
 
-### 8. Quote Marks
+### 9. Quote Marks
 
 - **中文文档**: 使用中文双引号 "“" 和 "”"，例如："这是一个引用"。
 - **English documents**: Use ASCII double quotes `"` and `"`, e.g., `"This is a quote."`.
 - Do NOT mix Chinese and ASCII quote styles in the same document.
 
-### 9. Complete, Standalone Sentences
+### 10. Complete, Standalone Sentences
 
 Each sentence should be grammatically complete and express one clear thought. No sentence fragments.
 
@@ -250,6 +296,7 @@ Before considering content complete:
 3. [ ] Code blocks have context before and interpretation after — one sentence each for short blocks
 4. [ ] Real source excerpts cite file path and line number; illustrative code is labeled as such
 5. [ ] Narrative weaves through content without repeating points
+5.5. [ ] Paragraphs control information density; avoid cramming >4-5 distinct points in one dense paragraph — use lists or split when explaining multiple components/stages/relationships
 6. [ ] Lists are used for scanable content (constraints, comparisons, checklists); paragraphs for causal reasoning
 7. [ ] No italics for emphasis (ok for paper titles, variables, notation)
 8. [ ] Bold used sparingly for important terms; no `**Keyword**：` paragraph openings
