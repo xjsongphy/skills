@@ -105,7 +105,56 @@ class ApplyDefaultSchedule:
 The `isinstance` check filters out non-TIR functions. `_is_scheduled` reads `func.attrs["tirx.is_scheduled"]` — a boolean flag set by any scheduling pass that has already processed this function. `_apply_rules` tries each rule in priority order; `tunable=False` means each rule returns a single deterministic schedule.
 ```
 
-### 5. Control Paragraph Information Density
+### 5. Interpret Figures and Tables Immediately
+
+Figures and tables need context before and interpretation after, just like code blocks. Place interpretation immediately after the figure or table it refers to, not several paragraphs later.
+
+**Guideline**: When a paragraph contains multiple figures or tables, interpret each one right after it appears, then move to the next item. Do not stack multiple figures/tables and then provide all interpretations at the end.
+
+**BAD** (delayed interpretation makes readers search for matching explanations):
+```markdown
+## Results
+
+![Figure 1](fig1.png)
+![Figure 2](fig2.png)
+![Figure 3](fig3.png)
+
+Table 1 shows the performance metrics. Table 2 shows the comparison.
+
+The three figures above demonstrate... (several paragraphs later)
+
+Figure 1 shows the baseline performance... Figure 2 indicates the improvement... Figure 3 confirms the final result...
+```
+
+**GOOD** (interpret immediately after each figure/table):
+```markdown
+## Results
+
+![Figure 1](fig1.png)
+
+Figure 1 shows the baseline performance across different workloads. The blue bars represent GPU utilization, while the red line indicates the theoretical maximum.
+
+![Figure 2](fig2.png)
+
+Compared to Figure 1, Figure 2 demonstrates a 2.3× improvement after applying our optimization. The gap is most pronounced in I/O-bound workloads.
+
+![Figure 3](fig3.png)
+
+Figure 3 confirms that the final result approaches the theoretical upper bound, validating our approach.
+
+Table 1: Performance Metrics
+
+| Metric | Value | Unit |
+|--------|-------|------|
+| Throughput | 1234 | MB/s |
+| Latency | 56 | ms |
+
+Table 1 shows the achieved throughput and latency under the test configuration.
+```
+
+**Key insight**: The goal is not to reduce interpretation length, but to place it where readers can immediately connect the visual/data with its meaning, without scrolling back and forth.
+
+### 6. Control Paragraph Information Density
 
 A single paragraph should focus on one main idea or one level of detail. When a paragraph needs to explain multiple components, data flow stages, or causal relationships, readers struggle to process all information at once.
 
@@ -159,7 +208,7 @@ Option 3 — Simplify (when the diagram already shows most details):
 - Whether the diagram already shows the structure
 - Whether readers need detailed understanding or just the gist
 
-### 6. Use Lists When They Improve Scanability
+### 7. Use Lists When They Improve Scanability
 
 Use narrative paragraphs for causal reasoning, conceptual explanation, and argument development. Use bullets or numbered lists when they improve scanability — especially for constraints, failure modes, design choices, comparisons, checklists, and sequential procedures. Do not avoid lists when they make the structure clearer.
 
@@ -177,7 +226,7 @@ The algorithm has the following limitations:
 - No streaming mode — all data must fit in memory.
 ```
 
-### 7. Use Emphasis Sparingly
+### 8. Use Emphasis Sparingly
 
 Use bold only for important concepts, conclusions, or warnings. Do not bold every introduced term. Avoid paragraph openings like `**核心思想**：...`; integrate emphasis naturally into complete sentences.
 
@@ -195,7 +244,7 @@ Do not use italics for emphasis. Italics may still be used for paper titles, mat
 算法面临的**主要难点**在于需要处理大量数据。
 ```
 
-### 8. Maintain a Direct Professional Tone
+### 9. Maintain a Direct Professional Tone
 
 Avoid conversational filler, meta-commentary, and repetitive transition phrases. Prefer precise claims over generic emphasis words such as "核心", "关键", "重要", "主要", and "本质". Use these words only when they add real meaning.
 
@@ -213,13 +262,13 @@ Avoid repetitive "不是...而是..." constructions — overuse creates monotono
 该设计优先考虑精度提升，而非单纯追求执行速度。
 ```
 
-### 9. Quote Marks
+### 10. Quote Marks
 
 - **中文文档**: 使用中文双引号 "“" 和 "”"，例如："这是一个引用"。
 - **English documents**: Use ASCII double quotes `"` and `"`, e.g., `"This is a quote."`.
 - Do NOT mix Chinese and ASCII quote styles in the same document.
 
-### 10. Complete, Standalone Sentences
+### 11. Complete, Standalone Sentences
 
 Each sentence should be grammatically complete and express one clear thought. No sentence fragments.
 
