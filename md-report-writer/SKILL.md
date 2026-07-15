@@ -111,6 +111,14 @@ A single paragraph should focus on one main idea or one level of detail. When a 
 
 **Guideline**: If a paragraph contains more than 4-5 distinct information points (especially when they span different dimensions like data flow, control flow, selectivity, and semantic meaning), consider splitting into a list or multiple shorter paragraphs.
 
+**IMPORTANT**: 控制信息密度的正确方法**不是简单随意切分段落**，而是用更合适的表达形式替代部分文字描述。优先使用：
+
+1. **Mermaid 流程图**：替代算法流程、控制流、反馈循环的密集文字描述
+2. **伪代码**：替代复杂逻辑、算法步骤、实现细节的文字说明
+3. **数学公式**：替代数学关系、计算过程、约束条件的文字叙述
+
+这些表达形式能让读者更快理解结构和逻辑，同时保持文字的简洁性。
+
 **BAD** (information overload — 11 points in one dense paragraph):
 ```markdown
 图 2 左侧的 Adapt 按箭头形成一个跨任务闭环。首先，`Seed Program` 与 `Documentation` 提供已有 PyTorch 示例和可用算子说明，二者经由 `Synthesize` 生成新的 `Training Program`；它是可执行的高层参考任务，而不是最终优化目标。随后，agent 根据该任务执行 `Generate Kernel`，尝试写出对应的 Triton 内核。`Testing` 将生成内核与参考任务一起运行，`Get Execution Feedback` 返回编译错误、运行错误或正确性结果。`Extract Failure Patterns` 只从失败候选及其反馈中提炼重复出现的限制；`Clustering` 将语义相近的限制合并，写入 `Update Skill Memory`。最后，更新后的记忆沿 `Injecting` 箭头加入下一轮 `Generate Kernel` 的提示词，使后续候选能够避开已知陷阱。图中的环形箭头表示该过程会在多个合成任务上持续重复，因而记忆是跨任务积累的。
