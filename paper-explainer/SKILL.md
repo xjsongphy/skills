@@ -194,6 +194,8 @@ An algorithm explanation should identify, when applicable:
 
 Define symbols next to first use. Use formulas when they compress a relationship more clearly than prose. Use pseudocode or Mermaid for multi-stage control flow; do not force an algorithm into a dense paragraph.
 
+When the paper provides pseudocode and the explanation is line-oriented, preserve a source-faithful listing and add concise `//` comments on the relevant lines to explain state and data flow. Prefer this annotated listing over a row-by-row mapping table when the table would separate control flow. Keep the original operations and symbols unchanged, and clearly label added comments as explanatory.
+
 ### Code
 
 Use code only when it reveals behavior that the prose or figure cannot show as clearly. Prefer small excerpts around the decisive condition, update, data structure, or kernel mapping.
