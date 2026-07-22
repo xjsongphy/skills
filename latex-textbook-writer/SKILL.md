@@ -132,6 +132,8 @@ Let $V$ be a *vector space*. The \textit{Hahn-Banach theorem} states...
 Let $V$ be a vector space. The \textbf{Hahn-Banach theorem} states...
 ```
 
+Bold a term to introduce or name it; do not use vague emphasis words such as "核心", "关键", "重要", "主要", "本质", or "显著" as a substitute for saying what a concept is or does. State the definition, hypothesis, or measured effect directly.
+
 ### 5. Bulleted and Numbered Lists
 
 **ONLY use bullets (`itemize`) and numbered lists (`enumerate`) in:**

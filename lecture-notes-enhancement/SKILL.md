@@ -79,6 +79,7 @@ Apply md-report-writer style principles:
 - Start sections abruptly with lists/formulas
 - Use bullet points for main narrative explanations
 - Use conversational filler ("we will explore", "as we can see")
+- Use vague emphasis words ("核心", "关键", "重要", "主要", "本质", "显著") as a substitute for evidence — state the role, input/output, or measured effect instead
 - Write multi-paragraph docstrings or comment blocks
 
 #### Segment Length Principle

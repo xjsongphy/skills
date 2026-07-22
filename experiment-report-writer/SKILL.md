@@ -75,6 +75,7 @@ Use **"narrative → element → explanation"** structure. After presenting data
 
 - Use complete sentences. Avoid sentence fragments.
 - Avoid conversational filler: "我们将探索" (we will explore), "我们可以看到" (we can see), "值得注意的是" (it is worth noting).
+- Do not use broad emphasis words such as "核心", "关键", "重要", "主要", "本质", or "显著" as a substitute for evidence. State the component's role, its input and output, the measured effect, or the source supporting the claim instead.
 - State facts directly and professionally.
 - Say what you know, flag what you don't know, and never fake confidence.
 
@@ -229,7 +230,7 @@ Conclusions must be supported by preceding theory, data, or error analysis. Do n
 其中 $V_{\pi 2} = 4V_\pi$ 为四块串联晶体的总半波电压，$\lambda = 632.8~\mathrm{nm}$ 为激光波长，$n_\text{o}$ 为晶体寻常光折射率。
 ```
 
-**Key points**:
+**Points to note**:
 
 1. **Narrative first**: Explanatory text introduces figure and table before they appear
 2. **Variables defined before use**: $\lambda$, $n_\text{o}$ defined after formula, $V_{\pi 2}$ defined inline

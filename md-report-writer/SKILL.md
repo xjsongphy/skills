@@ -34,10 +34,10 @@ Avoid parenthetical dumps that define several important concepts at once:
 
 ```markdown
 <!-- BAD: too many concepts crammed into parentheses -->
-PrimFunc 是 TIR（Tensor IR，TVM 的低层中间表示）层的核心 IR 单元，包含 buffer（TIR 中表示一块有形状和数据类型的线性内存区域，通过多维索引访问）访问代码。这些 PrimFunc 尚未被分配 tiling（将循环拆分为多层 tile）策略。
+PrimFunc 是 TIR（Tensor IR，TVM 的低层中间表示）层的 IR 单元，包含 buffer（TIR 中表示一块有形状和数据类型的线性内存区域，通过多维索引访问）访问代码。这些 PrimFunc 尚未被分配 tiling（将循环拆分为多层 tile）策略。
 
 <!-- GOOD: core concepts get their own sentences, acronyms use light parentheses -->
-PrimFunc 是 TVM 低层中间表示 TIR（Tensor IR）的核心 IR 单元。它包含完整的循环嵌套，循环体内是对 buffer 的读写。buffer 是 TIR 层的数据容器：一个有形状和数据类型的内存块，通过多维索引访问其中元素。接下来的关键步骤是确定 tiling：将大循环按 tile 拆分成多层嵌套，以利用缓存局部性和并行能力。
+PrimFunc 是 TVM 低层中间表示 TIR（Tensor IR）的 IR 单元。它包含完整的循环嵌套，循环体内是对 buffer 的读写。buffer 是 TIR 层的数据容器：一个有形状和数据类型的内存块，通过多维索引访问其中元素。接下来的步骤是确定 tiling：将大循环按 tile 拆分成多层嵌套，以利用缓存局部性和并行能力。
 ```
 
 ### 3. Narrative Flow Without Over-Explaining
@@ -59,7 +59,7 @@ After presenting code, data, or a diagram, add only the interpretation needed to
 ```markdown
 ## Results
 
-The experiment yielded three key metrics under controlled conditions:
+The experiment yielded three metrics under controlled conditions:
 
 - Metric A: 123 — baseline performance
 - Metric B: 456 — improvement over baseline
@@ -171,7 +171,7 @@ Table 1 shows the achieved throughput and latency under the test configuration.
 [Figure 1: Performance comparison]
 ```
 
-**Key insight**: The goal is not to reduce interpretation length, but to place it where readers can immediately connect the visual/data with its meaning, without scrolling back and forth.
+**Insight**: The goal is not to reduce interpretation length, but to place it where readers can immediately connect the visual/data with its meaning, without scrolling back and forth.
 
 ### 6. Control Paragraph Information Density
 
@@ -179,13 +179,13 @@ A single paragraph should focus on one main idea or one level of detail. When a 
 
 **Guideline**: If a paragraph contains more than 4-5 distinct information points (especially when they span different dimensions like data flow, control flow, selectivity, and semantic meaning), consider splitting into a list or multiple shorter paragraphs.
 
-**IMPORTANT**: 控制信息密度的正确方法**不是简单随意切分段落**，而是用更合适的表达形式替代部分文字描述。优先使用：
+**Guideline**: The right way to control information density is not to split paragraphs arbitrarily, but to replace dense prose with a more fitting representation. Prefer:
 
-1. **Mermaid 流程图**：替代算法流程、控制流、反馈循环的密集文字描述
-2. **伪代码**：替代复杂逻辑、算法步骤、实现细节的文字说明
-3. **数学公式**：替代数学关系、计算过程、约束条件的文字叙述
+1. **Mermaid diagrams** — replace dense prose that describes algorithm flow, control flow, or feedback loops.
+2. **Pseudocode** — replace prose that describes complex logic, algorithm steps, or implementation details.
+3. **Formulas** — replace prose that describes mathematical relations, computations, or constraints.
 
-这些表达形式能让读者更快理解结构和逻辑，同时保持文字的简洁性。
+These representations let readers grasp structure and logic faster while keeping the prose concise.
 
 **BAD** (information overload — 11 points in one dense paragraph):
 ```markdown
@@ -208,13 +208,21 @@ Option 2 — Split by stages (when the diagram is already clear):
 ```markdown
 图 2 左侧的 Adapt 形成一个跨任务闭环。
 
-**任务合成阶段**：`Seed Program` 与 `Documentation` 提供已有 PyTorch 示例和可用算子说明，经由 `Synthesize` 生成新的 `Training Program`。它是可执行的高层参考任务，而不是最终优化目标。
+#### 任务合成阶段
 
-**内核生成与验证阶段**：agent 根据 `Training Program` 执行 `Generate Kernel`，尝试写出对应的 Triton 内核。`Testing` 将生成内核与参考任务一起运行，`Get Execution Feedback` 返回编译错误、运行错误或正确性结果。
+`Seed Program` 与 `Documentation` 提供已有 PyTorch 示例和可用算子说明，经由 `Synthesize` 生成新的 `Training Program`。它是可执行的高层参考任务，而不是最终优化目标。
 
-**失败模式提取阶段**：`Extract Failure Patterns` 只从失败候选及其反馈中提炼重复出现的限制；`Clustering` 将语义相近的限制合并，写入 `Update Skill Memory`。
+#### 内核生成与验证阶段
 
-**记忆注入阶段**：更新后的记忆沿 `Injecting` 箭头加入下一轮 `Generate Kernel` 的提示词，使后续候选能够避开已知陷阱。图中的环形箭头表示该过程会在多个合成任务上持续重复，因而记忆是跨任务积累的。
+agent 根据 `Training Program` 执行 `Generate Kernel`，尝试写出对应的 Triton 内核。`Testing` 将生成内核与参考任务一起运行，`Get Execution Feedback` 返回编译错误、运行错误或正确性结果。
+
+#### 失败模式提取阶段
+
+`Extract Failure Patterns` 只从失败候选及其反馈中提炼重复出现的限制；`Clustering` 将语义相近的限制合并，写入 `Update Skill Memory`。
+
+#### 记忆注入阶段
+
+更新后的记忆沿 `Injecting` 箭头加入下一轮 `Generate Kernel` 的提示词，使后续候选能够避开已知陷阱。图中的环形箭头表示该过程会在多个合成任务上持续重复，因而记忆是跨任务积累的。
 ```
 
 Option 3 — Simplify (when the diagram already shows most details):
@@ -222,7 +230,7 @@ Option 3 — Simplify (when the diagram already shows most details):
 图 2 左侧的 Adapt 形成跨任务闭环：从 `Seed Program` 与 `Documentation` 合成训练任务开始，经内核生成、测试和反馈收集，提取失败模式并更新记忆。记忆注入下一轮生成，使候选避开已知陷阱。环形箭头表示该过程在多个任务上持续重复，记忆因而跨任务积累。
 ```
 
-**Key insight**: The choice between paragraph, list, or multi-section structure depends on:
+**Insight**: The choice between paragraph, list, or multi-section structure depends on:
 - How many distinct information points need to be conveyed
 - Whether the diagram already shows the structure
 - Whether readers need detailed understanding or just the gist
@@ -247,25 +255,25 @@ The algorithm has the following limitations:
 
 ### 8. Use Emphasis Sparingly
 
-Use bold only for important concepts, conclusions, or warnings. Do not bold every introduced term. Avoid paragraph openings like `**核心思想**：...`; integrate emphasis naturally into complete sentences.
+Use bold only for important concepts, conclusions, or warnings. Do not bold every introduced term. Avoid paragraph openings like `**算法思路**：...`; integrate emphasis naturally into complete sentences.
 
 Do not use italics for emphasis. Italics may still be used for paper titles, mathematical variables, or conventional notation.
 
 **BAD**:
 ```markdown
-**核心思想**：该算法使用动态规划解决问题。
-**关键难点**：需要处理大量数据。
+**算法思路**：该算法使用动态规划解决问题。
+**数据规模**：需要处理大量数据。
 ```
 
 **GOOD**:
 ```markdown
-该算法的**核心思想**是使用动态规划来解决问题。
-算法面临的**主要难点**在于需要处理大量数据。
+该算法基于**动态规划**解决问题。
+它需要在**大规模数据集**上运行，因此对内存占用敏感。
 ```
 
 ### 9. Maintain a Direct Professional Tone
 
-Avoid conversational filler, meta-commentary, and repetitive transition phrases. Prefer precise claims over generic emphasis words such as "核心", "关键", "重要", "主要", and "本质". Use these words only when they add real meaning.
+Avoid conversational filler, meta-commentary, and repetitive transition phrases. Do not use broad emphasis words such as "核心", "关键", "重要", "主要", "本质", or "显著" as a substitute for evidence. State the component's role in the process, its input and output, the measured effect, or the source supporting the claim. Write "该文件供 Phase B 消费" or "数据流如下", not "该图是核心" or "这个结果是关键的".
 
 Avoid repetitive "不是...而是..." constructions — overuse creates monotonous sentence rhythm. Express the same idea using varied sentence structures.
 
@@ -290,6 +298,21 @@ Avoid repetitive "不是...而是..." constructions — overuse creates monotono
 ### 11. Complete, Standalone Sentences
 
 Each sentence should be grammatically complete and express one clear thought. No sentence fragments.
+
+### 12. Use Direct Exposition, Not Rhetorical Self-Questioning
+
+Write mechanisms as declarative prose. Do not pose a reader question and answer it immediately, such as "这条链回答了'谁产生什么、谁消费什么'" or "这里要问的是……答案是……". State the producer, transformation, output, and consumer directly. Drafting checklists may contain questions, but those are internal checks and must not appear in place of explanation. Reserve rhetorical questions for cases where the user explicitly asks for a Q&A or tutorial format.
+
+### 13. Define Directly, Not by Analogy or Negation
+
+State what a component or quantity IS — its input, the operation performed, its output, and its role in the next stage. Do not open a paragraph with an analogy or a negation.
+
+Two anti-patterns to avoid as the opening or load-bearing mode of a paragraph:
+
+- **Analogy-led opening**: introducing a mechanism by glossing a term with a metaphor, such as "'锦标赛选择'可以理解成若干次小组赛：……". An analogy may follow a direct statement to aid intuition, but it must not carry the explanation or open the paragraph.
+- **Negation-led clarification**: defining a term mainly by saying what it is not, such as "这里的'策略性能'不是给自然语言策略 $S_i$ 单独打分。……". If a term is ambiguous, first state what it refers to and how it is measured; only add a compact contrast sentence if a reader is likely to misread it.
+
+Both patterns push the real explanation below the fold. Rewrite them as positive declarative prose: write "锦标赛选择从当前种群中分组比较适应度，胜者进入 parent 集合", and write "策略的性能由它所产生的修订内核 $K'_i$ 经编译、功能检查、NCU profiling 与计时后的延迟和硬件利用率度量" directly.
 
 ## Mermaid Diagram Guidelines
 
@@ -396,23 +419,25 @@ Define a concept, show a concrete example, then explain the general principle or
 
 Before considering content complete:
 
-1. [ ] Core concepts are defined before use; ordinary terms are not over-explained
+1. [ ] Important concepts are defined before use; ordinary terms are not over-explained
 2. [ ] Every section has at least one lead sentence before technical content
 3. [ ] Code blocks have context before and interpretation after — one sentence each for short blocks
 4. [ ] Real source excerpts cite file path and line number; illustrative code is labeled as such
 5. [ ] Narrative weaves through content without repeating points
-5.5. [ ] Paragraphs control information density; avoid cramming >4-5 distinct points in one dense paragraph — use lists or split when explaining multiple components/stages/relationships
-6. [ ] Lists are used for scanable content (constraints, comparisons, checklists); paragraphs for causal reasoning
-7. [ ] No italics for emphasis (ok for paper titles, variables, notation)
-8. [ ] Bold used sparingly for important terms; no `**Keyword**：` paragraph openings
-9. [ ] Varied sentence structure — no repetitive "不是...而是..." patterns
-10. [ ] Emphasis words (核心/关键/重要/主要/本质) used only when they add real meaning
-11. [ ] All sentences are complete and grammatically correct
-12. [ ] No conversational filler or meta-commentary
-13. [ ] Chinese documents use Chinese quotation marks: "“" and "”"
-14. [ ] Paragraphs separated by blank lines
-15. [ ] Mermaid diagrams used only when they clarify relationships; ≥4 meaningful nodes
-16. [ ] Mermaid diagrams: concise nodes, stroke-only emphasis, correct direction, no `fill` colors
+6. [ ] Paragraphs control information density; avoid cramming more than 4-5 distinct points in one paragraph — use lists, Mermaid, pseudocode, or formulas when explaining multiple components, stages, or relationships
+7. [ ] Lists are used for scanable content (constraints, comparisons, checklists); paragraphs for causal reasoning
+8. [ ] No italics for emphasis (ok for paper titles, variables, notation)
+9. [ ] Bold used sparingly for terms; no `**Label**：` paragraph openings
+10. [ ] Varied sentence structure — no repetitive “不是...而是...” patterns
+11. [ ] No broad emphasis words (核心/关键/重要/主要/本质/显著) used as a substitute for evidence
+12. [ ] Mechanisms written as direct declarative prose, not rhetorical self-questioning
+13. [ ] Concepts defined directly, not led by analogy or negation
+14. [ ] All sentences are complete and grammatically correct
+15. [ ] No conversational filler or meta-commentary
+16. [ ] Chinese documents use Chinese quotation marks: “”” and “””
+17. [ ] Paragraphs separated by blank lines
+18. [ ] Mermaid diagrams used only when they clarify relationships; at least 4 meaningful nodes
+19. [ ] Mermaid diagrams: concise nodes, stroke-only emphasis, correct direction, no `fill` colors
 
 ## Document Metadata
 
