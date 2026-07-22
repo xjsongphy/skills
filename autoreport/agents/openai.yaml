@@ -1,0 +1,4 @@
+interface:
+  display_name: "AutoReport"
+  short_description: "Coordinate physics experiment report generation"
+  default_prompt: "Use $autoreport to analyze measured data and produce a validated LaTeX experiment report."
