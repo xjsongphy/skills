@@ -1,0 +1,5 @@
+interface:
+  display_name: "Paper Explainer"
+  short_description: "Write source-verified, image-supported paper explanations"
+  default_prompt: "Use $paper-explainer to produce a clear, detailed Markdown explanation of this paper, including relevant figures and separate factual and reader reviews."
+

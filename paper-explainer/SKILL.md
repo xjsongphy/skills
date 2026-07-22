@@ -212,6 +212,25 @@ Cite repository paths and line locations when available. Explain what the excerp
 
 Apply `md-report-writer`'s density rules semantically, not mechanically.
 
+### Use direct exposition instead of rhetorical self-questioning
+
+Write the mechanism as declarative prose. Do not pose a reader question and immediately answer it in the explanation, such as “这条链回答了‘谁产生什么、谁消费什么’” or “这里要问的是……答案是……”. The drafting checklist may contain questions, but those questions are internal checks and should not appear as a substitute for explanation. State the producer, transformation, output, and consumer directly; reserve rhetorical questions for cases where the user explicitly requests a Q&A or tutorial format.
+
+### Define directly, not by analogy or negation
+
+State what a component or quantity IS — its input, the operation performed, its output, and its role in the next stage. Do not lead with an analogy and do not lead with a negation.
+
+Two anti-patterns to avoid as the opening or main mode of a paragraph:
+
+- **Analogy-led opening**: a paragraph that introduces a mechanism by quoting a term and glossing it with a metaphor, such as “锦标赛选择”可以理解成若干次小组赛：……. An analogy may follow a direct statement to aid intuition, but it must not be the load-bearing explanation and must not open the paragraph.
+- **Negation-led clarification**: a paragraph that defines a term primarily by saying what it is not, such as 这里的“策略性能”不是给自然语言策略 $S_i$ 单独打分。……. If a term is ambiguous, first state what it refers to and how it is measured; only then, if still needed, add one compact sentence noting the contrast that is likely to be misread.
+
+Both patterns push the real explanation (what produces the value, what consumes it, how it is computed) below the fold. Rewrite them as positive declarative prose: for the analogy case, write “锦标赛选择从当前种群中分组比较适应度，胜者进入 parent 集合”；for the negation case, write “策略的性能由它所产生的修订内核 $K'_i$ 经编译、功能检查、NCU profiling 与计时后的延迟和硬件利用率度量” directly, and drop the “不是……单独打分” lead.
+
+### Prefer specific descriptions over vague emphasis
+
+Do not use broad emphasis words such as “核心”“关键”“重要” or “显著” as a substitute for evidence. State the component's position in the process, its input and output, the measured effect, or the source supporting the claim. For example, write “数据流如下” or “该文件供 Phase B 消费”，不要在没有进一步说明时把图表或结果称为“核心”或“关键”。
+
 A paragraph should normally answer one reader question, express one main claim, or stay at one level of abstraction. Split or change representation when a paragraph mixes several of these dimensions:
 
 - component inventory;

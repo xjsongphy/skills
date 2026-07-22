@@ -1,0 +1,54 @@
+{
+  "skill_name": "paper-explainer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "请结合论文 PDF、附录和开源仓库，写一篇配图的中文论文解读，让领域内普通读者不看原文也能理解。",
+      "expected_output": "A source-audited, method-first Markdown explanation with selected paper figures, detailed mechanism chains, and Reviewer/Reader review passes.",
+      "files": [],
+      "assertions": [
+        "The paper body and appendix are both audited before drafting",
+        "Official code and web resources are distinguished from paper claims",
+        "The main contribution receives more explanatory depth than related work or result tables",
+        "Included figures have visible captions and immediate interpretation",
+        "Reviewer and Reader passes use separate evidence scopes"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "这篇论文的 memory 和 RAG 到底怎么工作？经验怎么生成、筛选、更新和检索？请把现有解读补全。",
+      "expected_output": "A revision that traces memory write triggers, abstraction, filtering, schema, lifetime, retrieval query, ranking, selection, and injection only as far as sources support.",
+      "files": [],
+      "assertions": [
+        "The current explanation and Git diff are read before editing",
+        "Memory generation, filtering, update, retrieval, and injection are treated as separate mechanism stages",
+        "Undisclosed details are marked as unspecified rather than invented",
+        "Repository behavior is labeled separately from paper-stated behavior"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "我不是这个方向的研究者，请先补充必要前置知识，再解读论文；不要默认我懂图里的符号和模块。",
+      "expected_output": "A compact prerequisite section followed by a method-first explanation, with the Reader subagent using reduced prior-knowledge assumptions.",
+      "files": [],
+      "assertions": [
+        "Only prerequisites needed for the paper's main method are added",
+        "Paper-specific symbols and modules are defined before use",
+        "The Reader pass receives a stricter explicit assumed_known/explain_in_draft audience contract",
+        "The explanation does not expand into an unrelated textbook chapter"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "这份论文解读每段都太密了，帮我按 md-report-writer 调整，但不要盲目拆段或删掉算法细节。",
+      "expected_output": "A semantic-density revision that changes representation where appropriate while preserving the central mechanism and evidence.",
+      "files": [],
+      "assertions": [
+        "Dense process prose is converted to diagrams, pseudocode, tables, or lists when appropriate",
+        "Tightly coupled causal reasoning is not mechanically split",
+        "Central inputs, filters, updates, outputs, and conditions are preserved",
+        "Peripheral repetition and result dumps are trimmed before mechanism details"
+      ]
+    }
+  ]
+}
