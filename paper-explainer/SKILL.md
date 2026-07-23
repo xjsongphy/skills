@@ -177,6 +177,18 @@ For every important placeholder such as `[Task]`, `<memory>`, `{profile}`, or a 
 
 If the paper does not publish the exact template or serialization, state that boundary instead of reconstructing one.
 
+### Source-faithful operational artifacts
+
+When an operational artifact materially determines how the method behaves, show the source artifact rather than replacing it with a prose-only summary. This applies across paper types to prompts, templates, schemas, configuration blocks, API contracts, pseudocode, algorithms, and decisive code excerpts.
+
+- Show the complete artifact when it is short enough to remain readable.
+- When it is long, preserve the original wording or structure and show the sections that determine inputs, constraints, decisions, state/context injection, outputs, and termination. Mark omitted portions explicitly; do not silently paraphrase the artifact as if it were shown.
+- Follow the source hierarchy: paper or appendix first, then the official repository or artifact. Cite the paper section, appendix, repository path, and line range when available.
+- Explain the artifact immediately after it: identify where important fields or values come from, how they are consumed or updated, and which behavior each part controls.
+- If the exact artifact is unavailable, say so and provide only a clearly labeled simplified example or reconstruction. Never present an invented artifact as the paper's or repository's original.
+
+For an agent paper, apply this rule to the system prompt, task prompt, feedback/context template, tool schema, memory record, or output contract whenever one of them controls the agent's behavior. The agent case is an application of the general artifact rule, not a separate writing mode.
+
 ### Tables
 
 Explain what the rows and columns compare, which direction is better, what baseline and conditions apply, and which trend matters. Do not narrate every cell. Keep only a few numbers that establish scale, validate a design choice, expose a counterexample, or define a limit.
@@ -202,7 +214,7 @@ When the paper provides pseudocode and the explanation is line-oriented, preserv
 
 ### Code
 
-Use code only when it reveals behavior that the prose or figure cannot show as clearly. Prefer small excerpts around the decisive condition, update, data structure, or kernel mapping.
+Use code only when it reveals behavior that the prose or figure cannot show as clearly. Prefer source-faithful excerpts around the decisive condition, update, data structure, or kernel mapping; apply the general source-faithful operational-artifact rule when a larger listing is needed to preserve the mechanism.
 
 Always distinguish:
 

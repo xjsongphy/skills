@@ -90,6 +90,13 @@ The draft should identify relevant inputs, state, objective, branches, update ru
 
 Examples should map an abstract mechanism to concrete behavior. Code should be introduced and interpreted, not pasted as proof by volume.
 
+When an operational artifact determines the behavior being explained, check
+whether the draft shows enough source-faithful material for the reader to
+recover that behavior. A prose summary is insufficient when the omitted
+wording, fields, constraints, or control structure could change the reader's
+understanding. For long artifacts, explicitly marked excerpts are acceptable
+when they retain the behavior-determining sections.
+
 ### Information density
 
 Evaluate semantic load, not line count.

@@ -41,6 +41,8 @@ Check especially:
 - whether memory/state update triggers, scope, lifetime, retrieval, and injection are explained;
 - whether algorithm branches, equations, constraints, and stop conditions match the source;
 - whether prompt/template placeholders are explained by runtime value, source, use, and lifetime;
+- whether any operational artifact that materially determines behavior is shown source-faithfully (in full when short, or with explicitly marked omissions when long) rather than replaced by a prose-only summary;
+- whether long prompts, templates, schemas, configurations, algorithms, or code listings preserve the sections that determine inputs, constraints, state/context, outputs, and termination;
 - whether figures are interpreted correctly rather than merely captioned;
 - whether repository behavior is labeled as implementation evidence;
 - whether appendix mechanisms that materially explain the method were omitted;
