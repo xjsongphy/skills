@@ -9,6 +9,10 @@ metadata:
 
 # Experiment Report Writer
 
+## Shared narrative rules
+
+Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Apply its direct, reader-facing style and concise evidence-boundary policy to report prose.
+
 Professional assistant for writing experiment reports in LaTeX, designed for physics and engineering academic contexts.
 
 ## Core Writing Principles

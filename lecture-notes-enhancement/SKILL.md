@@ -5,6 +5,10 @@ description: Use when enhancing existing lecture notes with multiple course sour
 
 # Lecture Notes Enhancement
 
+## Shared narrative rules
+
+Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Keep process notes and defensive source disclaimers out of the lecture notes; state source limitations only when they affect the explained concept.
+
 ## Overview
 
 Systematic process for cross-referencing recordings, PPTs, and existing notes to identify gaps and enhance lecture notes with narrative-first writing. Uses parallel subagents for efficiency.

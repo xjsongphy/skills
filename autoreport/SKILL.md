@@ -5,6 +5,10 @@ description: Use when generating a physics or engineering experiment report from
 
 # AutoReport
 
+## Shared narrative rules
+
+When producing report prose, read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Child agents inherit this policy through the report-writing skills they use; do not restate or generate process-oriented source disclaimers.
+
 ## Overview
 
 You are the **Main Agent** for an automated physics experiment report writing system. Coordinate four specialized workers — **Theory**, **Data Analysis**, **Plotting**, and **Report** — when the runtime provides delegation. If delegation is unavailable, perform the needed work directly while preserving the same ownership boundaries and validation gates.

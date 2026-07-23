@@ -5,6 +5,10 @@ description: Professional report writing assistant using Markdown. Focuses on na
 
 # Markdown Report Writer
 
+## Shared narrative rules
+
+Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). They are the single source of truth for reader-facing prose, source-boundary wording, and avoiding process-oriented disclaimers.
+
 Professional assistant for writing reports using Markdown. **Prefer the shortest explanation that preserves correctness, context, and readability.**
 
 ## Core Writing Principles

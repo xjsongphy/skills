@@ -5,6 +5,10 @@ description: Use when writing, revising, or auditing a standalone Markdown expla
 
 # Paper Explainer
 
+## Shared narrative rules
+
+Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). This skill adds paper-specific evidence and review rules but does not duplicate the shared wording policy.
+
 ## Overview
 
 Create a self-contained paper explanation that lets a reader understand the paper without repeatedly returning to the original. The explanation must answer not only “what modules exist”, but also “what each module receives, what it filters or changes, what state it updates, what it outputs, and why the next stage needs that output”.
@@ -63,7 +67,7 @@ Never let a later repository version silently redefine the paper's method. If pa
 
 ### Evidence-boundary style
 
-Mark evidence boundaries when they affect the reader's interpretation, but keep the wording compact. Prefer one local qualifier such as “论文未说明” or “这里是解释性展开” over repeated defensive sentences like “不能自行补出这些机制”“不能断言……” or repeated reminders not to invent details. Once a boundary has been stated in a section, do not restate the same warning in every following paragraph; spend the space on the disclosed mechanism and its consequence for the workflow. Use explicit “not specified” language only for details that are likely to be mistaken for published or implemented facts.
+Follow the shared narrative and evidence rules. Mark a boundary only where it changes how the reader should interpret the claim or code; keep the qualifier local and concise.
 
 ### Existing-document and Git audit
 

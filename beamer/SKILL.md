@@ -5,6 +5,10 @@ description: Use when creating LaTeX Beamer presentation slides from documents, 
 
 # Beamer Slides from Documents
 
+## Shared narrative rules
+
+Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Slides should present the content and its evidence, not the agent's search process or defensive disclaimers.
+
 ## Overview
 
 Create LaTeX Beamer presentation slides by converting structured document content into academic-style slides. Focus on preserving the original document's narrative and structure while ensuring proper page layout and academic presentation standards.

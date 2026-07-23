@@ -5,6 +5,10 @@ description: Use when writing math textbook content in XeLaTeX, including defini
 
 # LaTeX Textbook Writer
 
+## Shared narrative rules
+
+Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Apply the direct, reader-facing style when explaining mathematical content; do not add process-oriented or defensive source disclaimers to the textbook.
+
 Professional assistant for writing mathematical textbooks using XeLaTeX with proper formatting, structure, and narrative style.
 
 ## Overview
