@@ -289,6 +289,12 @@ Avoid repetitive "不是...而是..." constructions — overuse creates monotono
 该设计优先考虑精度提升，而非单纯追求执行速度。
 ```
 
+### Reader-Relevance Filter
+
+Every sentence must provide information the reader needs: a definition, fact, relationship, procedure, result, limitation, or interpretation. Remove meta-commentary about the writer's process or intention, such as "我需要保持忠实", "这段文字的目的是", or "没有公开资料，所以不能推测" when it does not change the conclusion.
+
+Do not justify an omission or wording choice merely because it was made. If a source does not support a claim, omit the unsupported claim or state the concrete limitation only when it affects the result. When revising existing text, do not restore deleted meta-commentary merely because it explains why the document was written that way. Keep explanations that teach the reader something; remove explanations that only explain the writing.
+
 ### 10. Quote Marks
 
 - **中文文档**: 使用中文双引号 "“" 和 "”"，例如："这是一个引用"。

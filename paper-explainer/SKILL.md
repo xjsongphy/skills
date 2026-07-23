@@ -212,6 +212,10 @@ Cite repository paths and line locations when available. Explain what the excerp
 
 Apply `md-report-writer`'s density rules semantically, not mechanically.
 
+### Reader-Relevance Filter
+
+Every sentence should advance the explanation with a fact, mechanism, relation, evidence boundary, or interpretation. Remove meta-commentary about preserving fidelity, the author's process, the purpose of a paragraph, or why an omission was made. Do not write that a detail cannot be inferred merely because it is not public; omit unsupported details, or state the concrete evidence limitation only when it changes the paper's interpretation.
+
 ### Use direct exposition instead of rhetorical self-questioning
 
 Write the mechanism as declarative prose. Do not pose a reader question and immediately answer it in the explanation, such as “这条链回答了‘谁产生什么、谁消费什么’” or “这里要问的是……答案是……”. The drafting checklist may contain questions, but those questions are internal checks and should not appear as a substitute for explanation. State the producer, transformation, output, and consumer directly; reserve rhetorical questions for cases where the user explicitly requests a Q&A or tutorial format.

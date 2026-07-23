@@ -81,6 +81,8 @@ Apply md-report-writer style principles:
 - Use conversational filler ("we will explore", "as we can see")
 - Use vague emphasis words ("核心", "关键", "重要", "主要", "本质", "显著") as a substitute for evidence — state the role, input/output, or measured effect instead
 - Write multi-paragraph docstrings or comment blocks
+- Add meta-commentary about the editing process, source fidelity, or why a sentence was written a certain way
+- Explain that an unsupported detail cannot be inferred unless that limitation changes the lecture content
 
 #### Segment Length Principle
 

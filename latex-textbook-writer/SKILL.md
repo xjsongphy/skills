@@ -142,6 +142,10 @@ Bold a term to introduce or name it; do not use vague emphasis words such as "ца
 
 **NEVER use bullets or numbered lists in main narrative text.**
 
+### Reader-Relevance Filter
+
+Keep only sentences that help the reader understand the mathematics: definitions, assumptions, relations, proofs, examples, consequences, or necessary limitations. Do not include meta-commentary about the author's writing process, intent, fidelity to a source, or why an omission was made. Do not explain that an unsupported point cannot be inferred merely to describe the drafting process; omit it or state the concrete mathematical limitation when it matters.
+
 ### 6. Chinese Quote Marks (CRITICAL for Chinese Documents!)
 
 **When writing Chinese text in LaTeX (with `ctex` package), ALWAYS use proper quote marks:**

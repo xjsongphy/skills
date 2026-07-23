@@ -213,6 +213,10 @@ slides/
 - Vary sentence structure to avoid monotony
 - Integrate emphasis naturally into full sentences
 
+### Reader-Relevance Filter
+
+Keep slide text focused on the claims, evidence, definitions, relationships, and conclusions the audience needs. Remove meta-commentary about the author's process or intent, including statements about preserving fidelity, explaining why wording was chosen, or avoiding speculation. Mention a source limitation only when it changes the claim shown on the slide.
+
 ### 3. Chinese Quote Marks (CRITICAL for Chinese Documents)
 
 **When writing Chinese text in LaTeX Beamer (with `ctex` package), ALWAYS use proper quote marks:**

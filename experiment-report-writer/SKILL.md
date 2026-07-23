@@ -79,6 +79,12 @@ Use **"narrative → element → explanation"** structure. After presenting data
 - State facts directly and professionally.
 - Say what you know, flag what you don't know, and never fake confidence.
 
+### Reader-Relevance Filter
+
+Every sentence must provide reader-facing content: a fact, definition, relation, procedure, result, limitation, or interpretation. Remove meta-commentary about the writing process or the author's intention, such as "我需要保持忠实", "这段话的目的是", or "没有公开资料，因此不能推测", unless the limitation changes the report's conclusion.
+
+Do not justify an omission or wording choice merely because it was made. If the source does not support a claim, omit it or state the specific evidence limitation only when it affects the analysis. When revising a report, do not restore deleted explanatory filler simply because it explains why the text was written that way.
+
 ### No Unnecessary Lists in Main Text
 
 Avoid unnecessary `itemize` and `enumerate` in main text. Use lists only when explicitly required by the template, appendix, or experimental procedures.
