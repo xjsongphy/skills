@@ -2,6 +2,12 @@
 
 Use only the groups relevant to the paper. The purpose is to expose hidden mechanism details, not to force every paper into an agent-system template.
 
+## Evidence gate
+
+Use each question to interrogate the sources, not to complete a plausible design. For every answer, record whether it is directly disclosed by the paper, shown by an identified official artifact, a clearly labeled inference, or `not specified`.
+
+When a source omits a field, default value, state lifetime, selection rule, ranking operation, or failure path, retain that omission. Do not infer ordinary behavior such as an empty first query, clearing a resolved error, appending only failures, filtering a candidate, or subtracting a ranking penalty. A complete explanation of a partially disclosed mechanism contains both its known relations and its explicit unknown boundary.
+
 ## Universal mechanism questions
 
 For each central stage or component, determine:
@@ -130,5 +136,6 @@ Use experiments to answer design questions:
 - Do averages hide failed tasks or incorrect outputs?
 - Which counterexample or negative result limits the claim?
 - Are community cases, competition results, and main controlled experiments directly comparable?
+- Does the source isolate the claimed cause with an ablation or explicit analysis? A recovery curve, before/after sequence, or temporal association alone does not prove which internal component caused the result.
 
 Keep only enough numerical detail to support these answers.

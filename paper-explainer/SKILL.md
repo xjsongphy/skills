@@ -65,6 +65,27 @@ Label claims by origin when the distinction matters:
 
 Never let a later repository version silently redefine the paper's method. If paper and code differ, report the difference and use the paper's experiment version for interpreting paper results.
 
+### Closed-world rule for operational details
+
+Treat source disclosure as closed-world for paper-specific operational claims. A reader's need to know a field, state transition, or branch does **not** establish that the paper disclosed it.
+
+- State a runtime input, schema field, default value, update/clear rule, lifetime, retrieval filter, ranking term, prompt insertion point, or stopping condition only when the paper, appendix, or identified official implementation establishes it.
+- A diagram arrow or a high-level verb such as “uses feedback”, “retrieves knowledge”, or “updates memory” establishes only the relation it visibly states. It does not establish an unshown serialization, data structure, scoring rule, or lifecycle.
+- When a central question matters but the source is silent, write the smallest useful boundary: “论文未说明该接口如何表示/消费/更新。” Do not replace the unknown with conventional system behavior.
+- Do not write unsupported defaults such as “首次为空”“成功后清空”“仅失败时追加”“应省略”“直接减分/过滤”. These are allowed only with direct source support.
+
+The method-depth checklist is a source-interrogation tool, not a license to complete an undocumented system design.
+
+### Claim ledger
+
+Before drafting method prose, build a working claim ledger for every central operational claim. Keep it available to the Reviewer and include at least:
+
+| Claim | Identity | Evidence location | Permitted wording |
+|---|---|---|---|
+| a paper statement | paper / implementation / inference / not specified | section, figure, algorithm, or repository path and line | the narrowest supported sentence |
+
+For claims about prompts, state, feedback, retrieval, ranking, code generation, or experiment causality, the ledger must cite an exact source location. If no row can be created, omit the claim or state the boundary. Do not convert the ledger into reader-facing process commentary.
+
 ### Evidence-boundary style
 
 Follow the shared narrative and evidence rules. Mark a boundary only where it changes how the reader should interpret the claim or code; keep the qualifier local and concise.
@@ -101,7 +122,7 @@ If the outline gives more attention to benchmark enumeration or related work tha
 
 ## Depth Standard for the Main Method
 
-For every central component, recover the mechanism chain:
+For every central component, recover the **disclosed** mechanism chain:
 
 ```text
 producer → input → selection/transformation → state change → output → consumer
@@ -120,7 +141,7 @@ Do not stop at verbs such as “processes feedback”, “updates memory”, “
 - Is the resulting state local to one step, one task, or shared across tasks?
 - What does the next stage actually consume?
 
-If the sources do not answer one of these questions, say so. Do not invent a plausible implementation.
+If the sources do not answer one of these questions, say so. Do not invent a plausible implementation, including in explanatory pseudocode, diagrams, examples, or captions.
 
 ## Prerequisite Knowledge Mode
 
@@ -167,7 +188,7 @@ If the source figure is too crowded, keep the original for evidence and optional
 
 ### Prompt and template figures
 
-For every important placeholder such as `[Task]`, `<memory>`, `{profile}`, or a named slot, explain:
+For every important placeholder such as `[Task]`, `<memory>`, `{profile}`, or a named slot **whose template or implementation is actually published**, explain:
 
 - what runtime value replaces it;
 - where that value comes from;
@@ -175,7 +196,7 @@ For every important placeholder such as `[Task]`, `<memory>`, `{profile}`, or a 
 - which stage uses it;
 - when it is updated, replaced, cleared, or omitted.
 
-If the paper does not publish the exact template or serialization, state that boundary instead of reconstructing one.
+If a paper figure merely labels an interface but does not publish its template or serialization, explain only the relation visible in the figure and state that the concrete value, format, or lifecycle is not specified. Do not treat visual labels as a complete runtime contract.
 
 ### Source-faithful operational artifacts
 
@@ -185,7 +206,7 @@ When an operational artifact materially determines how the method behaves, show 
 - When it is long, preserve the original wording or structure and show the sections that determine inputs, constraints, decisions, state/context injection, outputs, and termination. Mark omitted portions explicitly; do not silently paraphrase the artifact as if it were shown.
 - Follow the source hierarchy: paper or appendix first, then the official repository or artifact. Cite the paper section, appendix, repository path, and line range when available.
 - Explain the artifact immediately after it: identify where important fields or values come from, how they are consumed or updated, and which behavior each part controls.
-- If the exact artifact is unavailable, say so and provide only a clearly labeled simplified example or reconstruction. Never present an invented artifact as the paper's or repository's original.
+- If the exact artifact is unavailable, say so and provide only a clearly labeled simplified example or reconstruction made solely of disclosed relations. Never present an invented artifact as the paper's or repository's original, and never use a reconstruction to imply undisclosed fields, defaults, or control flow.
 
 For an agent paper, apply this rule to the system prompt, task prompt, feedback/context template, tool schema, memory record, or output contract whenever one of them controls the agent's behavior. The agent case is an application of the general artifact rule, not a separate writing mode.
 
@@ -316,7 +337,7 @@ Ask the user only when a missing choice would materially change scope and cannot
 2. Read the paper and appendix completely enough to enumerate contributions, method sections, algorithms, figures, tables, experiments, and limitations.
 3. Inspect official code/configs for central mechanism details not explicit in prose.
 4. Check official web resources for supplements, errata, slides, project documentation, or version differences.
-5. Build an internal evidence map: each central claim → source location → confidence → whether it belongs in the explanation.
+5. Build the claim ledger: each central claim → identity → exact source location → narrowest permitted wording. Mark unanswered mechanism questions as `not specified`.
 
 Do not begin polished prose from the abstract alone.
 
@@ -337,16 +358,21 @@ Do not begin polished prose from the abstract alone.
 5. Add experiments only after readers can understand what is being tested.
 6. End with supported conclusions and limitations, not a generic summary.
 
+Before moving to review, scan every explanatory pseudocode line, Mermaid edge, placeholder explanation, and sentence of runtime behavior against the claim ledger. Remove or locally label any operation whose source row is absent.
+
 ### Phase 5: Reviewer pass
 
 Dispatch the Reviewer after a complete draft exists. Give it:
 
 - the draft path;
+- the claim ledger, including every `not specified` boundary;
 - all in-scope local paper, appendix, image, code, and artifact locations;
 - official web sources already found;
 - the paper/version and user scope.
 
 The Reviewer remains read-only and returns the contract in [references/reviewer-agent.md](references/reviewer-agent.md). The Main agent fixes all blocker and major findings, resolves unsupported claims, and records any deliberate non-changes.
+
+The Reviewer report is a release artifact: retain its YAML result in the task record or provide it with the handoff. If delegation is unavailable, perform the same source-grounded review yourself and retain the result; do not declare a pass based on an informal reread.
 
 ### Phase 6: Reader pass
 
@@ -384,6 +410,7 @@ The two subagents advise; the Main agent decides.
 - A request for more detail is accepted only if it is necessary for the contribution, explains a paper-disclosed mechanism, or was explicitly requested by the user.
 - A request for deletion is rejected if it would break input/output flow, a decision condition, a state update, or the evidence behind a conclusion.
 - When sources are silent, preserve the boundary rather than satisfying curiosity with invention.
+- A request for operational detail is rejected when it requires an undocumented field, default, lifecycle, scoring operation, or control branch. Explain the disclosed relation and name the missing interface instead.
 
 ## Final Quality Gate
 
@@ -401,3 +428,6 @@ Before completion, verify:
 10. Paragraphs control semantic load without blind splitting or deletion.
 11. The document uses portable paths and cites real source locations.
 12. The final conclusion does not claim more than the evidence supports.
+13. Every central operational claim has a claim-ledger entry; undisclosed details are absent or locally marked `not specified`.
+14. Explanatory diagrams, pseudocode, and examples do not add operations, fields, defaults, or causal links beyond their source evidence.
+15. Experimental trends are attributed to a component only when an ablation or explicit source analysis supports that causal attribution.
