@@ -24,6 +24,25 @@ Write for clarity first, then add detail only when it helps the reader understan
 
 Avoid repeating the same idea in the introduction, explanation, and summary. A section may use one short lead sentence before technical content; it does not need a full paragraph unless the context is genuinely complex.
 
+#### Progressive Technical Depth
+
+When a report must introduce fundamentals and still support later technical analysis, separate readability from depth. Use three layers:
+
+1. **Reader map** — define the system, its purpose, and the objects the reader will encounter.
+2. **Mechanism layer** — show the minimum end-to-end data flow: inputs, transformations, outputs, consumers, and update or invalidation points.
+3. **Research layer** — compare method variants, evidence, trade-offs, and limitations.
+
+Accessibility comes from ordering, definitions, examples, and immediate interpretation. Do not achieve accessibility by deleting the mechanism layer. If later sections depend on a concept, keep the smallest explanation that lets the reader predict why those later methods exist.
+
+For technical surveys, the front matter should leave the reader able to answer:
+
+- What enters the system?
+- How is the input represented, stored, or indexed?
+- How does a query select, rank, and consume candidate information?
+- How can new observations update, invalidate, or replace prior information?
+
+For RAG or external-memory topics, the minimum mechanism layer normally includes the source-to-index path, the query-to-context path, and the trajectory-to-memory write path. The exact schema, API, deployment order, and release workflow belong to an implementation section and should not be added unless requested.
+
 ### 2. Define Important Concepts Before Use
 
 Core concepts must be defined before they are used in analysis, diagrams, or code interpretation. A core concept is a term that the reader must understand to follow the subsequent argument — such as an IR node, compiler pass, data structure, scheduling primitive, hardware component, or mathematical object.
@@ -43,6 +62,17 @@ PrimFunc 是 TIR（Tensor IR，TVM 的低层中间表示）层的 IR 单元，�
 <!-- GOOD: core concepts get their own sentences, acronyms use light parentheses -->
 PrimFunc 是 TVM 低层中间表示 TIR（Tensor IR）的 IR 单元。它包含完整的循环嵌套，循环体内是对 buffer 的读写。buffer 是 TIR 层的数据容器：一个有形状和数据类型的内存块，通过多维索引访问其中元素。接下来的步骤是确定 tiling：将大循环按 tile 拆分成多层嵌套，以利用缓存局部性和并行能力。
 ```
+
+#### Survey Boundary: Mechanism Versus Implementation
+
+“Pure survey” limits the document's claim and recommendation scope; it does not require a shallow explanation. A survey may include:
+
+- the general mechanism shared by a class of methods;
+- the input, transformation, output, and feedback of each paper's algorithm;
+- taxonomies, data-flow diagrams, simplified examples, and method limitations;
+- a comparison of which papers cover which lifecycle operations.
+
+Keep project-specific schema design, API contracts, production tiers, MVP sequencing, rollout plans, and adoption recommendations separate. When an example is an explanatory abstraction rather than a paper's original interface, label it as a simplified or illustrative example.
 
 ### 3. Narrative Flow Without Over-Explaining
 
@@ -448,6 +478,10 @@ Before considering content complete:
 17. [ ] Paragraphs separated by blank lines
 18. [ ] Mermaid diagrams used only when they clarify relationships; at least 4 meaningful nodes
 19. [ ] Mermaid diagrams: concise nodes, stroke-only emphasis, correct direction, no `fill` colors
+20. [ ] Introductory survey sections use progressive depth: reader map, mechanism layer, then research comparison
+21. [ ] “Pure survey” content retains general mechanisms and paper behavior while excluding project-specific implementation plans
+22. [ ] For RAG or external-memory topics, the source-to-index, query-to-context, and observation-to-memory paths are understandable
+23. [ ] Foundational sections and paper sections share the same rhythm: lead sentence, mechanism, immediate interpretation, and scope or limitation
 
 ## Document Metadata
 
