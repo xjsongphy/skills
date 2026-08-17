@@ -119,7 +119,7 @@
 }{lem}
 
 % 命题环境（橙色）
-\newtcbtheorem[number within=section]{proposition}{命题}{%
+\newtcbtheorem[number within=section, use counter from=theorem]{proposition}{命题}{%
     my_thm_base, colframe=thmorange, colback=thmorange!5,
     separator sign={：},
     title={\thesection.\arabic{tcbcounter}\quad\tcbtitle}
@@ -244,7 +244,7 @@
 %
 % 示例：
 % 我们关于``接近''和``连续''的概念...    % 正确：使用 `` 和 ''
-% 这是一个``简单的定义。               % 正确：使用 `` 和 ''
+% 这是一个``简单''的定义。               % 正确：使用 `` 和 ''
 %
 % 不要使用：
 % 我们关于"接近"和"连续"的概念...      % 错误：ASCII 直引号

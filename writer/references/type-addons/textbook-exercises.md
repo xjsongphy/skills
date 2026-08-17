@@ -1,8 +1,9 @@
 # Textbook exercise add-on
 
-Load with `types/textbook.md` when exercises or reference solutions are part
-of the deliverable. This file defines the pedagogical and content contract;
-the active format integration defines the source-file layout.
+Load with `../types/textbook.md` when exercises or reference solutions are part
+of the deliverable. This file defines the pedagogical and content contract; the
+active format and any format integration define source-file layout when one is
+needed.
 
 ## Content contract
 

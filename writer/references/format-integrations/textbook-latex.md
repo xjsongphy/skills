@@ -2,15 +2,19 @@
 
 Load with `../types/textbook.md` and `../formats/latex.md` for a mathematics
 textbook.
-Use the user's template first; otherwise start from
-`../../assets/latex/textbook-template.tex` and adapt its language settings.
+Use the user's template first. For a complete chapter-based textbook without a
+user template, use the language-appropriate `book` starter:
+`../../assets/latex/textbook-format-en.tex` or
+`../../assets/latex/textbook-format-zh.tex`. The compact
+`../../assets/latex/textbook-template.tex` is an `article`-class starter for
+short examples and isolated sections; it is not the default for chapter-based
+textbooks or chapter-based appendices.
 
-Use consistent theorem-like environments for definitions, theorems, examples,
-remarks, and exercises. Introduce a formal box with prose and follow it with
-explanation, proof, example, or consequence; do not stack formal blocks without
-narrative. Use upright body text and bold only for meaningful term introduction
-or controlled emphasis. For English documents that load `ctex`, explicitly set
-the proof name, contents name, and figure/table captions to English.
+Use the environment, numbering, label, and typography conventions supplied by
+the selected template. Follow narrative placement and formal-block sequencing
+from `../types/textbook.md`; this integration does not redefine textbook
+pedagogy. For English documents that load `ctex`, explicitly set the proof
+name, contents name, and figure/table captions to English.
 
 Compile through `latex-compile` at least twice after changing labels, theorem
 numbering, or cross-references. Keep TikZ figures inline only when they are

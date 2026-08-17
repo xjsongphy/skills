@@ -5,9 +5,11 @@ the package interaction, not general Typst syntax or explanation/report prose.
 
 Pin the requested Typst Universe release explicitly (for the initial integration,
 `@preview/scholia:0.1.0` when that is the project version) and compile a small
-smoke document before integrating it into the full artifact. Confirm the
-package's actual API for definitions, theorems, lemmas, proofs, headings,
-figures, and bibliography rather than assuming LaTeX names.
+smoke document before integrating it into the full artifact. Use the package's
+native formal constructs for `definition`, `theorem`, `lemma`, `proposition`,
+`corollary`, `proof`, `example`, and `remark`; use native Typst labels and `@`
+references for cross-references. Confirm the pinned package API rather than
+assuming LaTeX environment names or syntax.
 
 Check stable numbering, labels and `@` references, page breaks around formal
 blocks, bibliography output, and the interaction between package styling and

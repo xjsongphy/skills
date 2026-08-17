@@ -14,8 +14,3 @@ For figures, introduce the reason to inspect the image, place it with a visible
 caption, then explain reading order, inputs, outputs, legend, and takeaway
 locally. Use Mermaid only when a flow, state transition, or hierarchy is harder
 to recover from prose. Keep node labels short and explain the diagram in prose.
-
-For a Markdown report, use a title and concise scope or summary, place source
-links or citations adjacent to claims, and put a short interpretation directly
-under every result table, chart, or code output. Keep raw calculation details
-in an appendix or linked artifact when they would obscure the main result.

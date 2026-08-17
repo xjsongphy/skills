@@ -14,21 +14,11 @@ source location, version scope, and uncertainty boundary for each answer.
 
 When a source omits a field, default value, state lifetime, selection rule, ranking operation, or failure path, retain that omission. Do not infer ordinary behavior such as an empty first query, clearing a resolved error, appending only failures, filtering a candidate, or subtracting a ranking penalty. A complete explanation of a partially disclosed mechanism contains both its known relations and its explicit unknown boundary.
 
-## Universal mechanism questions
+## Base contract
 
-For each central stage or component, determine:
-
-- What object enters it, who produced that object, and in what representation?
-- What information is actually visible to the component?
-- What is filtered, aggregated, ranked, truncated, normalized, sampled, or omitted first?
-- What transformation, decision, or computation occurs?
-- What conditions choose among branches or reject an item?
-- What state is read and what state is updated?
-- How long does that state live: one call, one iteration, one task, or across tasks?
-- What output is produced, who consumes it, and why is it sufficient for the next stage?
-- For failure, empty input, disagreement, timeout, or budget exhaustion paths that actually exist or affect the main flow, what happens next?
-- Which design choice is essential, and what simpler alternative does the
-  source compare against?
+First satisfy the base mechanism contract in `../mechanism-analysis.md`.
+This file is an optional question bank for deepening that contract in
+specialized subjects; it does not define a second universal mechanism model.
 
 ## Agent and multi-component systems
 

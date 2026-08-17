@@ -9,7 +9,8 @@ description: Route the creation, revision, audit, or explanation of academic and
 writing. It is intentionally compositional:
 
 > exactly one primary type + zero or more lenses + zero or more source objects
-> + zero or more domains + one source format + optional format integrations
+> + zero or more domains + one format for artifacts (zero for chat-only prose)
+> + optional format integrations
 
 The module selected for a task is the canonical home of that rule. Do not copy
 the same rule into a type, format integration, or reviewer.
@@ -19,7 +20,8 @@ choosing a file to edit.
 
 ## Route a request
 
-1. Identify the task: draft, revise, audit, explain, translate, or compile.
+1. Identify the task: draft, revise, audit, explain, or translate. Compilation
+   and build diagnosis belong to the separate `latex-compile` skill.
 2. Select exactly one primary type under `references/types/`:
    `report`, `explanation`, or `textbook`.
 3. If the primary type has a bounded variant or component, load it from
@@ -28,33 +30,28 @@ choosing a file to edit.
    second primary type.
 4. Add zero or more cross-type lenses under `references/lenses/`:
    `derivation-analysis` for derivation-heavy exposition and
-   `mechanism-analysis` for input/output/state/control-flow depth. Load the
-   mechanism depth checklist only when the task needs its detailed questions.
+   `mechanism-analysis` for input/output/state/control-flow depth. Activate a
+   lens when the source or requested deliverable contains the corresponding
+   derivation or mechanism; do not require the user to name the lens explicitly.
+   Load the mechanism depth checklist only when the task needs its detailed
+   questions.
 5. Add source objects under `references/objects/` when the task relies on
    identifiable evidence sources: `paper`, `repository`, or both. Add a
    domain module only when the subject has domain-specific evidence or terms.
 6. For a source artifact, select exactly one format under `references/formats/`:
-   Markdown, LaTeX, or Typst. Chat-only prose may omit a format.
-7. Resolve exactly one format with this precedence: existing document format
-   > explicit user format > compatibility-wrapper default > writer default
-   (Markdown). Load a format integration only for a real type-format or package interaction that
+   Markdown, LaTeX, or Typst. Chat-only prose selects no format.
+7. Resolve exactly one format according to `Format resolution` below. Load a
+   format integration only for a real type-format or package interaction that
    cannot be expressed cleanly in the type and format modules. The initial
    exception integrations are `scholia-typst` and `textbook-latex` under
    `references/format-integrations/`.
-8. Load `references/common/narrative-and-evidence.md` for every reader-facing
-   document. Its claim ledger contract is the shared infrastructure for
-   source-dependent claims. Add `common/evidence-and-citations.md` when claims
-   depend on research, measurements, code, or other sources.
-9. Activate reviewers and checks by contract:
-   `reviewers/reader.md` by default for `type = explanation` (otherwise only
-   when requested); `reviewers/source-reviewer.md` and
-   `checks/source-claims.md` whenever the claim ledger is non-empty;
-   `checks/prose.md` for every writer document; and
-   `checks/rendered-document.md` whenever a renderable artifact is generated
-   or compiled. A reviewer
-   role is not a checklist: use `reviewers/reader.md` and/or
-   `reviewers/source-reviewer.md` when their isolation and output contracts
-   are required.
+8. Load `references/common/narrative.md` for every reader-facing document. Add
+   `common/evidence-and-citations.md` when claims depend on research,
+   measurements, code, or other sources; that module owns the shared ledger.
+9. Activate reviewers and checks according to the `Reviewer and check
+   activation` matrix below. A reviewer role is not a checklist: use
+   `reviewers/reader.md` and/or `reviewers/source-reviewer.md` when their
+   isolation and output contracts are required.
 
 Do not load every module by default. If the request is ambiguous, preserve the
 uncertainty and ask for the missing type, object, or format rather than
@@ -64,7 +61,7 @@ silently composing a large bundle.
 
 | Need | Load |
 |---|---|
-| Any reader-facing prose | `references/common/narrative-and-evidence.md` |
+| Any reader-facing prose | `references/common/narrative.md` |
 | Source boundaries and citations | `references/common/evidence-and-citations.md` |
 | General report | `references/types/report.md` |
 | Physics/engineering experiment report | `types/report.md` + `type-addons/report-experiment.md` |
@@ -90,20 +87,18 @@ silently composing a large bundle.
 
 ## Composition examples
 
-- **Ordinary paper explanation**: common prose + evidence + explanation +
-  paper object + Markdown/LaTeX/Typst format as needed. Do not load repository,
-  derivation, or mechanism lenses unless requested by the source and audience.
-- **Repository explanation**: common prose + evidence + explanation +
-  repository object. Paper facts are out of scope unless a paper object is also
-  active.
+- **Ordinary paper explanation**: explanation + paper object. Add lenses and
+  choose the format only when the source or deliverable requires them.
+- **Repository explanation**: explanation + repository object. Paper facts are
+  out of scope unless a paper object is also active.
 - **TENG Typst explanation**: explanation + paper + derivation-analysis +
   mechanism-analysis + Typst; add the domain module only if its subject policy
   is needed.
 - **GPU-kernel paper/repository explanation**: explanation + paper + repository
   + gpu-kernel + mechanism-analysis + chosen format.
 - **Ordinary Typst report**: report + Typst. Do not load `scholia-typst`.
-- **Experiment report**: report + type-addons/report-experiment + chosen format; add
-  measurement evidence and rendered checks when applicable.
+- **Experiment report**: report + report-experiment; add evidence, format, and
+  rendered checks when applicable.
 - **LaTeX textbook**: textbook + LaTeX + textbook-latex; add exercises only
   when exercises are part of the deliverable.
 
@@ -124,6 +119,11 @@ Use the following defaults unless the user explicitly narrows the task:
 When the user edits an existing source file, preserve its format even if the
 user does not repeat it. Otherwise use explicit user format, then the default
 of a compatibility wrapper, and finally Markdown as the writer default.
+
+For revisions, read the current document before editing. Inspect the working
+tree diff and relevant Git history when they reveal user changes or durable
+revision preferences. Preserve unrelated edits and do not restore deleted
+material merely because it existed in an older version.
 
 ## Review and evidence boundaries
 

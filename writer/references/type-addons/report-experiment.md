@@ -13,8 +13,7 @@ appendix. Write the abstract last. Results and discussion normally receive most
 of the body because they connect measurement, uncertainty, theory, and
 interpretation.
 
-Define every variable and unit before its first formula or table appearance.
-Introduce each figure, table, formula, or fitted value in prose and explain its
-meaning immediately afterwards. Conclusions must derive from prior analysis;
-they may not introduce new results. Discuss systematic and random uncertainty
-only to the extent the data or method supports it.
+Discuss systematic and random uncertainty only to the extent the data or method
+supports it. Compare theory with measurement where the design permits it, and
+state which conclusions are limited by measurement scope, data coverage, or
+uncontrolled conditions.

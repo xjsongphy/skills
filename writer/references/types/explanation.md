@@ -3,21 +3,22 @@
 Use for a standalone explanation that lets the target reader understand an
 active subject without constantly returning to its sources. The subject may be
 a paper, repository, experiment, theorem, system, or a paper/repository pair.
-Load `../common/evidence-and-citations.md`, the active object policy, and the
-generic reviewer roles when their respective phases are reached. Add
+Load `../common/narrative.md`, `../common/evidence-and-citations.md`, the active
+object policy, and the generic reviewer roles when their respective phases are
+reached. Add
 `../lenses/mechanism-analysis.md` or `../lenses/derivation-analysis.md` only
 when the subject requires them.
 
+Unless the user specifies another audience, target an informed but ordinary
+reader in the active subject's relevant subfield. Record the audience contract
+as `assumed_known` and `explain_in_draft`; never put subject-specific names,
+symbols, modules, prompts, or state transitions in `assumed_known`.
+
 ## Evidence model
 
-Audit each active source according to its object policy. Build a working claim
-ledger for each central operational claim with: claim, identity (source,
-implementation, inference, or `not specified`), exact evidence location, and
-permitted wording. Do not turn the ledger into reader-facing prose.
-
-Treat source-specific operational disclosure as closed-world. A diagram arrow
-or high-level verb establishes only the relation shown. Do not infer schemas,
-defaults, state lifetimes, prompt fields, ranking operations, or failure paths.
+Audit each active source according to its object policy and use the shared claim
+ledger. Do not redefine ledger fields or source identities here, and do not turn
+the ledger into reader-facing prose.
 
 ## Content and workflow
 
@@ -26,18 +27,38 @@ complete overview, one end-to-end mechanism or reasoning chain, design rationale
 and trade-offs, then decisive evidence and limitations. Background and result
 tables support that chain; they do not displace it.
 
+For a paper or source-grounded technical explanation, keep the contribution or
+central question at the center. Background and related work establish only the
+needed context; experiments explain setup, fairness, decisive trends,
+counterexamples, and limits rather than transcribing result grids.
+
+### Prerequisite mode
+
+Activate prerequisite mode when the user requests background knowledge or when
+an omitted concept would make the main argument unreadable. Add only the
+smallest concept chain needed by the first dependent section, place it before
+that section, and add the concepts to `explain_in_draft` while reducing
+`assumed_known`. Do not turn the explanation into an unrelated textbook.
+
 Before drafting, set `subject`, `audience_contract`, `assumed_known`, and
 `explain_in_draft`. Subject-specific names, symbols, components, state, and
-prompts always belong in the latter. Explain every central component as
-disclosed:
+prompts always belong in the latter. When `mechanism-analysis` is active,
+explain every central stage as disclosed:
 
 `producer → input → selection/transformation → state/update → output → consumer`.
 
-Introduce and interpret visuals locally. For a source-faithful prompt, schema,
+Audit all available figures and tables before selecting visuals. Introduce and
+interpret selected visuals locally. For a source-faithful prompt, schema,
 algorithm, or decisive code artifact, show the material that determines behavior
 and label any omitted portions. Label explanatory pseudocode or diagrams as
 such; never present a reconstruction as source material.
 
-Run a source-grounded Reviewer pass against all active object policies, fix its
-blocker and major findings, then run a draft-only Reader pass and fix unresolved
-P0/P1 issues. Do not use source knowledge to silently repair a Reader gap.
+For source-dependent explanations, run the source-grounded Reviewer against the
+active object policies and ledger. Run the draft-only Reader when the
+explanation type is active. Fix blocker/major or P0/P1 findings as applicable;
+if technical claims change during Reader-driven revision, run a targeted source
+recheck. Do not use source knowledge to silently repair a Reader gap.
+
+For revisions, inspect the existing document, working-tree diff, and relevant
+Git history before outlining changes. Git history provides revision context, not
+evidence for the subject's facts.

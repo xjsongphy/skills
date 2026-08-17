@@ -1,11 +1,10 @@
 # Prose check
 
-Before delivery, verify that every section has a purpose and every paragraph
-has one principal job. Define essential terms, variables, and units before
-using them. Ensure formulas, code, figures, tables, and lists have contextual
-prose and immediate interpretation.
+Apply `common/narrative.md` and the active type/format modules as a deterministic
+pass/fail gate. This check executes those rules; it does not define a second
+prose policy or replace the isolated Reader reviewer.
 
-Remove drafting-process commentary, rhetorical questions that replace an
-explanation, vague emphasis, decorative quotation marks, repeated conclusions,
-and contrast wording that does not resolve a real ambiguity. Confirm that the
-conclusion follows prior evidence and does not introduce new results.
+Pass only when sections have clear purposes, paragraphs have one principal job,
+and formulas, code, figures, tables, and lists have contextual prose and local
+interpretation. Confirm that required definitions precede use and that
+conclusions follow the established evidence without introducing new results.

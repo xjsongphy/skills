@@ -21,6 +21,7 @@
       "files": [],
       "assertions": [
         "The current explanation and Git diff are read before editing",
+        "Relevant Git history is inspected when it contains durable revision context",
         "Memory generation, filtering, update, retrieval, and injection are treated as separate mechanism stages",
         "Undisclosed details are marked as unspecified rather than invented",
         "Repository behavior is labeled separately from paper-stated behavior"

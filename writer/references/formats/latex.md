@@ -18,8 +18,3 @@ do not force presentation choices into prose.
 For XeLaTeX compilation, errors, reference resolution, or warnings, invoke the
 separate `latex-compile` skill. Compile until cross-references stabilize and
 inspect the rendered output when layout matters.
-
-For a LaTeX report, keep float placement, table environments, unit commands,
-bibliography style, and stable labels consistent with the supplied report class
-or laboratory template. Do not use a float to replace the prose that explains
-its result.

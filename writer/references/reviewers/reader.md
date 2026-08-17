@@ -21,7 +21,11 @@ Main supplies an explicit contract:
 - `audience_contract`: target background and reading goal;
 - `assumed_known`: concepts the reader may know without explanation;
 - `explain_in_draft`: concepts that must be defined or bridged;
-- `active_lenses`: derivation, mechanism, domain, or other active questions.
+- `active_lenses`: derivation-analysis, mechanism-analysis, or other active
+  analysis questions;
+- `active_addons`: bounded type variants such as report-experiment or
+  textbook-exercises;
+- `active_domains`: domain-specific terminology or evidence constraints.
 
 Do not broaden `assumed_known` from your own expertise. Subject-specific terms,
 symbols, modules, prompts, state, and design rationale must never be silently
@@ -36,9 +40,11 @@ After reading, the target reader should be able to explain:
 2. What approach or result it presents.
 3. How one complete input, derivation, experiment, or process travels through
    the main argument.
-4. What each central component receives, does, updates, and emits.
+4. What the central objects, steps, or components do. When
+   `mechanism-analysis` is active, this includes receives, updates, and emits.
 5. Why important filters, branches, assumptions, representations, or choices
-   are used.
+   are used. When `derivation-analysis` is active, this includes why each
+   non-obvious transformation is valid.
 6. What the evidence supports and what it does not establish.
 
 Report an issue only when it helps achieve one of these outcomes. Report a
@@ -74,21 +80,11 @@ as `not specified`.
 
 ### Narrative compliance
 
-Independently enforce the parent skill's shared narrative rules:
-
-- Flag negation-led or contrast-heavy prose such as “不是……而是……”,
-  “并非……而是……”, and “不等于……” unless the rejected interpretation is
-  plausible from the surrounding material and rejecting it materially changes
-  how the reader understands a mechanism, evidence boundary, metric, or
-  decision.
-- Flag process meta-commentary about searching, drafting, evidence-preservation,
-  or omission decisions instead of explaining the subject.
-- Flag analogy-led definitions and rhetorical self-questioning that postpone a
-  direct explanation of inputs, processing, outputs, or rationale.
-- Flag broad emphasis words that substitute for a concrete mechanism, relation,
-  measurement, or source.
-- Flag paragraphs whose structure obscures their main claim, even if a reader
-  could eventually infer it.
+Apply the canonical rules in `common/narrative.md`; do not create a second
+narrative policy in this reviewer. Report a finding when a violation obscures
+the argument or materially slows reading. The Reader may use the active format
+and type modules to identify the expected sentence, heading, emphasis, and
+element-placement behavior.
 
 Report a justified violation as `P1` when it materially slows reading or
 obscures the argument, and `P2` for local polish. Do not pass a draft merely
@@ -103,11 +99,13 @@ weakens the narrative.
 - Transitions preserve the causal or logical chain; sections are not inventories.
 - The heading hierarchy exposes the argument and uses parallel labels for
   parallel content.
-- The draft lets the reader answer who receives what, what is selected or
-  transformed, what state changes and for how long, what is passed onward, and
-  what happens on failure or termination.
-- Algorithms identify relevant inputs, objective, branches, update rules, stop
-  conditions, and output. Symbols are defined close to first use.
+- When `mechanism-analysis` is active, the draft lets the reader answer who
+  receives what, what is selected or transformed, what state changes and for
+  how long, what is passed onward, and what happens on failure or termination.
+- When `derivation-analysis` is active, formulas and proofs identify their
+  target, assumptions, domains, non-obvious transformations, and conclusion.
+- When an experiment add-on is active, measurements identify conditions,
+  quantities, comparisons, uncertainty, and interpretation.
 
 ### Figures, tables, examples, and code
 

@@ -21,62 +21,45 @@ object to fill another object's contract.
 Read the Main agent's claim ledger and active object policies before reviewing.
 Test every central operational claim against its exact ledger entry; a broad
 source citation is not sufficient evidence for an undocumented interface detail.
+Main also supplies the active primary type, type add-ons, lenses, objects,
+domains, and format. Use that composition to decide which conditional checks
+apply.
 
-## Evidence hierarchy
+## Evidence policy
 
-Use this priority:
-
-1. The active primary source, including figures and tables, for its stated
-   method, experiment, result, or claim.
-2. Its appendix and supplement for prompts, pseudocode, cases, parameters,
-   proofs, and omitted mechanisms.
-3. An active repository or other official artifact for implementation details
-   not fully spelled out by the primary source.
-4. Official project web resources for errata, supplements, interfaces, and
-   version clarification.
-5. Third-party sources only for background.
-6. Git history/diffs only when the active object policy permits them as
-   evidence; otherwise use them for revision context, not subject claims.
-
-If active sources conflict, report the conflict and identify each source and
-version. Do not silently choose a later implementation over an evaluated
-method or a current runtime over a stated specification.
+Read the active object policies as the authority for evidence precedence,
+allowed source locations, version scope, and unknown boundaries. Do not build a
+paper-shaped hierarchy here and do not use one active object to fill another
+object's contract. If active object policies expose conflicting sources, report
+the conflict and identify each source and version; do not silently choose one.
 
 ## What to verify
 
-Prioritize the deliverable's central mechanism or argument chain:
-
-```text
-problem → overall design → component inputs → filtering/transformation
-        → state/update → conditions → outputs → final artifact
-```
-
 Check especially:
 
-- whether every central operational claim has an exact source section/figure/algorithm, repository path, test, or observation, rather than a general citation;
-- whether the draft turns a diagram label, a high-level relation, or a reasonable convention into an undisclosed schema, default, lifetime, prompt contract, filter, ranking operation, or branch;
-- whether explanatory pseudocode, Mermaid diagrams, examples, and captions introduce behavior beyond their cited source;
-- whether a causal reading of a trend is supported by an ablation, controlled comparison, or explicit source analysis;
-- whether the draft names each central component's actual input and output;
-- whether raw logs, profiles, retrieved items, training samples, or candidates are filtered before use;
-- whether memory/state update triggers, scope, lifetime, retrieval, and injection are explained;
-- whether algorithm branches, equations, constraints, and stop conditions match the source;
-- whether prompt/template placeholders are explained by runtime value, source, use, and lifetime;
-- whether any operational artifact that materially determines behavior is shown source-faithfully (in full when short, or with explicitly marked omissions when long) rather than replaced by a prose-only summary;
-- whether long prompts, templates, schemas, configurations, algorithms, or code listings preserve the sections that determine inputs, constraints, state/context, outputs, and termination;
-- whether figures are interpreted correctly rather than merely captioned;
+- whether every substantive claim has an exact source location and permitted
+  wording in the shared ledger, rather than only a broad citation;
+- whether explanatory pseudocode, diagrams, examples, and captions introduce
+  behavior beyond the cited source;
 - whether claims from different active objects and explanatory inferences are
   labeled as separate identities;
-- whether active appendices, tests, or supplementary mechanisms that materially
-  explain the subject were omitted;
-- whether benchmark conditions, denominators, baselines, and negative results are mixed or overstated.
+- whether figures, tables, and source artifacts are interpreted or presented
+  according to the active type and format rules;
+- whether active source material required by the object policy is omitted.
+
+When `mechanism-analysis` is active, additionally verify the disclosed chain of
+inputs, selection/transformation, state/update, conditions, outputs, consumers,
+and failure or termination paths. When `derivation-analysis` is active, verify
+domains, assumptions, valid transformations, intermediate results, and the
+stated conclusion. When an experiment add-on is active, verify measurement
+conditions, comparators, uncertainty, decisive trends, and evidence limits.
+
+Do not require any of these conditional checks when their module is inactive.
 
 For an omitted source detail that materially affects interpretation, require a concise `not specified` boundary. Do not require the writer to fill it. Treat claims such as “首次为空”“成功后清空”“失败才追加”“会过滤/减分”“应省略” as `UNSUPPORTED` unless the cited source establishes them.
 
-Related work only needs to locate a gap when the deliverable requires it.
-Experiments need fair setup, decisive trends, representative values,
-counterexamples, and claim boundaries. Do not demand a literature survey or
-table transcription.
+Related work, exhaustive tables, and peripheral artifacts only need coverage
+when the active type or user scope requires them.
 
 ## Finding classes
 

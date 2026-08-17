@@ -1,4 +1,4 @@
-# GPU-kernel domain lens
+# GPU-kernel domain module
 
 Load only for explanations or reports whose central subject is a GPU kernel or
 GPU execution pipeline. This module adds domain questions; it does not replace

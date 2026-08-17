@@ -2,7 +2,7 @@
 
 Use this module only for Typst language and source syntax. Load a document-type
 module separately for report, paper, or textbook writing rules. The guidance is
-organized for current Typst 0.15 syntax and follows the useful separation used
+organized for current Typst 0.15.x syntax and follows the useful separation used
 by mature Typst agent skills: basics, styling, mathematics, structured content,
 and modules.
 
@@ -38,7 +38,8 @@ forms; use a conversion strategy only when the user explicitly asks for one.
   appropriate.
 - `#emph[content]`, `#strong[content]`, and `#underline[content]` are code-mode
   functions for explicit text styling.
-- `\\` escapes markup punctuation when literal text is needed.
+- `\` followed by a markup character escapes that character when literal text is
+  needed, for example `\#`.
 
 Prefer semantic markup and functions over manually inserted spacing or repeated
 layout characters.
@@ -86,8 +87,8 @@ Keep reusable style in scoped `#set`/`#show` rules and reusable components in
 
 Use `$...$` for inline or display mathematics. Spaces inside the delimiters
 make a display expression. Subscripts use `_`, superscripts use `^`, fractions
-use `/` with grouping, and aligned equations can use `&` and `\\` inside a
-matrix or aligned structure.
+use `/` with grouping, and aligned equations can use `&` and a single `\` for
+alignment and line breaks inside a matrix or aligned structure.
 
 ```typst
 $ x_i^2 $
@@ -131,10 +132,3 @@ Use `#import "path.typ": item` to import selected definitions and
 `#import "@preview/name:version": item` for a Typst Universe package when its
 version and API are known. Keep package and local module boundaries explicit;
 do not silently replace a project template with a similarly named package.
-
-For a Typst report, separate report content from its theme: use `#set` for
-page, text, heading, and caption defaults, and a small `#let` helper only for
-genuinely repeated report elements. Keep one bibliography configuration and
-stable labels for figures, tables, equations, and sections. Compile the full
-document and inspect spacing, heading hierarchy, table overflow, bibliography,
-CJK fallback, and orphaned headings when layout matters.
