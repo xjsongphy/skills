@@ -7,7 +7,9 @@ description: Use when enhancing existing lecture notes with multiple course sour
 
 ## Shared narrative rules
 
-Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Keep process notes and defensive source disclaimers out of the lecture notes; state source limitations only when they affect the explained concept.
+Load the `writer` skill's common narrative-and-evidence module. Keep process
+notes and defensive source disclaimers out of the lecture notes; state source
+limitations only when they affect the explained concept.
 
 ## Overview
 
@@ -19,7 +21,7 @@ Systematic process for cross-referencing recordings, PPTs, and existing notes to
 - Enhancing existing lecture notes (讲义.md) with course recordings and PPTs
 - Course has multiple source materials (records/, extracted/, existing notes)
 - Need systematic gap identification and content supplementation
-- Following md-report-writer narrative style (narrative flow before technical content)
+- Following the `writer` Markdown narrative route (narrative flow before technical content)
 
 **Don't use when:**
 - Creating lecture notes from scratch (use brainstorming + writing-plans instead)
@@ -43,7 +45,7 @@ The enhancement process follows four phases:
 **Phase 1: Parallel Analysis** - Dispatch subagents to analyze each source material independently
 **Phase 2: Gap Synthesis** - Identify missing content, inconsistencies, and improvement opportunities
 **Phase 3: Systematic Enhancement** - Edit lecture notes section-by-section with narrative-first style
-**Phase 4: Verification** - Ensure all improvements follow md-report-writer guidelines
+**Phase 4: Verification** - Ensure all improvements follow the `writer` Markdown narrative route
 
 ### Phase 1: Parallel Analysis Dispatch
 
@@ -70,7 +72,7 @@ Create structured gap analysis organized by priority:
 
 ### Phase 3: Narrative-First Enhancement
 
-Apply md-report-writer style principles:
+Apply the `writer` common narrative and Markdown principles:
 
 **✅ DO:**
 - Start sections with explanatory narrative

@@ -1,132 +1,78 @@
 ---
 name: update-skill
-description: Use when updating existing skills based on conversation feedback, user corrections, or identified improvements.
+description: Use when updating an existing skill based on conversation feedback, user corrections, or identified improvements; classify feedback and edit the canonical module without creating duplicate rules.
 ---
 
 # Update Skill
 
-Update existing skills based on user feedback and corrections during conversation. This skill learns from the conversation to improve future outputs.
+Update an existing skill from explicit conversation feedback. Read the target
+skill before editing, identify the smallest canonical file that owns the rule,
+apply the change, and validate links and metadata afterwards.
 
-## When to Use
+## Use
 
-Call this skill when:
-1. A skill-generated output required manual corrections during conversation
-2. User provided specific feedback on style, format, or content preferences
-3. Multiple iterations were needed to get the output right
-4. User expressed satisfaction after corrections and wants these preferences remembered
-
-## How to Use
-
-After the conversation reaches a satisfactory state, invoke this skill:
+Call this skill only after feedback or a correction is concrete enough to store:
 
 ```
 /update-skill <skill-name>
 ```
 
-Example:
+Do not update a skill merely because an output was generated. The conversation
+must contain a durable preference, rule, boundary, or workflow correction.
+
+## Writer routing
+
+When the target is `writer`, first read:
+
 ```
-/update-skill md-report-writer
+/Users/xjsongphy/.agents/skills/writer/MAINTENANCE.md
 ```
 
-When called, the AI will:
-1. Manually review the conversation for feedback and corrections
-2. Read the target skill file
-3. Identify which guidelines need updating based on the conversation
-4. Manually apply updates to the skill file
-5. Commit changes to git
+Classify the feedback as a shared rule, primary type, type add-on, lens,
+source object, domain, format, format integration, reviewer, check, or routing
+rule. Edit
+the corresponding canonical module. Update `writer/SKILL.md` only when the
+feedback changes module selection or a hard boundary. If a feedback item says
+that a repository implementation must not be treated as a paper fact, update
+`writer/references/objects/paper.md` and/or `objects/repository.md`, not a
+generic explanation paragraph.
+If it changes module selection, reviewer activation, format precedence, or
+compatibility behavior, update `writer/SKILL.md` only for that routing contract.
 
-## What Gets Updated
-
-The skill looks for these types of feedback in the conversation:
-
-### Style Corrections
-- Tone changes (formal → casual, etc.)
-- Formatting preferences (bullet points vs paragraphs, etc.)
-- Emphasis changes (bold vs italics, etc.)
-
-### Content Structure
-- Section ordering preferences
-- What content should come first (narrative before data, etc.)
-- Level of detail desired
-
-### Language-Specific Rules
-- Quote mark preferences
-- Punctuation conventions
-- Terminology preferences
-
-### Code Presentation
-- When to include full code vs snippets
-- How much explanation code needs
-- Comment style preferences
-
-### Citation and References
-- When to cite papers/code
-- How to format citations
-- What level of documentation is required
+Keep one rule in one canonical location. Do not create a compatibility wrapper,
+copy an old skill, or add a format integration merely to repeat rules already
+expressed by a type and a format. During an approved migration window, an
+existing legacy entry point may remain as a thin wrapper that routes to the
+canonical writer modules; it must not own copied rules. If a cross-module
+contract changes, update the owning module first and make only the smallest
+link or route adjustment.
 
 ## Process
 
-When you invoke `/update-skill <skill-name>`, the AI will:
+1. Review the conversation and state the durable feedback in one sentence.
+2. Locate the target skill under the active skills root. Do not assume
+   `~/.claude/skills`; use the actual configured skills repository.
+3. Read the target `SKILL.md` and any maintenance/index file it names.
+4. Read the canonical module and nearby references needed to avoid duplication.
+5. Apply the smallest edit that captures the feedback; preserve unrelated user
+   changes.
+6. Search for stale paths, duplicate wording, and old entry-point names. For
+   writer, check `MAINTENANCE.md`, the module map, format integrations, and
+   any retained thin wrappers.
+7. Validate YAML frontmatter, referenced files, and relevant evals. Compile or
+   render only when the changed rule affects source or layout.
+8. Report the changed files, the learned rule, and validation results. Create a
+   git commit only when the user explicitly requests one or the surrounding
+   workflow explicitly requires it.
 
-1. **Review the conversation** to identify your feedback, corrections, and refinements
+## Feedback categories
 
-2. **Read the target skill file** to understand current guidelines
+- Style: tone, sentence shape, paragraph density, punctuation, or emphasis.
+- Structure: section order, narrative before elements, or argument shape.
+- Source policy: citations, evidence hierarchy, claim identity, or unknowns.
+- Format syntax: Markdown, LaTeX, Typst, or another source language.
+- Type behavior: report, explanation, textbook, or a bounded variant.
+- Workflow: routing, reviewer isolation, rendering, or validation gates.
 
-3. **Identify what needs updating** by matching your feedback to specific guidelines
-
-4. **Update the skill file** manually based on what was learned
-   - Add new guidelines if needed
-   - Clarify ambiguous existing guidelines
-   - Add examples from the conversation if helpful
-
-5. **Commit to git** with a descriptive message explaining what was learned
-
-## Example Scenarios
-
-**Scenario 1**: User asked for more detailed code explanations
-```
-Conversation: User said "这个代码太复杂了，需要详细解释每一步的作用"
-Action: Update the code explanation guidelines to require detailed explanations
-for complex code, not just variable annotations.
-```
-
-**Scenario 2**: User preferred different quote marks
-```
-Conversation: User said "中文用中文的双引号！"
-Action: Update the quote marks guideline to specify Chinese quotes for Chinese text.
-```
-
-**Scenario 3**: User wanted narrative before data
-```
-Conversation: User said "不要直接开始列表，先解释一下背景"
-Action: Add/clarify the "narrative first" principle with stronger language.
-```
-
-## Output Format
-
-After updating, the skill reports:
-- Which skill was updated
-- What changes were made
-- Git commit details
-
-Example:
-```
-✓ Updated md-report-writer
-  - Added: Complex code requires detailed logic explanation
-  - Modified: Distinguished simple vs complex code handling
-  - Committed: a5e0e09
-```
-
-## Limitations
-
-- Only updates skills in `/Users/xjsongphy/.claude/skills/`
-- Cannot modify skill metadata (name, description)
-- Requires user to explicitly call the skill
-- Does not automatically update from every conversation
-
-## Best Practices
-
-1. **Call when satisfied**: Invoke this skill only after the output meets user expectations
-2. **Be specific**: The skill works best with concrete feedback patterns
-3. **Review changes**: The skill will show what it changed; verify it captured the right lesson
-4. **Iterative refinement**: Multiple conversations may be needed to fully capture a preference
+Prefer a concise rule with a concrete trigger and expected behavior. Preserve
+examples only when they clarify a fragile boundary.

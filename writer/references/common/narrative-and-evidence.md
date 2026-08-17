@@ -2,6 +2,21 @@
 
 This file is shared by writing-oriented skills. Read it when the parent skill links here; do not copy its rules into individual skills.
 
+## Claim ledger contract
+
+When a document makes source-dependent claims, maintain a compact working ledger
+with one row per substantive claim:
+
+```text
+claim → evidence source → source location → evidence kind → confidence/boundary
+```
+
+The ledger is object-independent infrastructure. The active object policies
+define the allowed evidence kinds, source locations, version scope, and unknown
+boundary; the lens that asks a mechanism question does not define those source
+categories. The ledger supports source review and claim checks, but it is not
+automatically copied into reader-facing prose.
+
 ## Narrative requirements
 
 - Write for the reader's understanding, not to document the agent's research process.
@@ -10,10 +25,12 @@ This file is shared by writing-oriented skills. Read it when the parent skill li
 - If source availability changes the interpretation, state the concrete scope at the point where it matters: for example, “下例为依据论文方法写出的简化伪代码” or “论文未公开该接口的具体实现”. Do not explain the same limitation again in later paragraphs.
 - If a detail is unsupported and does not affect the conclusion, omit it. If it affects the conclusion, use a short factual label such as “论文未说明”“未找到官方实现” or “这里是解释性展开”.
 - Prefer positive, evidence-bearing sentences over negation-based assurances. Explain what the source establishes, what the excerpt illustrates, and where the boundary lies.
+- Use quotation marks only for direct quotation, the first introduction of a coined or scoped term, and code/identifier/schema-token references. Do not wrap colloquial paraphrases, metaphor labels, or long explanatory clauses in quotation marks; state such content as plain declarative prose. Long quoted passages and scare-quoted paraphrases read as lecture notes, not academic prose.
+- Use the field's established term and verify it against the source. Do not coin a non-standard term (avoid “回链” where the literature says “provenance”), and do not import a term from another document unless the current document actually uses it. If a Chinese rendering is needed, anchor it to the standard term on first use, then use one term consistently.
 
 ## Contrast economy
 
-Default to direct assertions. Do not use “不是……而是……”, “并非……而是……”, “不等于……”, or equivalent contrast merely to add emphasis, announce the writer's process, or restate a fact in negative form. Such a sentence carries invalid information when deleting its negative half leaves the mechanism, evidence, and decision unchanged.
+Default to direct assertions. Do not use “不是……而是……”, “并非……而是……”, “而不是……”, “而非……”, “不等于……”, or equivalent contrast merely to add emphasis, announce the writer's process, or restate a fact in negative form. Such a sentence carries invalid information when deleting its negative half leaves the mechanism, evidence, and decision unchanged. Rewrite the contrast as a positive declarative statement — state what the thing is and does — and drop the rejected alternative unless rejecting it resolves a real ambiguity.
 
 Keep a contrast only when both conditions hold:
 
@@ -37,3 +54,7 @@ When no official repository is available, do not invent repository paths, APIs, 
 Before returning a document, search for and remove sentences whose only purpose is to justify the writing process, source-search process, or avoidance of hallucination. Preserve concise source-boundary statements when deleting them would make a code example, implementation claim, or conclusion misleading.
 
 Also search for contrastive constructions. Rewrite or delete each one unless it passes both Contrast economy conditions; do not keep a negation merely because it sounds emphatic or anticipates an implausible misunderstanding.
+
+Scan for quotation marks wrapping colloquial paraphrases, metaphor labels, or long explanatory clauses, and convert them to plain prose. Reserve quotes for direct quotation, first-use term introduction, and code or schema tokens.
+
+Check that every technical term is the field's standard term or a clearly anchored rendering, and that no term is defined unless the document actually uses it.

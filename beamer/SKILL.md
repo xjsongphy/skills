@@ -7,7 +7,9 @@ description: Use when creating LaTeX Beamer presentation slides from documents, 
 
 ## Shared narrative rules
 
-Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Slides should present the content and its evidence, not the agent's search process or defensive disclaimers.
+Load the `writer` skill's `references/common/narrative-and-evidence.md` when
+slide prose explains source material. Slides should present the content and its
+evidence, not the agent's search process or defensive disclaimers.
 
 ## Overview
 

@@ -1,10 +1,16 @@
-# Method Depth Checklist
+# Mechanism Depth Checklist
 
-Use only the groups relevant to the paper. The purpose is to expose hidden mechanism details, not to force every paper into an agent-system template.
+Use only the groups relevant to the active subject and sources. The purpose is
+to expose hidden mechanism details, not to force every document into an
+agent-system template.
 
 ## Evidence gate
 
-Use each question to interrogate the sources, not to complete a plausible design. For every answer, record whether it is directly disclosed by the paper, shown by an identified official artifact, a clearly labeled inference, or `not specified`.
+Use each question to interrogate the active sources, not to complete a
+plausible design. For every answer, preserve the source location, version
+scope, and uncertainty boundary required by the active object policies. This
+checklist is source-agnostic; active object policies define the evidence label,
+source location, version scope, and uncertainty boundary for each answer.
 
 When a source omits a field, default value, state lifetime, selection rule, ranking operation, or failure path, retain that omission. Do not infer ordinary behavior such as an empty first query, clearing a resolved error, appending only failures, filtering a candidate, or subtracting a ranking penalty. A complete explanation of a partially disclosed mechanism contains both its known relations and its explicit unknown boundary.
 
@@ -21,11 +27,13 @@ For each central stage or component, determine:
 - How long does that state live: one call, one iteration, one task, or across tasks?
 - What output is produced, who consumes it, and why is it sufficient for the next stage?
 - For failure, empty input, disagreement, timeout, or budget exhaustion paths that actually exist or affect the main flow, what happens next?
-- Which design choice is essential, and what simpler alternative does the paper compare against?
+- Which design choice is essential, and what simpler alternative does the
+  source compare against?
 
 ## Agent and multi-component systems
 
-When the paper contains agents, planners, reviewers, generators, optimizers, or judges, explain:
+When the subject contains agents, planners, reviewers, generators, optimizers,
+or judges, explain:
 
 - each role's exact inputs and output format;
 - whether roles see the full history, a selected window, summaries, exemplars, or only the current state;
@@ -81,7 +89,7 @@ For retrieval systems, explain as many disclosed stages as exist:
 - fallback when no suitable item exists;
 - update or refresh policy.
 
-If the paper only says “uses RAG”, explicitly mark which stages are unspecified.
+If a source only says “uses RAG”, explicitly mark which stages are unspecified.
 
 ## Search and optimization algorithms
 
@@ -136,6 +144,8 @@ Use experiments to answer design questions:
 - Do averages hide failed tasks or incorrect outputs?
 - Which counterexample or negative result limits the claim?
 - Are community cases, competition results, and main controlled experiments directly comparable?
-- Does the source isolate the claimed cause with an ablation or explicit analysis? A recovery curve, before/after sequence, or temporal association alone does not prove which internal component caused the result.
+- Does the source isolate the claimed cause with an ablation or explicit
+  analysis? A recovery curve, before/after sequence, or temporal association
+  alone does not prove which internal component caused the result.
 
 Keep only enough numerical detail to support these answers.

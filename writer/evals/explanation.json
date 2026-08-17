@@ -1,5 +1,5 @@
 {
-  "skill_name": "paper-explainer",
+  "skill_name": "writer",
   "evals": [
     {
       "id": 1,
@@ -40,7 +40,7 @@
     },
     {
       "id": 4,
-      "prompt": "这份论文解读每段都太密了，帮我按 md-report-writer 调整，但不要盲目拆段或删掉算法细节。",
+      "prompt": "这份论文解读每段都太密了，按 writer 的叙述与格式模块调整，但不要盲目拆段或删掉算法细节。",
       "expected_output": "A semantic-density revision that changes representation where appropriate while preserving the central mechanism and evidence.",
       "files": [],
       "assertions": [

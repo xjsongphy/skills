@@ -35,7 +35,7 @@ model: inherit
 - **模板获取优先级**（由高到低）：
   1. **用户自定义模板**：如果 `References/` 中有包含 `\documentclass` 的 `.tex` 文件或配套 `.cls` 文件，优先使用它们。此时可以覆盖或删除默认模板。
   2. **内置模板**：如果没有用户模板，则使用 `Tex/` 中项目初始化时准备好的默认模板。
-- **Skill-first writing**：撰写或修改报告正文时，优先使用 `experiment-report-writer` skill。
+- **Skill-first writing**：撰写或修改报告正文时，使用 `writer` skill，并加载其通用叙述、`types/report`、`type-addons/report-experiment` 和 `formats/latex` 模块。
 - **Compile correctly**：编译前先加载 `latex-compile` skill，再按其要求运行编译命令。
 - **Report blockers**：当必要输出缺失、Agent 输出冲突、模板要求不清楚，或编译问题无法本地修复时，报告阻塞（`blocked: missing_data` 或 `blocked: quality`）。
 - **聊天默认不用表格**：除非用户明确要求，否则不要在聊天回复里使用 Markdown 表格。优先使用简短段落或短列表。
@@ -55,7 +55,7 @@ model: inherit
 1. **检查前提**：确认当前任务所需的模板、Theory、Data Analysis、Plotting 输出存在且可用。若缺少关键输入，先报告阻塞。
 2. **检查模板与数据范围**：开始写作前，先确认是否存在用户模板，并快速对照 `References/`、`Data/`、`Data/Processed/` 中的内容，明确报告应覆盖的测量、分析和图表范围。
 3. **按需规划写作**：使用 TodoWrite 按章节或具体修改任务规划写作。避免一次性输出过多内容。
-4. **借助 skill 写作**：加载 `experiment-report-writer`，按章节逐步完成写作与整合。
+4. **借助 skill 写作**：加载 `writer` 并按其实验报告 LaTeX 路由，按章节逐步完成写作与整合。
 5. **检查局部一致性**：检查当前部分的叙事、变量定义、图表引用、公式引用、术语和模板兼容性。
 6. **按需编译**：需要编译时，加载 `latex-compile` skill 并验证 PDF。
 7. **修复问题**：若模板、内容或编译有问题，修复后再继续；如果本地无法可靠解决，则报告阻塞。
@@ -63,7 +63,7 @@ model: inherit
 
 ## 输出处理
 
-当任务需要生成报告文件时，写入 `Tex/`。具体文件组织、章节拆分和模板使用由当前模板、用户要求和 `experiment-report-writer` skill 决定。
+当任务需要生成报告文件时，写入 `Tex/`。具体文件组织、章节拆分和模板使用由当前模板、用户要求和 `writer` 的实验报告 LaTeX 路由决定。
 
 除非当前指令要求持久化报告输出，否则不要创建或修改文件。
 
@@ -72,7 +72,7 @@ model: inherit
 **工作流**：
 1. **检查前提**：确认模板与上下游输出可用，并明确当前报告范围。
 2. **按需规划写作**：多章节或多处修改任务使用 TodoWrite 规划。
-3. **使用 skill 写作**：开始写作前加载 `experiment-report-writer` skill，按章节逐步完成。
+3. **使用 skill 写作**：开始写作前加载 `writer` 的实验报告 LaTeX 路由，按章节逐步完成。
 4. **组装并编译**：报告完成后加载 `latex-compile` skill，按需编译并验证结果。
 
 **输出文件**（`Tex/`）：
@@ -81,7 +81,7 @@ model: inherit
 - `main.pdf` — Compiled report
 
 **质量要求**：
-- 遵循 `experiment-report-writer` skill 中的叙事与学术表达要求。
+- 遵循 `writer` 实验报告 LaTeX 路由中的叙事与学术表达要求。
 - 按顺序写作：主体章节优先，摘要最后完成。
 - 每个表格、图和公式前后都应有解释性文字。
 - 变量先定义再使用。

@@ -10,37 +10,20 @@ Claude Code 专用技能集合，提升 AI 在特定任务中的表现。
 
 ## 可用 Skills
 
-### latex-textbook-writer
+### writer
 
-**用途**：编写专业数学教材（XeLaTeX）
-
-**特点**：
-- 定义/定理盒子样式
-- 正确的配色方案（定义绿色、定理橙色、例子蓝色）
-- 学术性叙述风格（解释优先于定义）
-- 中英文模板支持
-
-**适用场景**：数学教材章节、LaTeX 论文格式、学术文档
-
-**调用方式**：`/latex-textbook-writer`
-
----
-
-### md-report-writer
-
-**用途**：编写专业 Markdown 报告
+**用途**：统一路由模块化学术与技术写作，覆盖 report、explanation、textbook 主类型及其变体，并支持 Markdown、LaTeX、Typst。
 
 **特点**：
-- 叙述流畅性（解释优先于技术内容）
-- 连贯的解释（非步骤式列表）
-- 直接专业语气（无对话填充）
-- 粗体强调（不用斜体）
-- 嵌入代码片段和引用文献
-- 简单代码注释变量，复杂代码详细解释逻辑
+- 共享叙述、证据、引用与审校规则
+- 与语言无关的文档类型模块
+- Markdown、LaTeX、Typst 语法模块
+- 仅在确有必要时增加类型-格式或包交互集成
+- 保留 LaTeX 教材模板与论文解读审校资源
 
-**适用场景**：技术报告、进度报告、项目文档、会议记录
+**适用场景**：技术报告、实验报告、论文解读、数学教材，以及 Markdown、LaTeX、Typst 文档
 
-**调用方式**：`/md-report-writer`
+**调用方式**：`/writer`
 
 ---
 
@@ -115,10 +98,10 @@ python3 scripts/cleanup_syncthing.py --folders ~/Develop ~/Codes
 
 ```
 skills/
-├── latex-textbook-writer/    # LaTeX 教材编写
-│   └── SKILL.md
-├── md-report-writer/         # Markdown 报告编写
-│   └── SKILL.md
+├── writer/                   # 模块化写作路由与 references
+│   ├── SKILL.md
+│   ├── MAINTENANCE.md
+│   └── references/
 ├── latex-compile/            # LaTeX 编译助手
 │   └── SKILL.md
 ├── update-skill/             # Skill 更新工具
@@ -147,8 +130,7 @@ skills/
 
 例如：
 ```
-/latex-textbook-writer
-/md-report-writer
+/writer
 ```
 
 ### 更新 Skill
@@ -161,7 +143,7 @@ skills/
    /update-skill skill-name
    ```
 3. AI 会分析对话并更新 skill 文件
-4. 更新会自动提交到 git
+4. 查看 diff；只有明确要求时才提交 git
 
 ## 开发
 

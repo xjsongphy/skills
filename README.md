@@ -10,37 +10,23 @@ These skills provide professional guidance for Claude Code in specific domains, 
 
 ## Available Skills
 
-### latex-textbook-writer
+### writer
 
-**Purpose**: Write professional mathematics textbooks using XeLaTeX
-
-**Features**:
-- Definition/theorem box styles
-- Correct color scheme (definitions in green, theorems in orange, examples in blue)
-- Academic narrative style (explanation before definition)
-- English and Chinese template support
-
-**Use Cases**: Mathematics textbook chapters, LaTeX paper formatting, academic documents
-
-**Invoke**: `/latex-textbook-writer`
-
----
-
-### md-report-writer
-
-**Purpose**: Write professional Markdown reports
+**Purpose**: Route modular academic and technical writing across report,
+explanation, and textbook primary types, with bounded variants, source objects,
+cross-type lenses, Markdown, LaTeX, or Typst formats.
 
 **Features**:
-- Narrative flow (explanation before technical content)
-- Coherent explanations (not step-by-step lists)
-- Direct, professional tone (no conversational filler)
-- Bold emphasis (no italics)
-- Embed code snippets and cite literature
-- Simple code: annotate variables; complex code: explain logic in detail
+- Shared narrative, evidence, citation, and review rules
+- Language-neutral document-type modules
+- Markdown, LaTeX, and Typst syntax modules
+- Format integrations only where a type-format or package interaction adds real rules
+- LaTeX textbook templates and source-grounded explanation review assets
 
-**Use Cases**: Technical reports, progress reports, project documentation, meeting notes
+**Use Cases**: Reports, lab reports, paper explanations, mathematics textbooks,
+technical Markdown, LaTeX, and Typst documents
 
-**Invoke**: `/md-report-writer`
+**Invoke**: `/writer`
 
 ---
 
@@ -95,24 +81,6 @@ python3 scripts/cleanup_syncthing.py --folders ~/Develop ~/Codes
 
 ---
 
-### experiment-report-writer
-
-**Purpose**: Professional LaTeX experiment report writing assistant for physics and engineering
-
-**Features**:
-- Narrative flow (explanation before technical content)
-- Define-before-use principle for variables and units
-- Professional academic tone with complete sentences
-- Structured report format with proper section ordering
-- LaTeX best practices (equations, figures, tables, units)
-- Todo-driven breakdown strategy for multi-section reports
-
-**Use Cases**: Physics experiment reports, engineering lab reports, academic LaTeX documents
-
-**Invoke**: `/experiment-report-writer`
-
----
-
 ### browser
 
 **Purpose**: Control Chrome browser via REST API for browser automation tasks
@@ -136,10 +104,10 @@ python3 scripts/cleanup_syncthing.py --folders ~/Develop ~/Codes
 
 ```
 skills/
-├── latex-textbook-writer/    # LaTeX textbook writing
-│   └── SKILL.md
-├── md-report-writer/         # Markdown report writing
-│   └── SKILL.md
+├── writer/                   # Modular writing router and references
+│   ├── SKILL.md
+│   ├── MAINTENANCE.md
+│   └── references/
 ├── update-skill/             # Skill update utility
 │   └── SKILL.md
 ├── syncthing-cleanup/        # Syncthing cleanup utility
@@ -166,8 +134,7 @@ Use the command directly in Claude Code:
 
 Examples:
 ```
-/latex-textbook-writer
-/md-report-writer
+/writer
 ```
 
 ### Updating a Skill
@@ -180,7 +147,7 @@ When a skill's output needs adjustment:
    /update-skill skill-name
    ```
 3. AI analyzes the conversation and updates the skill file
-4. Changes are automatically committed to git
+4. Review the diff and commit only when explicitly requested
 
 ## Development
 

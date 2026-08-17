@@ -1,0 +1,25 @@
+# LaTeX format
+
+Use the supplied class and template before generic guidance. Keep document
+semantics in sections, environments, labels, captions, and bibliography entries;
+do not force presentation choices into prose.
+
+- Define symbols before math and use labels for display equations that will be
+  referenced. Use consistent notation and units; prefer `siunitx` when the
+  template supports it.
+- Give each figure and table a complete caption, stable label, and local prose
+  interpretation. Keep table width appropriate to content rather than filling a
+  line by default.
+- Use theorem-like environments consistently for textbook material. State
+  language and font settings explicitly for CJK documents.
+- Keep source files modular when a project has several chapters or sections;
+  keep paths portable and references resolvable.
+
+For XeLaTeX compilation, errors, reference resolution, or warnings, invoke the
+separate `latex-compile` skill. Compile until cross-references stabilize and
+inspect the rendered output when layout matters.
+
+For a LaTeX report, keep float placement, table environments, unit commands,
+bibliography style, and stable labels consistent with the supplied report class
+or laboratory template. Do not use a float to replace the prose that explains
+its result.

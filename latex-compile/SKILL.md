@@ -22,7 +22,8 @@ This skill provides the standard XeLaTeX compilation workflow for LaTeX projects
 
 **Don't use when:**
 - Compiling with pdfLaTeX or LuaLaTeX (commands differ)
-- Setting up a new LaTeX project from scratch (use latex-textbook-writer templates instead)
+- Setting up a new LaTeX project from scratch (use the `writer` LaTeX and
+  textbook-LaTeX route, including its template assets, instead)
 
 ## Standard Compilation Commands
 
