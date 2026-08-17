@@ -7,7 +7,7 @@ description: Use when enhancing existing lecture notes with multiple course sour
 
 ## Shared narrative rules
 
-Load the `writer` skill's common narrative-and-evidence module. Keep process
+Load the `writer` skill's `references/common/narrative.md` module. Keep process
 notes and defensive source disclaimers out of the lecture notes; state source
 limitations only when they affect the explained concept.
 
@@ -144,7 +144,7 @@ Edit the lecture notes systematically by section:
 | Answering questions without editing notes | User needs enhanced documentation, not conversation | Edit the lecture notes directly |
 | Adding too much content at once | Hard to verify, high error risk | Edit section-by-section with todo tracking |
 | Forgetting narrative flow | Technical content feels abrupt | Start each section with explanatory text |
-| Using italics for emphasis | Md-report-writer specifies **bold** only | Replace all italics with bold |
+| Using italics for emphasis | The active writer format/type rules specify the emphasis policy | Apply the active writer route |
 | Writing conversational filler | Unprofessional, wastes tokens | Use direct, professional tone |
 | Skipping parallel analysis | Sequential processing is slower, loses context | Dispatch subagents for independent sources |
 | Leaving symbols unexplained | Readers can't follow formulas | Always define $w_i$, $w_p$, and other notation at first use |

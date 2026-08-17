@@ -22,11 +22,9 @@ must contain a durable preference, rule, boundary, or workflow correction.
 
 ## Writer routing
 
-When the target is `writer`, first read:
-
-```
-/Users/xjsongphy/.agents/skills/writer/MAINTENANCE.md
-```
+When the target is `writer`, first resolve the active skills root from the
+runtime configuration and read `<skills-root>/writer/MAINTENANCE.md`. Do not
+hardcode a user-specific absolute path or assume `~/.claude/skills`.
 
 Classify the feedback as a shared rule, primary type, type add-on, lens,
 source object, domain, format, format integration, reviewer, check, or routing
