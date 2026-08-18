@@ -4,8 +4,8 @@ Use for a standalone explanation that lets the target reader understand an
 active subject without constantly returning to its sources. The subject may be
 a paper, repository, experiment, theorem, system, or a paper/repository pair.
 Load `../common/narrative.md`, `../common/evidence-and-citations.md`, the active
-object policy, and the generic reviewer roles when their respective phases are
-reached. Add
+object policy, and the relevant analysis modules. Reviewer and check
+activation follows the writer routing contract. Add
 `../lenses/mechanism-analysis.md` or `../lenses/derivation-analysis.md` only
 when the subject requires them.
 
@@ -53,12 +53,5 @@ algorithm, or decisive code artifact, show the material that determines behavior
 and label any omitted portions. Label explanatory pseudocode or diagrams as
 such; never present a reconstruction as source material.
 
-For source-dependent explanations, run the source-grounded Reviewer against the
-active object policies and ledger. Run the draft-only Reader when the
-explanation type is active. Fix blocker/major or P0/P1 findings as applicable;
-if technical claims change during Reader-driven revision, run a targeted source
-recheck. Do not use source knowledge to silently repair a Reader gap.
-
-For revisions, inspect the existing document, working-tree diff, and relevant
-Git history before outlining changes. Git history provides revision context, not
-evidence for the subject's facts.
+Follow the reviewer and check activation contract in `../../SKILL.md`. Do not
+use source knowledge to silently repair a Reader gap.

@@ -40,6 +40,6 @@ nearest claim's scope, comparator, conditions, and strength; a broad method
 citation does not prove an undisclosed API, default, state lifetime, filter, or
 ranking rule.
 
-When no official repository is available, do not invent repository paths, APIs,
-configuration details, or implementation behavior. Use source-disclosed
-algorithms, figures, appendices, and clearly labeled pseudocode instead.
+Do not fabricate unavailable source identities, locations, APIs, configuration,
+or implementation behavior. When source material is incomplete, use only its
+disclosed algorithms, figures, appendices, and clearly labeled pseudocode.

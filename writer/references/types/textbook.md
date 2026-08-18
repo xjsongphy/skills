@@ -11,7 +11,6 @@ continuous argument: establish the starting facts, explain each non-obvious
 transition, and state the resulting claim. Do not replace proof logic with an
 unexplained list of “steps”.
 
-Use examples to make an abstract definition operational; use exercises only
-after prerequisites and a worked example establish the required technique.
+Use examples to make an abstract definition operational.
 Keep a consistent theorem, definition, example, remark, and exercise hierarchy.
 Do not add generic process commentary or ornamental emphasis.
