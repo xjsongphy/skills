@@ -1,4 +1,0 @@
-interface:
-  display_name: "Paper Explainer"
-  short_description: "Route paper explanations through the modular writer skill"
-  default_prompt: "Use the writer skill with explanation as the primary type and paper as the active source object."
