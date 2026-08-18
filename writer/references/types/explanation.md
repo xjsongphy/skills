@@ -3,7 +3,7 @@
 Use for a standalone explanation that lets the target reader understand an
 active subject without constantly returning to its sources. The subject may be
 a paper, repository, experiment, theorem, system, or a paper/repository pair.
-Load `../common/narrative.md`, `../common/evidence-and-citations.md`, the active
+Load `../common/writing.md`, `../common/evidence-and-citations.md`, the active
 object policy, and the relevant analysis modules. Reviewer and check
 activation follows the writer routing contract. Add
 `../lenses/mechanism-analysis.md` or `../lenses/derivation-analysis.md` only
@@ -62,8 +62,8 @@ explain every central stage as disclosed:
 
 `producer → input → selection/transformation → state/update → output → consumer`.
 
-Audit all available figures and tables before selecting visuals. Introduce and
-interpret selected visuals locally. For a source-faithful prompt, schema,
+Audit all available figures and tables before selecting visuals. For a
+source-faithful prompt, schema,
 algorithm, or decisive code artifact, show the material that determines behavior
 and label any omitted portions. Label explanatory pseudocode or diagrams as
 such; never present a reconstruction as source material.

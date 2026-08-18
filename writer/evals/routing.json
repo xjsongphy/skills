@@ -1,54 +1,73 @@
 {
   "skill_name": "writer",
-  "description": "Composition tests for the writer router. The expected list is the smallest required module set; forbidden entries guard against accidental Cartesian-product loading.",
+  "description": "Composition tests for the writer router. The expected list is the smallest required module set; required_sections records conditional subsections that must be activated; forbidden entries guard against accidental Cartesian-product loading.",
   "cases": [
     {
       "id": "ordinary-paper-explanation",
       "prompt": "写一篇普通论文解读。",
-      "expected_modules": ["types/explanation.md", "objects/paper.md", "formats/markdown.md", "common/narrative.md", "common/technical-exposition.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "reviewers/coordination.md", "checks/prose.md", "checks/source-claims.md"],
+      "expected_modules": ["types/explanation.md", "objects/paper.md", "formats/markdown.md", "common/writing.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "checks/document.md"],
       "forbidden_modules": ["objects/repository.md", "lenses/derivation-analysis.md", "lenses/mechanism-analysis.md"]
     },
     {
       "id": "repository-explanation",
       "prompt": "根据官方仓库写一篇实现解读。",
-      "expected_modules": ["types/explanation.md", "objects/repository.md", "formats/markdown.md", "common/narrative.md", "common/technical-exposition.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "reviewers/coordination.md", "checks/prose.md", "checks/source-claims.md"],
+      "expected_modules": ["types/explanation.md", "objects/repository.md", "formats/markdown.md", "common/writing.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "checks/document.md"],
       "forbidden_modules": ["objects/paper.md"]
     },
     {
       "id": "teng-typst-explanation",
       "prompt": "用 Typst 解读 TENG 论文的推导与机制。",
-      "expected_modules": ["types/explanation.md", "objects/paper.md", "lenses/derivation-analysis.md", "lenses/mechanism-analysis.md", "formats/typst.md", "common/narrative.md", "common/technical-exposition.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "reviewers/coordination.md", "checks/prose.md", "checks/source-claims.md", "checks/rendered-document.md"],
+      "expected_modules": ["types/explanation.md", "objects/paper.md", "lenses/derivation-analysis.md", "lenses/mechanism-analysis.md", "formats/typst.md", "common/writing.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "checks/document.md"],
       "forbidden_modules": []
     },
     {
       "id": "teng-typst-scholia-explanation",
       "prompt": "用户指定使用 Scholia，用 Typst 解读 TENG 论文中需要编号和交叉引用的密集推导。",
-      "expected_modules": ["types/explanation.md", "objects/paper.md", "lenses/derivation-analysis.md", "lenses/mechanism-analysis.md", "formats/typst.md", "format-integrations/scholia-typst.md", "common/narrative.md", "common/technical-exposition.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "reviewers/coordination.md", "checks/prose.md", "checks/source-claims.md", "checks/rendered-document.md"],
+      "expected_modules": ["types/explanation.md", "objects/paper.md", "lenses/derivation-analysis.md", "lenses/mechanism-analysis.md", "formats/typst.md", "format-integrations/scholia-typst.md", "common/writing.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "checks/document.md"],
       "forbidden_modules": []
     },
     {
       "id": "gpu-paper-repository-explanation",
       "prompt": "同时解释 GPU kernel 论文和对应仓库实现。",
-      "expected_modules": ["types/explanation.md", "objects/paper.md", "objects/repository.md", "domains/gpu-kernel.md", "lenses/mechanism-analysis.md", "formats/markdown.md", "common/narrative.md", "common/technical-exposition.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "reviewers/coordination.md", "checks/prose.md", "checks/source-claims.md"],
+      "expected_modules": ["types/explanation.md", "objects/paper.md", "objects/repository.md", "domains/gpu-kernel.md", "lenses/mechanism-analysis.md", "formats/markdown.md", "common/writing.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "checks/document.md"],
       "forbidden_modules": []
     },
     {
       "id": "ordinary-typst-report",
       "prompt": "写一份普通 Typst 报告。",
-      "expected_modules": ["types/report.md", "formats/typst.md", "common/narrative.md", "common/technical-exposition.md", "checks/prose.md", "checks/rendered-document.md"],
+      "expected_modules": ["types/report.md", "formats/typst.md", "common/writing.md", "checks/document.md"],
       "forbidden_modules": ["format-integrations/scholia-typst.md", "objects/paper.md"]
     },
     {
       "id": "experiment-report",
       "prompt": "写一份物理实验报告。",
-      "expected_modules": ["types/report.md", "type-addons/report-experiment.md", "formats/latex.md", "common/narrative.md", "common/technical-exposition.md", "checks/prose.md", "checks/rendered-document.md"],
+      "expected_modules": ["types/report.md", "type-addons/report-experiment.md", "formats/latex.md", "common/writing.md", "checks/document.md"],
       "forbidden_modules": ["types/explanation.md", "objects/paper.md"]
     },
     {
       "id": "latex-textbook",
       "prompt": "写一章 LaTeX 数学教材。",
-      "expected_modules": ["types/textbook.md", "formats/latex.md", "format-integrations/textbook-latex.md", "common/narrative.md", "common/technical-exposition.md", "checks/prose.md", "checks/rendered-document.md"],
+      "expected_modules": ["types/textbook.md", "formats/latex.md", "format-integrations/textbook-latex.md", "common/writing.md", "checks/document.md"],
       "forbidden_modules": ["types/report.md", "types/explanation.md"]
+    },
+    {
+      "id": "progressive-depth-survey",
+      "prompt": "写一篇技术调研，先给读者地图，再解释机制，最后分析研究实现和证据。",
+      "expected_modules": ["types/explanation.md", "common/writing.md", "formats/markdown.md", "reviewers/reader.md", "checks/document.md"],
+      "required_sections": ["common/writing.md#Progressive technical depth"],
+      "forbidden_modules": ["reviewers/source-reviewer.md"]
+    },
+    {
+      "id": "brief-paper-fact-question",
+      "prompt": "这篇论文使用了什么 optimizer？请简要回答。",
+      "expected_modules": ["types/explanation.md", "objects/paper.md", "common/writing.md", "common/evidence-and-citations.md"],
+      "forbidden_modules": ["reviewers/reader.md", "reviewers/source-reviewer.md", "checks/document.md", "formats/markdown.md"]
+    },
+    {
+      "id": "explicit-typst-experiment-report",
+      "prompt": "用 Typst 写一份物理实验报告。",
+      "expected_modules": ["types/report.md", "type-addons/report-experiment.md", "formats/typst.md", "common/writing.md", "checks/document.md"],
+      "forbidden_modules": ["formats/latex.md", "format-integrations/textbook-latex.md", "types/explanation.md"]
     }
   ]
 }

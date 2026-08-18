@@ -23,7 +23,8 @@ choosing a file to edit.
 1. Identify the task: draft, revise, audit, explain, or translate. Compilation
    and build diagnosis belong to the separate `latex-compile` skill. Also identify
    whether this is a brief chat answer/local lookup or a substantial persistent
-   artifact; the latter uses the full workflow below.
+   artifact. The full source-grounded workflow applies conditionally to
+   substantial explanations; reports and textbooks follow their type contracts.
 2. Select exactly one primary type under `references/types/`:
    `report`, `explanation`, or `textbook`.
 3. If the primary type has a bounded variant or component, load it from
@@ -32,13 +33,11 @@ choosing a file to edit.
    second primary type.
 4. Add zero or more cross-type lenses under `references/lenses/`:
    `derivation-analysis` for derivation-heavy exposition and
-   `mechanism-analysis` for input/output/state/control-flow depth, or
-   `progressive-depth` when a technical survey needs layered reader → mechanism
-   → research exposition. Activate a lens when the source or requested
-   deliverable contains the corresponding analysis; do not require the user to
-   name the lens explicitly.
-   Load the mechanism depth checklist only when the task needs its detailed
-   questions.
+   `mechanism-analysis` for input/output/state/control-flow depth. Activate a
+   lens when the source or requested deliverable contains the corresponding
+   analysis; do not require the user to name the lens explicitly. The
+   mechanism lens contains an optional deep-dive question bank; use only the
+   relevant groups.
 5. Add source objects under `references/objects/` when the task relies on
    identifiable evidence sources: `paper`, `repository`, or both. Add a
    domain module only when the subject has domain-specific evidence or terms.
@@ -49,8 +48,7 @@ choosing a file to edit.
    cannot be expressed cleanly in the type and format modules. The initial
    exception integrations are `scholia-typst` and `textbook-latex` under
    `references/format-integrations/`.
-8. Load `references/common/narrative.md` and
-   `references/common/technical-exposition.md` for every reader-facing document.
+8. Load `references/common/writing.md` for every reader-facing document.
    Add `common/evidence-and-citations.md` when claims depend on research,
    measurements, code, or other sources; that module owns the shared ledger.
 9. Activate reviewers and checks according to the `Reviewer and check
@@ -66,8 +64,7 @@ silently composing a large bundle.
 
 | Need | Load |
 |---|---|
-| Any reader-facing prose | `references/common/narrative.md` |
-| Cross-type technical exposition | `references/common/technical-exposition.md` |
+| Any reader-facing prose and technical exposition | `references/common/writing.md` |
 | Source boundaries and citations | `references/common/evidence-and-citations.md` |
 | General report | `references/types/report.md` |
 | Physics/engineering experiment report | `types/report.md` + `type-addons/report-experiment.md` |
@@ -76,8 +73,8 @@ silently composing a large bundle.
 | Textbook exercises and answers | `type-addons/textbook-exercises.md` |
 | Derivation-heavy exposition | `lenses/derivation-analysis.md` |
 | Mechanism/deep pipeline analysis | `lenses/mechanism-analysis.md` |
-| Layered technical survey | `lenses/progressive-depth.md` |
-| Detailed mechanism questions | `lenses/mechanism-analysis/depth-checklist.md` |
+| Layered technical survey | the conditional progressive-depth section in `common/writing.md` |
+| Detailed mechanism questions | the optional deep-dive section in `lenses/mechanism-analysis.md` |
 | Paper evidence policy | `objects/paper.md` |
 | Repository evidence policy | `objects/repository.md` |
 | GPU-kernel subject | `domains/gpu-kernel.md` |
@@ -86,12 +83,9 @@ silently composing a large bundle.
 | Typst source | `formats/typst.md` |
 | Scholia + Typst interaction | `format-integrations/scholia-typst.md` |
 | LaTeX textbook interaction | `format-integrations/textbook-latex.md` |
-| Prose audit | `checks/prose.md` |
-| Source-claim audit | `checks/source-claims.md` |
-| Rendered-document audit | `checks/rendered-document.md` |
+| Document gates | `checks/document.md` (run the applicable sections) |
 | Source-grounded review | `reviewers/source-reviewer.md` |
 | Draft-only reader simulation | `reviewers/reader.md` |
-| Reviewer coordination and release contract | `reviewers/coordination.md` when multiple reviewer roles or a delegated persistent review are active |
 
 ## Composition examples
 
@@ -119,10 +113,41 @@ Use the following defaults unless the user explicitly narrows the task:
 |---|---|
 | `reviewers/reader.md` | substantial/persistent `type = explanation`; other types only when requested. |
 | `reviewers/source-reviewer.md` | substantial source-grounded work with a non-empty claim ledger, or an explicit source audit request. Brief answers use minimal source verification. |
-| `checks/prose.md` | every writer document. |
-| `checks/source-claims.md` | claim ledger is non-empty. |
-| `checks/rendered-document.md` | a renderable document is generated or compiled. |
-| `reviewers/coordination.md` | both Reader and Source Reviewer are active, or a delegated persistent review is requested; not for a brief chat answer. |
+| coordination rules below | both Reader and Source Reviewer are active, or a delegated persistent review is requested; not for a brief chat answer. |
+| `checks/document.md` prose section | every writer document. |
+| `checks/document.md` source section | claim ledger is non-empty. |
+| `checks/document.md` rendered section | a renderable document is generated or compiled. |
+
+## Reviewer coordination
+
+Use these Main-agent rules when more than one isolated reviewer is active or a
+delegated persistent review is requested. Reader comprehension and source
+grounding are separate judgments; neither reviewer silently replaces the
+other's role.
+
+### Arbitration
+
+- Evidence boundaries from the active object policies cap every completeness
+  request. Reader preference cannot turn an undocumented detail into a fact.
+- If a comprehension issue blocks the central mechanism, it takes priority over
+  stylistic brevity. Add only the smallest source-supported bridge.
+- Add detail only when it serves the contribution, is source-disclosed, or is
+  explicitly requested. Refuse deletion when it would break an input/output,
+  condition, state-update, derivation, or evidence chain.
+- Preserve `not specified` boundaries when the source is silent. A reviewer may
+  recommend narrowing or labeling a claim, not filling it from general knowledge.
+
+### Completion and release
+
+- For a persistent artifact or delegated review, retain the structured review
+  result until the task reaches its final handoff. A chat-only answer does not
+  require a Reviewer YAML file to be persisted.
+- If delegation is unavailable, run the same roles sequentially with the same
+  source and draft isolation boundaries.
+- Finish only after the applicable Reader, Source Reviewer, active lens checks,
+  figure/artifact coverage, document source-claim and prose sections, and the
+  rendered section have passed or their remaining limitations are explicitly
+  reported.
 
 ## Format resolution
 

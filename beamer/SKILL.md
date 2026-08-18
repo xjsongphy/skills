@@ -7,7 +7,7 @@ description: Use when creating LaTeX Beamer presentation slides from documents, 
 
 ## Shared narrative rules
 
-Load the `writer` skill's `references/common/narrative.md` when
+Load the `writer` skill's `references/common/writing.md` when
 slide prose explains source material. Slides should present the content and its
 evidence, not the agent's search process or defensive disclaimers.
 

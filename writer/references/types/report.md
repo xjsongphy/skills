@@ -3,11 +3,10 @@
 Use this language-neutral module for technical, scientific, analytical, and
 business reports. Apply the user or organization template first.
 
-Give the document a clear title and scope statement. Begin each major section
-with prose that tells the reader why the next figure, table, formula, or code
-output matters; place the element next; then interpret the result locally. Keep
-raw records, exhaustive grids, and long derivations in appendices or linked
-artifacts when they would hide the main argument.
+Give the document a clear title and scope statement. Keep raw records,
+exhaustive grids, and long derivations in appendices or linked artifacts when
+they would hide the main argument. Apply the shared technical-exposition rules
+for placing and interpreting document elements.
 
 ## Structure
 
@@ -24,7 +23,7 @@ measurement or source, comparison basis, uncertainty or limitation when
 material, and implication. Do not turn tables or figures into unconnected
 inventories.
 
-Use prose → element → interpretation. Explain rows, columns, units, baseline,
-metric direction, and the trend that changes the conclusion; do not narrate
-every cell. Place detailed raw data, derivations, or exhaustive result grids in
-an appendix when the reader needs the main argument first.
+Explain rows, columns, units, baseline, metric direction, and the trend that
+changes the conclusion; do not narrate every cell. Place detailed raw data,
+derivations, or exhaustive result grids in an appendix when the reader needs
+the main argument first.

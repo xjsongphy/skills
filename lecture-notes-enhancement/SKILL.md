@@ -7,7 +7,7 @@ description: Use when enhancing existing lecture notes with multiple course sour
 
 ## Shared narrative rules
 
-Load the `writer` skill's `references/common/narrative.md` module. Keep process
+Load the `writer` skill's `references/common/writing.md` module. Keep process
 notes and defensive source disclaimers out of the lecture notes; state source
 limitations only when they affect the explained concept.
 

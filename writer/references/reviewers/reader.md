@@ -80,7 +80,7 @@ as `not specified`.
 
 ### Narrative compliance
 
-Apply the canonical rules in `common/narrative.md`; do not create a second
+Apply the canonical rules in `../common/writing.md`; do not create a second
 narrative policy in this reviewer. Report a finding when a violation obscures
 the argument or materially slows reading. The Reader may use the active format
 and type modules to identify the expected sentence, heading, emphasis, and

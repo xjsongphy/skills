@@ -9,8 +9,7 @@ already owns the concept.
 
 | Feedback or rule | Canonical location |
 |---|---|
-| Shared narrative wording | `references/common/narrative.md` |
-| Cross-type technical exposition, depth, density, or representation choice | `references/common/technical-exposition.md` |
+| Shared narrative wording, technical exposition, depth, density, or representation choice | `references/common/writing.md` |
 | Claim ledger, source identity, evidence boundaries, or citation policy | `references/common/evidence-and-citations.md` |
 | What the deliverable is and who reads it | one file under `references/types/` |
 | A bounded type variant or component | `references/type-addons/`, e.g. `type-addons/report-experiment.md` |
@@ -41,7 +40,8 @@ When `/update-skill writer` is invoked:
 
 Use the module map in `SKILL.md` as the public index. Keep this file procedural
 and short; detailed writing rules belong in the referenced modules. Narrative
-rules are defined in `references/common/narrative.md`. The shared claim ledger,
+and technical exposition rules are defined in `references/common/writing.md`.
+The shared claim ledger,
 source identity, and citation contract are defined in
 `references/common/evidence-and-citations.md`; objects define how their
 evidence fills it, and reviewers/checks consume it.
