@@ -1,6 +1,6 @@
 # Prose check
 
-Apply `common/narrative.md` and the active type/format modules as a deterministic
+Apply `../common/narrative.md`, `../common/technical-exposition.md`, and the active type/format modules as a deterministic
 pass/fail gate. This check executes those rules; it does not define a second
 prose policy or replace the isolated Reader reviewer.
 

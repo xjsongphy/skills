@@ -21,7 +21,9 @@ choosing a file to edit.
 ## Route a request
 
 1. Identify the task: draft, revise, audit, explain, or translate. Compilation
-   and build diagnosis belong to the separate `latex-compile` skill.
+   and build diagnosis belong to the separate `latex-compile` skill. Also identify
+   whether this is a brief chat answer/local lookup or a substantial persistent
+   artifact; the latter uses the full workflow below.
 2. Select exactly one primary type under `references/types/`:
    `report`, `explanation`, or `textbook`.
 3. If the primary type has a bounded variant or component, load it from
@@ -30,9 +32,11 @@ choosing a file to edit.
    second primary type.
 4. Add zero or more cross-type lenses under `references/lenses/`:
    `derivation-analysis` for derivation-heavy exposition and
-   `mechanism-analysis` for input/output/state/control-flow depth. Activate a
-   lens when the source or requested deliverable contains the corresponding
-   derivation or mechanism; do not require the user to name the lens explicitly.
+   `mechanism-analysis` for input/output/state/control-flow depth, or
+   `progressive-depth` when a technical survey needs layered reader → mechanism
+   → research exposition. Activate a lens when the source or requested
+   deliverable contains the corresponding analysis; do not require the user to
+   name the lens explicitly.
    Load the mechanism depth checklist only when the task needs its detailed
    questions.
 5. Add source objects under `references/objects/` when the task relies on
@@ -45,8 +49,9 @@ choosing a file to edit.
    cannot be expressed cleanly in the type and format modules. The initial
    exception integrations are `scholia-typst` and `textbook-latex` under
    `references/format-integrations/`.
-8. Load `references/common/narrative.md` for every reader-facing document. Add
-   `common/evidence-and-citations.md` when claims depend on research,
+8. Load `references/common/narrative.md` and
+   `references/common/technical-exposition.md` for every reader-facing document.
+   Add `common/evidence-and-citations.md` when claims depend on research,
    measurements, code, or other sources; that module owns the shared ledger.
 9. Activate reviewers and checks according to the `Reviewer and check
    activation` matrix below. A reviewer role is not a checklist: use
@@ -62,6 +67,7 @@ silently composing a large bundle.
 | Need | Load |
 |---|---|
 | Any reader-facing prose | `references/common/narrative.md` |
+| Cross-type technical exposition | `references/common/technical-exposition.md` |
 | Source boundaries and citations | `references/common/evidence-and-citations.md` |
 | General report | `references/types/report.md` |
 | Physics/engineering experiment report | `types/report.md` + `type-addons/report-experiment.md` |
@@ -70,6 +76,7 @@ silently composing a large bundle.
 | Textbook exercises and answers | `type-addons/textbook-exercises.md` |
 | Derivation-heavy exposition | `lenses/derivation-analysis.md` |
 | Mechanism/deep pipeline analysis | `lenses/mechanism-analysis.md` |
+| Layered technical survey | `lenses/progressive-depth.md` |
 | Detailed mechanism questions | `lenses/mechanism-analysis/depth-checklist.md` |
 | Paper evidence policy | `objects/paper.md` |
 | Repository evidence policy | `objects/repository.md` |
@@ -84,6 +91,7 @@ silently composing a large bundle.
 | Rendered-document audit | `checks/rendered-document.md` |
 | Source-grounded review | `reviewers/source-reviewer.md` |
 | Draft-only reader simulation | `reviewers/reader.md` |
+| Reviewer coordination and release contract | `reviewers/coordination.md` when multiple reviewer roles or a delegated persistent review are active |
 
 ## Composition examples
 
@@ -97,8 +105,9 @@ silently composing a large bundle.
 - **GPU-kernel paper/repository explanation**: explanation + paper + repository
   + gpu-kernel + mechanism-analysis + chosen format.
 - **Ordinary Typst report**: report + Typst. Do not load `scholia-typst`.
-- **Experiment report**: report + report-experiment; add evidence, format, and
-  rendered checks when applicable.
+- **Experiment report**: report + report-experiment; default to LaTeX when no
+  existing or explicit format is supplied, then add evidence and rendered
+  checks when applicable.
 - **LaTeX textbook**: textbook + LaTeX + textbook-latex; add exercises only
   when exercises are part of the deliverable.
 
@@ -108,17 +117,21 @@ Use the following defaults unless the user explicitly narrows the task:
 
 | Module | Trigger |
 |---|---|
-| `reviewers/reader.md` | `type = explanation`; other types only when requested. |
-| `reviewers/source-reviewer.md` | claim ledger is non-empty, especially when source objects are active. |
+| `reviewers/reader.md` | substantial/persistent `type = explanation`; other types only when requested. |
+| `reviewers/source-reviewer.md` | substantial source-grounded work with a non-empty claim ledger, or an explicit source audit request. Brief answers use minimal source verification. |
 | `checks/prose.md` | every writer document. |
 | `checks/source-claims.md` | claim ledger is non-empty. |
 | `checks/rendered-document.md` | a renderable document is generated or compiled. |
+| `reviewers/coordination.md` | both Reader and Source Reviewer are active, or a delegated persistent review is requested; not for a brief chat answer. |
 
 ## Format resolution
 
 When the user edits an existing source file, preserve its format even if the
-user does not repeat it. Otherwise use explicit user format, then the default
-of a compatibility wrapper, and finally Markdown as the writer default.
+user does not repeat it. Otherwise use explicit user format, then a bounded
+type/add-on default, and finally Markdown as the writer default. The default
+for `report + report-experiment` is LaTeX because the experiment contract and
+its established report assets are LaTeX-oriented; an explicit format always
+overrides it.
 
 For revisions, read the current document before editing. Inspect the working
 tree diff and relevant Git history when they reveal user changes or durable
@@ -149,6 +162,6 @@ material merely because it existed in an older version.
   data analysis, plotting, or orchestration responsibilities.
 - Treat `latex-compile` as a separate build and diagnosis skill. Do not embed
   its compiler workflow here.
-- The canonical rules live under `writer`; any legacy user-facing entry point
-  retained during migration must be a thin wrapper and must not own a copied
-  rule. Update feedback against the canonical module, not the wrapper.
+- The canonical rules live under `writer`; the removed legacy entry points are
+  not part of routing. Do not recreate them or copy their rules into a new
+  wrapper.

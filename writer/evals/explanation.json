@@ -9,9 +9,11 @@
       "assertions": [
         "The paper body and appendix are both audited before drafting",
         "Official code and web resources are distinguished from paper claims",
+        "Official author/project material and third-party background are assigned distinct source roles",
         "The main contribution receives more explanatory depth than related work or result tables",
         "Included figures have visible captions and immediate interpretation",
-        "Reviewer and Reader passes use separate evidence scopes"
+        "Reviewer and Reader passes use separate evidence scopes",
+        "A substantial explanation uses the full source-grounded workflow and release contract"
       ]
     },
     {
@@ -48,7 +50,8 @@
         "Dense process prose is converted to diagrams, pseudocode, tables, or lists when appropriate",
         "Tightly coupled causal reasoning is not mechanically split",
         "Central inputs, filters, updates, outputs, and conditions are preserved",
-        "Peripheral repetition and result dumps are trimmed before mechanism details"
+        "Peripheral repetition and result dumps are trimmed before mechanism details",
+        "Clarity-before-detail and semantic-density rules are applied without deleting source-supported mechanism steps"
       ]
     }
   ]

@@ -10,6 +10,7 @@ already owns the concept.
 | Feedback or rule | Canonical location |
 |---|---|
 | Shared narrative wording | `references/common/narrative.md` |
+| Cross-type technical exposition, depth, density, or representation choice | `references/common/technical-exposition.md` |
 | Claim ledger, source identity, evidence boundaries, or citation policy | `references/common/evidence-and-citations.md` |
 | What the deliverable is and who reads it | one file under `references/types/` |
 | A bounded type variant or component | `references/type-addons/`, e.g. `type-addons/report-experiment.md` |
@@ -32,9 +33,9 @@ When `/update-skill writer` is invoked:
 3. Update only that module unless the feedback exposes a cross-module contract;
    in that case update the canonical module first, then the smallest routing or
    link change needed to keep the contract discoverable.
-4. Search for stale links, duplicate wording, and old skill names. During the
-   migration window, retain only thin compatibility wrappers for old user
-   entry points; wrappers may route and set defaults but may not own rules.
+4. Search for stale links, duplicate wording, and old skill names. The removed
+   legacy entry points must not be recreated; update only the canonical writer
+   modules.
 5. Validate frontmatter, referenced paths, and relevant eval assertions. Compile
    or render only when the changed module affects source or layout.
 

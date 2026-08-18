@@ -9,6 +9,14 @@ activation follows the writer routing contract. Add
 `../lenses/mechanism-analysis.md` or `../lenses/derivation-analysis.md` only
 when the subject requires them.
 
+Use the full source-grounded workflow only for a persistent or substantial
+explanation: audit the active sources, set the outline, draft the central method
+or reasoning chain first, run the applicable isolated reviewers, and perform a
+targeted source recheck after revisions. A single factual question, citation
+lookup, or short abstract summary uses the smallest source verification needed
+for that answer and does not automatically create a full ledger/reviewer/release
+workflow.
+
 Unless the user specifies another audience, target an informed but ordinary
 reader in the active subject's relevant subfield. Record the audience contract
 as `assumed_known` and `explain_in_draft`; never put subject-specific names,
@@ -26,6 +34,13 @@ Center the explanation on the concrete question or problem, the shortest
 complete overview, one end-to-end mechanism or reasoning chain, design rationale
 and trade-offs, then decisive evidence and limitations. Background and result
 tables support that chain; they do not displace it.
+
+For a substantial paper explanation, a useful default shape is contribution or
+central question → problem and motivation → overall method and main visual →
+causal or algorithmic method → concrete case → decisive evidence → limitations
+and conclusion. Keep headings shallow and meaningful, use parallel labels for
+parallel sections, do not skip heading levels, and place appendix detail near
+the method section that needs it rather than creating a detached catalogue.
 
 For a paper or source-grounded technical explanation, keep the contribution or
 central question at the center. Background and related work establish only the

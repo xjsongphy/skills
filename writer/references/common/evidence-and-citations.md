@@ -24,6 +24,12 @@ Use the strongest available primary source. Keep these identities distinct:
 2. what an identified official implementation does;
 3. a clearly labeled explanatory inference or simplification.
 
+Third-party material may provide background or a comparison point when the
+active object policy permits it. It does not upgrade an interpretation into a
+claim made by the active primary source. Official project material is also a
+separate source record unless the active object policy explicitly treats it as
+part of the source scope.
+
 Do not let a later code revision silently redefine a paper's evaluated method.
 Do not create citations, bibliographic fields, data values, results, or source
 locations. If a source does not establish an operational detail, omit it or

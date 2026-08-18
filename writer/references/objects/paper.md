@@ -12,6 +12,14 @@ identity and scope. Record exact section, figure, algorithm, table, or page
 locations for central claims. A diagram arrow or high-level verb establishes
 only the relation shown.
 
+When the paper directly identifies author or project material, official slides,
+talks, project pages, release notes, and errata may clarify terminology, source
+scope, or implementation context. Keep those records distinct from the paper's
+evaluated claims; inspect an actual repository or runtime artifact under
+`objects/repository.md` when implementation behavior matters. Third-party
+articles, tutorials, and background sources may support context or comparison,
+but cannot establish what the paper itself states.
+
 Treat undisclosed schemas, defaults, prompt fields, state lifetimes, ranking
 operations, filters, and failure paths as `not specified` unless the paper or
 its identified supplement establishes them.

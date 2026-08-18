@@ -39,11 +39,9 @@ compatibility behavior, update `writer/SKILL.md` only for that routing contract.
 
 Keep one rule in one canonical location. Do not create a compatibility wrapper,
 copy an old skill, or add a format integration merely to repeat rules already
-expressed by a type and a format. During an approved migration window, an
-existing legacy entry point may remain as a thin wrapper that routes to the
-canonical writer modules; it must not own copied rules. If a cross-module
-contract changes, update the owning module first and make only the smallest
-link or route adjustment.
+expressed by a type and a format. The legacy writer entry points have been
+removed. If a cross-module contract changes, update the owning module first and
+make only the smallest link or route adjustment.
 
 ## Process
 
