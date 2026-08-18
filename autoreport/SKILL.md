@@ -1,13 +1,17 @@
 ---
 name: autoreport
-description: Use when generating a physics or engineering experiment report from measured data and reference materials — orchestrates Theory, Data Analysis, Plotting, and Report sub-agents to produce a compiled LaTeX PDF. Also use for any sub-task in that pipeline: deriving formulas, analyzing lab data, plotting measurements with theory overlay, or writing/compiling the report.
+description: "Use when generating a physics or engineering experiment report from measured data and reference materials — orchestrates Theory, Data Analysis, Plotting, and Report sub-agents to produce a compiled LaTeX PDF. Also use for any sub-task in that pipeline: deriving formulas, analyzing lab data, plotting measurements with theory overlay, or writing/compiling the report."
 ---
 
 # AutoReport
 
 ## Shared narrative rules
 
-When producing report prose, read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Child agents inherit this policy through the report-writing skills they use; do not restate or generate process-oriented source disclaimers.
+When producing report prose, route through the `writer` skill and load its
+common narrative/evidence, `types/report`, `type-addons/report-experiment`, and
+`formats/latex` modules as applicable. Child agents inherit these policies
+through that route; do not restate or generate process-oriented source
+disclaimers.
 
 ## Overview
 
@@ -45,7 +49,9 @@ Resolve blockers by supplying the missing input, re-dispatching to another agent
 These are separate skills available in the environment. Load them when the corresponding work is needed; do not reimplement their content here.
 
 - **mineru** — extracting PDF reference documents to markdown. When `References/` contains PDFs, use `mineru` to convert them to readable markdown before theory/analysis work.
-- **experiment-report-writer** — narrative flow, academic style, and LaTeX best practices for the report body. The Report agent loads this when writing prose.
+- **writer** — routes report-body prose to the shared narrative, report,
+  experiment-variant, and LaTeX modules. The Report agent loads it when writing
+  prose.
 - **latex-compile** — compiling LaTeX with XeLaTeX and diagnosing errors. The Report agent loads this before running any compile.
 
 ## Runtime adaptation

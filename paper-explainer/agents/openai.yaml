@@ -1,5 +1,4 @@
 interface:
   display_name: "Paper Explainer"
-  short_description: "Write source-verified, image-supported paper explanations"
-  default_prompt: "Use $paper-explainer to produce a clear, detailed Markdown explanation of this paper, including relevant figures and separate factual and reader reviews."
-
+  short_description: "Route paper explanations through the modular writer skill"
+  default_prompt: "Use the writer skill with explanation as the primary type and paper as the active source object."

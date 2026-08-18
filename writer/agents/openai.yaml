@@ -1,0 +1,4 @@
+interface:
+  display_name: "Writer"
+  short_description: "模块化学术技术报告教材与论文解读写作统一路由中心入口"
+  default_prompt: "Use $writer to route and handle an academic or technical document according to its primary type, active sources, format, and required analysis lenses."

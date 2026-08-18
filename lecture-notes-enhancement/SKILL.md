@@ -7,7 +7,9 @@ description: Use when enhancing existing lecture notes with multiple course sour
 
 ## Shared narrative rules
 
-Read and follow [the shared narrative and evidence rules](../shared/narrative-and-evidence.md). Keep process notes and defensive source disclaimers out of the lecture notes; state source limitations only when they affect the explained concept.
+Load the `writer` skill's `references/common/narrative.md` module. Keep process
+notes and defensive source disclaimers out of the lecture notes; state source
+limitations only when they affect the explained concept.
 
 ## Overview
 
@@ -19,7 +21,7 @@ Systematic process for cross-referencing recordings, PPTs, and existing notes to
 - Enhancing existing lecture notes (讲义.md) with course recordings and PPTs
 - Course has multiple source materials (records/, extracted/, existing notes)
 - Need systematic gap identification and content supplementation
-- Following md-report-writer narrative style (narrative flow before technical content)
+- Following the `writer` Markdown narrative route (narrative flow before technical content)
 
 **Don't use when:**
 - Creating lecture notes from scratch (use brainstorming + writing-plans instead)
@@ -43,7 +45,7 @@ The enhancement process follows four phases:
 **Phase 1: Parallel Analysis** - Dispatch subagents to analyze each source material independently
 **Phase 2: Gap Synthesis** - Identify missing content, inconsistencies, and improvement opportunities
 **Phase 3: Systematic Enhancement** - Edit lecture notes section-by-section with narrative-first style
-**Phase 4: Verification** - Ensure all improvements follow md-report-writer guidelines
+**Phase 4: Verification** - Ensure all improvements follow the `writer` Markdown narrative route
 
 ### Phase 1: Parallel Analysis Dispatch
 
@@ -70,7 +72,7 @@ Create structured gap analysis organized by priority:
 
 ### Phase 3: Narrative-First Enhancement
 
-Apply md-report-writer style principles:
+Apply the `writer` common narrative and Markdown principles:
 
 **✅ DO:**
 - Start sections with explanatory narrative
@@ -142,7 +144,7 @@ Edit the lecture notes systematically by section:
 | Answering questions without editing notes | User needs enhanced documentation, not conversation | Edit the lecture notes directly |
 | Adding too much content at once | Hard to verify, high error risk | Edit section-by-section with todo tracking |
 | Forgetting narrative flow | Technical content feels abrupt | Start each section with explanatory text |
-| Using italics for emphasis | Md-report-writer specifies **bold** only | Replace all italics with bold |
+| Using italics for emphasis | The active writer format/type rules specify the emphasis policy | Apply the active writer route |
 | Writing conversational filler | Unprofessional, wastes tokens | Use direct, professional tone |
 | Skipping parallel analysis | Sequential processing is slower, loses context | Dispatch subagents for independent sources |
 | Leaving symbols unexplained | Readers can't follow formulas | Always define $w_i$, $w_p$, and other notation at first use |

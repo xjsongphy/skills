@@ -1,5 +1,5 @@
 {
-  "skill_name": "paper-explainer",
+  "skill_name": "writer",
   "evals": [
     {
       "id": 1,
@@ -21,6 +21,7 @@
       "files": [],
       "assertions": [
         "The current explanation and Git diff are read before editing",
+        "Relevant Git history is inspected when it contains durable revision context",
         "Memory generation, filtering, update, retrieval, and injection are treated as separate mechanism stages",
         "Undisclosed details are marked as unspecified rather than invented",
         "Repository behavior is labeled separately from paper-stated behavior"
@@ -40,7 +41,7 @@
     },
     {
       "id": 4,
-      "prompt": "这份论文解读每段都太密了，帮我按 md-report-writer 调整，但不要盲目拆段或删掉算法细节。",
+      "prompt": "这份论文解读每段都太密了，按 writer 的叙述与格式模块调整，但不要盲目拆段或删掉算法细节。",
       "expected_output": "A semantic-density revision that changes representation where appropriate while preserving the central mechanism and evidence.",
       "files": [],
       "assertions": [

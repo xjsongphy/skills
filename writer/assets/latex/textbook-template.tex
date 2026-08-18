@@ -1,0 +1,58 @@
+% A compact XeLaTeX mathematics starter using article class. Adapt rather than
+% overwrite a user-provided class or template. Use the book templates for a
+% complete chapter-based textbook or chapter-based exercise appendices.
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% Uncomment these for an English document that still needs CJK support.
+% \renewcommand{\proofname}{Proof}
+% \renewcommand{\contentsname}{Contents}
+% \usepackage{caption}
+% \captionsetup{figurename=Figure,tablename=Table}
+
+\definecolor{definitiongreen}{RGB}{34,139,34}
+\definecolor{theoremorange}{RGB}{230,126,0}
+\definecolor{exampleblue}{RGB}{70,130,180}
+
+\newtcbtheorem[number within=section]{definition}{Definition}{
+  enhanced, colback=definitiongreen!4, colframe=definitiongreen,
+  fonttitle=\bfseries\sffamily\color{white}, coltitle=white,
+  colbacktitle=definitiongreen, arc=2mm, boxrule=0.8pt
+}{def}
+\newtcbtheorem[number within=section]{theorem}{Theorem}{
+  enhanced, colback=theoremorange!4, colframe=theoremorange,
+  fonttitle=\bfseries\sffamily\color{white}, coltitle=white,
+  colbacktitle=theoremorange, arc=2mm, boxrule=0.8pt
+}{thm}
+\newtcbtheorem[number within=section]{example}{Example}{
+  enhanced, colback=exampleblue!4, colframe=exampleblue,
+  fonttitle=\bfseries\sffamily\color{white}, coltitle=white,
+  colbacktitle=exampleblue, arc=2mm, boxrule=0.8pt
+}{ex}
+\newtheorem{exercise}{Exercise}[section]
+
+\begin{document}
+\tableofcontents
+
+\section{A section title}
+Introduce the mathematical question before its formal definition.
+
+\begin{definition}{Example object}{object}
+State the definition and its assumptions precisely.
+\end{definition}
+
+Explain how the definition will be used before moving to a theorem or example.
+
+\begin{theorem}{Example result}{result}
+State the result with all hypotheses.
+\end{theorem}
+\begin{proof}
+Give a continuous argument and explain the non-obvious transitions.
+\end{proof}
+
+\end{document}
