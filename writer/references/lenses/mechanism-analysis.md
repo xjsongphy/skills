@@ -118,6 +118,12 @@ For retrieval systems, explain as many disclosed stages as exist:
 - fallback when no suitable item exists;
 - update or refresh policy.
 
+When progressive exposition is active, keep these paths distinct where they are
+disclosed: source → index or storage; query → selected context; and trajectory
+or feedback → memory update or replacement. State what is represented, how
+selection is made, who consumes the result, and which observations update or
+replace old information.
+
 If a source only says “uses RAG”, explicitly mark which stages are unspecified.
 
 ### Search and optimization algorithms

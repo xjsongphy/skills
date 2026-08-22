@@ -1,7 +1,7 @@
 # Evidence and citations
 
 This file is the single canonical owner of source identity, claim-ledger, and
-citation policy. Narrative style belongs to `narrative.md`.
+citation policy. Narrative style belongs to `writing.md`.
 
 ## Claim ledger contract
 

@@ -83,6 +83,33 @@ rule can match an element or selector and transform it.
 Keep reusable style in scoped `#set`/`#show` rules and reusable components in
 `#let` functions. Do not encode a style system by copying formatted fragments.
 
+## Document layout
+
+Put page, paragraph, and heading policy in one document-level `#set`/`#show`
+cluster. Do not insert blank lines, `#v(...)`, or per-chapter spacing to fake
+chapter breaks or heading gaps.
+
+Typst has no heading page-break field. Start a new page at chapter-like titles
+with `#show heading.where(level: 1): it => { pagebreak(weak: true); it }`.
+Control heading gaps with `#show heading.where(level: n): set block(above: …,
+below: …)` and `sticky: true` on non-chapter headings. If a later package
+`#show heading` replaces the heading with its own `block`, that `set block`
+rule no longer applies; override the heading show after the package wrapper
+(see `format-integrations/scholia-typst.md` when Scholia is active).
+
+For Chinese body text, use two-character first-line indent on every paragraph,
+including the first paragraph after a heading:
+
+```typst
+#set par(first-line-indent: (amount: 2em, all: true), justify: true)
+```
+
+`all: false` (Typst’s default) leaves that first paragraph flush. Turn indent
+off for outlines, bibliographies, lists, and tables. Headings must not inherit
+the body indent. For CJK documents, set `lang` and a font list that actually
+provides the needed weights; Songti SC has no usable bold, so map `#show strong`
+to PingFang SC or another sans.
+
 ## Math syntax
 
 Use `$...$` for inline or display mathematics. Spaces inside the delimiters
@@ -128,7 +155,9 @@ table, section, or equation numbers.
 ## Imports and packages
 
 Use `#import "path.typ": item` to import selected definitions and
-`#include "section.typ"` to include another source file's content. Use
+`#include "section.typ"` to include another source file's content. An included
+file does not inherit the parent’s `#import` or `#let` bindings; each chapter
+file that uses those names must import them itself. Use
 `#import "@preview/name:version": item` for a Typst Universe package when its
 version and API are known. Keep package and local module boundaries explicit;
 do not silently replace a project template with a similarly named package.

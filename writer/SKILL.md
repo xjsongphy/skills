@@ -48,7 +48,7 @@ choosing a file to edit.
    cannot be expressed cleanly in the type and format modules. The initial
    exception integrations are `scholia-typst` and `textbook-latex` under
    `references/format-integrations/`.
-8. Load `references/common/writing.md` for every reader-facing document.
+8. Load `references/common/writing.md` for every reader-facing output.
    Add `common/evidence-and-citations.md` when claims depend on research,
    measurements, code, or other sources; that module owns the shared ledger.
 9. Activate reviewers and checks according to the `Reviewer and check
@@ -74,6 +74,8 @@ silently composing a large bundle.
 | Derivation-heavy exposition | `lenses/derivation-analysis.md` |
 | Mechanism/deep pipeline analysis | `lenses/mechanism-analysis.md` |
 | Layered technical survey | the conditional progressive-depth section in `common/writing.md` |
+| Substantial document skeleton | the conditional topic-sentence section in `common/writing.md` |
+| Shorten or compress a draft | the conditional length-revision section in `common/writing.md` |
 | Detailed mechanism questions | the optional deep-dive section in `lenses/mechanism-analysis.md` |
 | Paper evidence policy | `objects/paper.md` |
 | Repository evidence policy | `objects/repository.md` |
@@ -114,7 +116,7 @@ Use the following defaults unless the user explicitly narrows the task:
 | `reviewers/reader.md` | substantial/persistent `type = explanation`; other types only when requested. |
 | `reviewers/source-reviewer.md` | substantial source-grounded work with a non-empty claim ledger, or an explicit source audit request. Brief answers use minimal source verification. |
 | coordination rules below | both Reader and Source Reviewer are active, or a delegated persistent review is requested; not for a brief chat answer. |
-| `checks/document.md` prose section | every writer document. |
+| `checks/document.md` prose section | every document artifact; brief chat answers and local lookups do not require the document gate. |
 | `checks/document.md` source section | claim ledger is non-empty. |
 | `checks/document.md` rendered section | a renderable document is generated or compiled. |
 

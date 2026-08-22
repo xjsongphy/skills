@@ -3,15 +3,14 @@
 Use for a standalone explanation that lets the target reader understand an
 active subject without constantly returning to its sources. The subject may be
 a paper, repository, experiment, theorem, system, or a paper/repository pair.
-Load `../common/writing.md`, `../common/evidence-and-citations.md`, the active
-object policy, and the relevant analysis modules. Reviewer and check
-activation follows the writer routing contract. Add
-`../lenses/mechanism-analysis.md` or `../lenses/derivation-analysis.md` only
-when the subject requires them.
+Apply the common writing/evidence contracts and any lenses selected by writer
+routing. This module defines how an explanation organizes the active subject;
+reviewer and check activation remains owned by `writer/SKILL.md`.
 
 Use the full source-grounded workflow only for a persistent or substantial
-explanation: audit the active sources, set the outline, draft the central method
-or reasoning chain first, run the applicable isolated reviewers, and perform a
+explanation: audit the active sources, set the outline, write topic sentences
+for the central method or reasoning chain before full prose as defined in
+`../common/writing.md`, run the applicable isolated reviewers, and perform a
 targeted source recheck after revisions. A single factual question, citation
 lookup, or short abstract summary uses the smallest source verification needed
 for that answer and does not automatically create a full ledger/reviewer/release
@@ -57,10 +56,8 @@ that section, and add the concepts to `explain_in_draft` while reducing
 
 Before drafting, set `subject`, `audience_contract`, `assumed_known`, and
 `explain_in_draft`. Subject-specific names, symbols, components, state, and
-prompts always belong in the latter. When `mechanism-analysis` is active,
-explain every central stage as disclosed:
-
-`producer → input → selection/transformation → state/update → output → consumer`.
+prompts always belong in the latter. When a lens is active, organize the
+explanation according to that lens's contract.
 
 Audit all available figures and tables before selecting visuals. For a
 source-faithful prompt, schema,

@@ -13,7 +13,9 @@
         "The main contribution receives more explanatory depth than related work or result tables",
         "Included figures have visible captions and immediate interpretation",
         "Reviewer and Reader passes use separate evidence scopes",
-        "A substantial explanation uses the full source-grounded workflow and release contract"
+        "A substantial explanation uses the full source-grounded workflow and release contract",
+        "Topic sentences are written and checked as a chain before full prose",
+        "The document prose gate records pattern hits rather than claiming a mental style pass"
       ]
     },
     {
@@ -51,7 +53,21 @@
         "Tightly coupled causal reasoning is not mechanically split",
         "Central inputs, filters, updates, outputs, and conditions are preserved",
         "Peripheral repetition and result dumps are trimmed before mechanism details",
-        "Clarity-before-detail and semantic-density rules are applied without deleting source-supported mechanism steps"
+        "Clarity-before-detail and semantic-density rules are applied without deleting source-supported mechanism steps",
+        "Length revision is not applied unless the user asked to shorten, compress, or meet a limit"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "这篇解读太长了，请压缩，但不要删掉机制步骤和 not specified 边界。",
+      "expected_output": "A length revision that shortens the draft while preserving the topic-sentence chain, mechanism steps, and source boundaries.",
+      "files": [],
+      "assertions": [
+        "Length revision runs because the user asked to compress",
+        "Paragraphs that do not serve a topic sentence are the first deletion candidates",
+        "Input/output, condition, state-update, derivation, evidence, and not-specified boundaries are preserved",
+        "Dense numerical lists are promoted to a table or figure when that is the smaller representation",
+        "The document prose gate is re-run after compression"
       ]
     }
   ]

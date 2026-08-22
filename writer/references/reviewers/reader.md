@@ -81,24 +81,21 @@ as `not specified`.
 ### Narrative compliance
 
 Apply the canonical rules in `../common/writing.md`; do not create a second
-narrative policy in this reviewer. Report a finding when a violation obscures
-the argument or materially slows reading. The Reader may use the active format
-and type modules to identify the expected sentence, heading, emphasis, and
-element-placement behavior.
+narrative policy in this reviewer. Report only violations that obscure the
+argument or materially slow reading. Use active type and format modules to
+interpret the expected document structure.
 
 Report a justified violation as `P1` when it materially slows reading or
 obscures the argument, and `P2` for local polish. Do not pass a draft merely
 because its mechanism is recoverable if pervasive contrastive or meta-writing
 weakens the narrative.
 
-### Concepts, mechanism, and evidence
+### Active contract checks
 
-- Subject-specific concepts are defined before they carry reasoning.
-- Each section gives enough context before a formula, list, figure, table, or
-  code block appears.
-- Transitions preserve the causal or logical chain; sections are not inventories.
-- The heading hierarchy exposes the argument and uses parallel labels for
-  parallel content.
+- Subject-specific concepts are defined before they carry reasoning; transitions
+  preserve the causal or logical chain; sections are not inventories; and the
+  heading hierarchy exposes the argument with parallel labels for parallel
+  content.
 - When `mechanism-analysis` is active, the draft lets the reader answer who
   receives what, what is selected or transformed, what state changes and for
   how long, what is passed onward, and what happens on failure or termination.
@@ -107,29 +104,24 @@ weakens the narrative.
 - When an experiment add-on is active, measurements identify conditions,
   quantities, comparisons, uncertainty, and interpretation.
 
-### Figures, tables, examples, and code
+### Elements and artifacts
 
-- A figure has a reason to appear, a visible caption, and immediate
-  interpretation. Reading order, regions, arrows, legends, inputs, outputs, and
-  takeaway are clear where relevant.
-- A table explains rows, columns, units, metric direction, baseline or
-  conditions, and the decisive trend without reading every cell aloud.
-- Examples map an abstract mechanism to concrete behavior. Code is introduced
-  and interpreted, not pasted as proof by volume.
+- A selected figure, table, example, or code block has a clear purpose, readable
+  local takeaway, and enough context to recover its relevant inputs, outputs,
+  conditions, units, baseline, regions, or decisive trend without reading every
+  cell or line aloud.
 - When an operational artifact determines behavior, enough source-faithful
   material is shown for the reader to recover that behavior. Long excerpts may
   omit non-behavior-determining sections only when omissions are marked.
 
 ### Information density
 
-Evaluate semantic load, not line count. A paragraph is overloaded when it forces
+Evaluate semantic load, not line count. Report overload when a paragraph forces
 the reader to hold several independent dimensions at once—such as component
-inventory, data flow, branch logic, state lifetime, rationale, and result.
-
-Typical remedies are a flow or pseudocode block for a multi-stage process, a
-table for exact mappings, a list for parallel conditions, focused paragraphs for
-causal explanation, and deletion of peripheral repetition. Do not recommend
-blind splitting of one continuous argument.
+inventory, data flow, branch logic, state lifetime, rationale, and result—and
+the problem materially blocks comprehension. Recommend a flow/pseudocode block,
+table, list, focused paragraphs, or deletion of repetition as appropriate; do
+not recommend blind splitting of one continuous argument.
 
 ## Priority
 
