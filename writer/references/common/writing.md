@@ -43,6 +43,15 @@ Operational test: would the sentence lose factual content if the negation were
 removed and the remainder rewritten as a positive assertion? If yes, keep the
 contrast. If no, it was rhetorical; cut it and state what the thing is or does.
 
+The same economy applies at document scale. Do not argue against an
+implementation nobody proposed, and do not name a mechanism or API that does
+not exist, even as a counterexample: each negation builds the rejected concept
+in the reader's mind before knocking it down. Do not reserve a paragraph for an
+absent mechanism; a passage explaining why a component was rejected leaves the
+reader believing it might exist. State the positive rule — what is read, when,
+by whom — and keep the document's stated behavior equal to the implemented
+behavior.
+
 ## Quotation and sentence shape
 
 Use quotation marks only for direct quotation, the first introduction of a
@@ -198,6 +207,18 @@ buffer（TIR 中表示一块有形状和数据类型的线性内存区域，通�
 **Good:** “PrimFunc 是 TVM 低层中间表示 TIR（Tensor IR）的 IR 单元。它包含完整
 的循环嵌套，循环体内是对 buffer 的读写。buffer 是 TIR 层的数据容器：一个有形状
 和数据类型的内存块，通过多维索引访问其中元素。”
+
+Give one notation one meaning for the whole document. Assign each reserved
+marker, symbol, or bracketed form a single meaning, reuse an established
+notation only with the same meaning, and verify every cross-reference resolves:
+duplicated headings make anchors ambiguous even when the link looks correct.
+
+Define a mechanism in one place. When a mechanism is fully specified in one
+section, a partial restatement elsewhere is a liability — it drifts, and it
+usually drops fields. Delete the restatement and cross-link to the definition,
+unless the immediately following text depends on it locally; if the mention
+must stay, write it so it does not use the defined vocabulary before the
+definition introduces it.
 
 ## Selective code and artifact explanation
 
