@@ -1,0 +1,3 @@
+interface:
+  display_name: "Pi"
+  short_description: "Delegate work to Pi and review its output"
