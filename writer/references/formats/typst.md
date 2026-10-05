@@ -152,6 +152,20 @@ Use a bibliography file with `#bibliography("refs.bib")` and cite a key with
 `@key`. Keep labels stable and use references instead of manually typed figure,
 table, section, or equation numbers.
 
+Give a numbered display equation a label after the math block and refer to it
+with `@eq:name`:
+
+```typst
+$ F = k x $ <eq:hooke>
+
+如 @eq:hooke 所示，恢复力与位移成正比。
+```
+
+Style tables like ruled academic tables: `table.hline` for the top, header,
+and bottom rules (booktabs style, no vertical rules), `table.header` for the
+header row, and a fixed number of decimal places in each numeric column so
+values stay comparable. Keep table width appropriate to content.
+
 ## Imports and packages
 
 Use `#import "path.typ": item` to import selected definitions and
