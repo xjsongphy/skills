@@ -13,7 +13,8 @@ Use the usual order when no template overrides it: title page; introduction;
 necessary theory; setup and procedure; results and discussion; conclusion;
 acknowledgments (optional); references; appendix.
 
-- The introduction stays within about one third of the body text.
+- The introduction stays within about a tenth of the body text; necessary
+  theory within a quarter to a third.
 - Results and discussion form the main body — more than half of the text —
   because they connect measurement, uncertainty, theory, and interpretation.
 - Write the main sections first and draft the abstract (and keywords) last, so
@@ -60,6 +61,12 @@ session. Concretely:
 - Keep instrument operation sequences, switch settings, unit-conversion
   checks, and on-the-fly self-checks out of the report; they belong in a lab
   notebook, or in a procedure appendix only when the template demands it.
+  Name key instruments by model and manufacturer with the constants later
+  steps need, each with its uncertainty, and compress operations into one
+  parameterized paragraph of conditions and criteria instead of a step
+  narrative.
+- Present each headline derived quantity as a labelled equation, and compare
+  it with theory or literature later through that reference.
 - Do not reproduce the full raw data grid in the main text. A compact table of
   the points the argument uses, or a plot, replaces the grid; ship a complete
   data appendix only when the course or template requires it.
@@ -79,6 +86,45 @@ session. Concretely:
   file names, or conclusions established elsewhere.
 - Answer appended thought questions in a few sentences each; they are not
   mini-essays and must not restate the body.
+
+### Prose patterns
+
+**Numbers travel in groups.** A reported value appears with its uncertainty
+and a reference point — threshold, theoretical expectation, nominal value, or
+an independent measurement — together with what the comparison supports or
+rules out. Do not list numbers for archival alone.
+
+**Bad:** 「拟合斜率为 -1.3，截距 13.3，$x$ = 1.3，$A$ = 6.0×10⁵。」
+
+**Good:** 「拟合得 $b = 2.08 plus.minus 0.05$，与杂质电离饱和区预期 $b approx 2$
+相符，排除了明显的迁移率退化。」
+
+**Hedges carry their scale.** 约、可能、相容、一致 are followed immediately by
+the quantity that justifies them — an uncertainty, a ratio, a bound, or a
+deviation from expectation.
+
+**Bad:** 「误差可能较大。」
+
+**Good:** 「该点残差 0.54%, 接近 0.55% 的剔除阈值, 予以保留并计入系统项.」
+
+**Captions stay short.** One or two sentences: what is shown and its decisive
+reading.
+
+**Bad:** 「图 3. 相位随反偏压的变化。测量在 1133 Hz 与 1633 Hz 两个频率下进行,
+数据取自 D_1–D_5 的 0–10 V 扫描 (文件 phase_1133.csv 与 phase_1633.csv), 判据
+见 4.1 节……」
+
+**Good:** 「图 3. 相位偏离随反偏压增大, 与串联损耗角模型 (式 11) 不符.」
+
+**Anomalies close in one paragraph.** Observation, decisive check, limitation.
+
+**Bad:** one paragraph excluding series resistance, one excluding parallel
+leakage, one excluding deep levels, each with a reverse check and a numeric
+bound — four paragraphs in total.
+
+**Good:** 「相位偏离与 $C_x$ 强线性相关, 但其频率标度与串联、并联模型均不符
+(摆幅在频率增大 75% 时反降 13%), 列为未解释系统项; 对电容幅值的影响不超过
+2.3%。」
 
 ## Define before formula
 
@@ -103,6 +149,14 @@ as their first definition.
 Avoid `itemize` and `enumerate` in the main text; an experiment report reads
 as continuous prose. Use a list only when the template requires it, for
 appendix data, or for genuinely parallel procedural steps.
+
+## Figures
+
+Combine the panels of one measurement into a single multi-panel figure with a
+shared caption — LaTeX `subcaption`/`subfigure`, Typst a `grid` inside
+`#figure`. Give a measurement condition its own figure only when it carries a
+standalone conclusion. Size panels so labels stay legible at final width,
+about 0.3–0.8 of the text width per panel.
 
 ## Worked example
 

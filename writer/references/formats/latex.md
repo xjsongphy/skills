@@ -15,6 +15,10 @@ do not force presentation choices into prose.
   when the class provides it). Give each figure and table a complete caption
   and stable label. Keep table width appropriate to content rather than
   filling a line by default.
+- Build multi-panel figures with `subcaption`/`subfigure`: each panel gets a
+  label and a one-line caption, the shared caption states the decisive
+  reading. Size each panel between 0.3 and 0.8 `\linewidth` so its labels
+  stay legible.
 - Use theorem-like environments consistently for textbook material. State
   language and font settings explicitly for CJK documents.
 - Keep source files modular when a project has several chapters or sections;

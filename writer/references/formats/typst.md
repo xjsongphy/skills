@@ -164,7 +164,13 @@ $ F = k x $ <eq:hooke>
 Style tables like ruled academic tables: `table.hline` for the top, header,
 and bottom rules (booktabs style, no vertical rules), `table.header` for the
 header row, and a fixed number of decimal places in each numeric column so
-values stay comparable. Keep table width appropriate to content.
+values stay comparable. Keep table width appropriate to content. Put units in
+the column header (`T (°C)`, `$V_"D0"$ / V`), not in every cell.
+
+Build multi-panel figures as a `grid` of panels inside one `#figure` with a
+shared caption; label each panel `(a)`, `(b)` in its top-left corner or
+caption line. Size each panel between 0.3 and 0.8 of the text width so its
+labels stay legible.
 
 ## Imports and packages
 
