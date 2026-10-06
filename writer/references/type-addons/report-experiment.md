@@ -69,6 +69,14 @@ session. Concretely:
 - Verification side-trips — endpoint recomputation, alternative fits,
   residual spot checks — support confidence; report their conclusion, not
   every intermediate comparison.
+- A discussion paragraph answers one question. When a result deviates from
+  expectation, give the observation, the decisive check, and the resulting
+  limitation in one paragraph; longer alternative-exclusion chains (competing
+  models, frequency scans, control samples) belong in the analysis artifact —
+  the report keeps their conclusion and the strongest single counter-evidence.
+- Figure and table captions stay within one or two sentences: what is shown
+  and its decisive reading. Captions do not restate selection criteria, data
+  file names, or conclusions established elsewhere.
 - Answer appended thought questions in a few sentences each; they are not
   mini-essays and must not restate the body.
 
