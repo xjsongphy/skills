@@ -181,3 +181,17 @@ file that uses those names must import them itself. Use
 `#import "@preview/name:version": item` for a Typst Universe package when its
 version and API are known. Keep package and local module boundaries explicit;
 do not silently replace a project template with a similarly named package.
+
+## Code blocks and CJK fallback
+
+Raw text uses the document's mono font list. In a Chinese document, a Latin-only
+stack (`Menlo`, `DejaVu Sans Mono`) leaves Chinese comments to the body CJK
+fallback, which is often a serif such as Songti SC; comments then read like
+prose rather than code. Add an installed CJK sans to the raw stack:
+
+```typst
+#show raw: set text(font: ("Menlo", "PingFang SC", "DejaVu Sans Mono"))
+```
+
+For Scholia documents, set the same stack through `fonts.mono` instead; see
+`../format-integrations/scholia-typst.md`.
