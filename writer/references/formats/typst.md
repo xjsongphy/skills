@@ -195,3 +195,24 @@ prose rather than code. Add an installed CJK sans to the raw stack:
 
 For Scholia documents, set the same stack through `fonts.mono` instead; see
 `../format-integrations/scholia-typst.md`.
+
+## Callout boxes and internal spacing
+
+A callout with smaller text than body prose needs its own spacing scale; do not
+reuse the body's paragraph spacing unchanged. As a tested starting point at
+10.5pt, use `leading: 1.35em`, `spacing: 1.8em` for paragraphs, and
+`list(indent: 1.2em, spacing: 1em)`. Paragraph spacing below the leading makes
+paragraph breaks read as ordinary line breaks.
+
+Give the title explicit space rather than a bare `#parbreak()`:
+
+```typst
+#text(font: "PingFang SC", size: 10pt, fill: rgb("#6B7686"))[Title]
+#v(10pt)
+#body
+```
+
+Render a box containing a title, two paragraphs, and a two-item list; inspect
+the title gap, inter-paragraph gap, inter-item gap, and the gap after the list
+as one spacing system. Keep the box's line leading close to the body's so the
+smaller text does not look denser than the surrounding page.
