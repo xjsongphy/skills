@@ -198,11 +198,14 @@ For Scholia documents, set the same stack through `fonts.mono` instead; see
 
 ## Callout boxes and internal spacing
 
-A callout with smaller text than body prose needs its own spacing scale; do not
-reuse the body's paragraph spacing unchanged. As a tested starting point at
-10.5pt, use `leading: 1.35em`, `spacing: 1.8em` for paragraphs, and
-`list(indent: 1.2em, spacing: 1em)`. Paragraph spacing below the leading makes
-paragraph breaks read as ordinary line breaks.
+A callout with smaller text than body prose needs its own spacing scale. To make
+line and paragraph gaps visually equal, keep `spacing` slightly below `leading`;
+at 10.5pt, `leading: 1.35em` with `spacing: 1.15em` matches the body's rhythm.
+Use `first-line-indent: 2em` to keep paragraph boundaries visible, and
+`list(indent: 1.2em, spacing: 1em)` with
+`#show list: set par(first-line-indent: 0em)` so list items do not inherit the
+indent. Do not use a larger paragraph spacing for callouts; the gap then reads
+as a separate block.
 
 Give the title explicit space rather than a bare `#parbreak()`:
 
