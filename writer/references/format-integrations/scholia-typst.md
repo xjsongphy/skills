@@ -36,3 +36,25 @@ text. Disable indent on outline, bibliography, and lists; inside
 `figure.where(kind: "frame")` use `all: false` so the knot title line stays
 flush. Each `#include`d chapter must `#import "@preview/scholia:0.1.0": *`
 itself.
+
+## Code blocks with Chinese comments
+
+Scholia applies `show raw: set text(font: f.mono)`, and `f.mono` defaults to
+`("Menlo", "DejaVu Sans Mono")`. Both faces lack Chinese glyphs, so Chinese
+comments fall back to the document's CJK body font, usually Songti SC; at small
+sizes they read as prose rather than code.
+
+Add an installed CJK sans to the `mono` stack through the `fonts` override:
+
+```typst
+#show: scholia.with(
+  fonts: (
+    // ...
+    mono: ("Menlo", "PingFang SC", "DejaVu Sans Mono"),
+  ),
+)
+```
+
+Latin code keeps Menlo; only missing CJK glyphs fall back to PingFang SC.
+Render a code block containing Chinese comments at high resolution, because the
+fallback is easy to miss at body size.
