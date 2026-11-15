@@ -43,14 +43,23 @@ Operational test: would the sentence lose factual content if the negation were
 removed and the remainder rewritten as a positive assertion? If yes, keep the
 contrast. If no, it was rhetorical; cut it and state what the thing is or does.
 
-The same economy applies at document scale. Do not argue against an
-implementation nobody proposed, and do not name a mechanism or API that does
-not exist, even as a counterexample: each negation builds the rejected concept
-in the reader's mind before knocking it down. Do not reserve a paragraph for an
-absent mechanism; a passage explaining why a component was rejected leaves the
-reader believing it might exist. State the positive rule — what is read, when,
-by whom — and keep the document's stated behavior equal to the implemented
-behavior.
+## Absent mechanisms
+
+Give textual space only to mechanisms the subject actually has. Do not argue
+against an implementation nobody proposed. A denial aimed at a mechanism the
+document never establishes (“Harness 不生成 IR 的自然语言摘要”, “不伪装为 tool
+result”, “不回填给同一个 session”) first builds the concept in the reader's
+mind in order to knock it down, and a paragraph explaining why some component
+was left out leaves the reader believing it might exist. State the positive
+rule instead — what is read, produced, or stored, when, and by whom. Never
+name a nonexistent mechanism, field, or API, including as a counterexample.
+
+Keep a boundary statement only when the misreading is genuinely available:
+the surrounding material contains something confusable, or a nearby section
+defines a similar-looking mechanism. Attach it as one clause to the positive
+rule instead of giving it its own argument. This extends the contrast test
+above: there, both readings describe something real; here, the denied reading
+describes nothing.
 
 ## Quotation and sentence shape
 
@@ -208,17 +217,18 @@ buffer（TIR 中表示一块有形状和数据类型的线性内存区域，通�
 的循环嵌套，循环体内是对 buffer 的读写。buffer 是 TIR 层的数据容器：一个有形状
 和数据类型的内存块，通过多维索引访问其中元素。”
 
-Give one notation one meaning for the whole document. Assign each reserved
-marker, symbol, or bracketed form a single meaning, reuse an established
-notation only with the same meaning, and verify every cross-reference resolves:
-duplicated headings make anchors ambiguous even when the link looks correct.
+## One definition per structure
 
-Define a mechanism in one place. When a mechanism is fully specified in one
-section, a partial restatement elsewhere is a liability — it drifts, and it
-usually drops fields. Delete the restatement and cross-link to the definition,
-unless the immediately following text depends on it locally; if the mention
-must stay, write it so it does not use the defined vocabulary before the
-definition introduces it.
+Define each structure once, in the section that owns it: schema, record
+layout, procedure steps, lifecycle or ownership table. An early partial
+summary (“每张 Knowledge Card 至少包含 ID、适用条件、简要指导”) ships fewer
+fields than the definition and drifts when the definition changes, and
+readers who meet it first take it as complete. Delete the early summary and
+link to the defining section. Keep a forward mention only when the
+immediately following text depends on it, and then name the structure and
+link without re-enumerating its fields. The same holds for an argument or
+worked example: state it once where it carries weight; further occurrences
+link instead of restating.
 
 ## Selective code and artifact explanation
 
@@ -241,11 +251,15 @@ location, and explain the input, branch, state change, and output around them.
 Choose the smallest representation that makes the structure recoverable:
 
 - prose for causal chains and interpretation;
-- lists for parallel conditions, constraints, or procedures;
+- lists for parallel definitions, conditions, constraints, or procedures;
 - tables for exact repeated mappings or comparisons;
 - diagrams for architecture, pipelines, state transitions, or feedback loops;
 - pseudocode for complex control flow;
 - formulas for mathematical relationships.
+
+When introducing related concepts side by side, consider a separate list item
+for each definition and its example so readers can compare them at a glance.
+Keep concise prose when it already makes the distinction clear.
 
 Introduce each figure, table, code block, formula, or list with its purpose and
 interpret it locally. For formulas that form part of a sentence, use punctuation
@@ -322,7 +336,9 @@ hallucination. Delete a paragraph-final sentence that restates the paragraph
 without adding a fact, limitation, or next step. Scan for contrastive
 constructions and quotation marks wrapping paraphrases; retain them only when
 they resolve a real ambiguity or carry reader-facing information. Apply the
-keep-vs-cut test to every retained contrast.
+keep-vs-cut test to every retained contrast. Remove denials of mechanisms the
+document never establishes, and replace partial re-enumerations of structures
+defined elsewhere with a link.
 
 ## API reference entries
 

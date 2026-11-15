@@ -31,6 +31,16 @@ content if the negation were removed and rewritten as a positive assertion?
 If no, it was rhetorical; rewrite. Retain only contrasts that pass the two
 conditions in `writing.md`.
 
+**Denials of absent mechanisms.** For every passage that denies a behavior
+(“不生成 X”、“不伪装为 Y”、“不把 Z 回填”), confirm the denied mechanism is
+either established in this document or genuinely confusable with adjacent
+content; otherwise rewrite as the positive rule and delete the remainder.
+Flag any mechanism, field, or API named nowhere else in the document.
+
+**Premature partial definitions.** For each structure named in more than one
+section, confirm exactly one defining occurrence; other occurrences must be
+links or plain names. Flag any second occurrence that re-enumerates fields.
+
 **Process meta and throat-clearing.** Delete sentence openers whose only job
 is to announce writing, importance, or a section change:
 

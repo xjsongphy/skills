@@ -85,6 +85,11 @@ Keep reusable style in scoped `#set`/`#show` rules and reusable components in
 
 ## Document layout
 
+The prose and academic-table defaults below describe long-form documents.
+For teaching slides, let the slide theme and
+`../format-integrations/teaching-slides-typst.md` own frame geometry, headings,
+paragraph indentation and table styling; do not apply book-layout overrides.
+
 Put page, paragraph, and heading policy in one document-level `#set`/`#show`
 cluster. Do not insert blank lines, `#v(...)`, or per-chapter spacing to fake
 chapter breaks or heading gaps.
@@ -97,15 +102,18 @@ below: …)` and `sticky: true` on non-chapter headings. If a later package
 rule no longer applies; override the heading show after the package wrapper
 (see `format-integrations/scholia-typst.md` when Scholia is active).
 
-For Chinese body text, use two-character first-line indent on every paragraph,
+For Chinese long-form body text, use two-character first-line indent on every paragraph,
 including the first paragraph after a heading:
 
 ```typst
 #set par(first-line-indent: (amount: 2em, all: true), justify: true)
 ```
 
-`all: false` (Typst’s default) leaves that first paragraph flush. Turn indent
-off for outlines, bibliographies, lists, and tables. Headings must not inherit
+`all: false` (Typst’s default) leaves that first paragraph flush. Turn paragraph
+first-line indent off for outlines, bibliographies, lists, and tables. In Chinese
+lecture notes, indent unordered list markers and their items together by `2em`
+using `#set list(indent: 2em)`, with continuation lines aligned to item text;
+do not add a separate paragraph first-line indent inside list items. Headings must not inherit
 the body indent. For CJK documents, set `lang` and a font list that actually
 provides the needed weights; Songti SC has no usable bold, so map `#show strong`
 to PingFang SC or another sans.
