@@ -226,4 +226,6 @@ Give the title explicit space rather than a bare `#parbreak()`:
 Render a box containing a title, two paragraphs, and a two-item list; inspect
 the title gap, inter-paragraph gap, inter-item gap, and the gap after the list
 as one spacing system. Keep the box's line leading close to the body's so the
-smaller text does not look denser than the surrounding page.
+smaller text does not look denser than the surrounding page. Keep short callouts
+unbreakable (`breakable: false`); moving the whole box to the next page is better
+than splitting its title from its body.

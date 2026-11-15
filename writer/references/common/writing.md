@@ -234,6 +234,10 @@ link instead of restating.
 
 - Give code or pseudocode context before the block and its behavioral takeaway
   after it. Short code needs only a concise before/after explanation.
+- Introduce the block with what it contains, inside the sentence: “In the
+  following program …” or “The fragment below …”. Avoid standalone labels such
+  as “Example program” or “illustrative fragment”, which read like catalogue
+  entries rather than prose.
 - Explain line-level details only for non-obvious control flow, hidden
   assumptions, state changes, or decisive APIs. Do not use long code or comments
   as a substitute for conceptual explanation.
