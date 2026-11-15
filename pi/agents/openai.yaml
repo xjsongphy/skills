@@ -1,3 +1,4 @@
 interface:
   display_name: "Pi"
   short_description: "Delegate work to Pi and review its output"
+  default_prompt: "Use Pi as the executor for this coding task, then independently review its changes."

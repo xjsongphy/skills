@@ -1,14 +1,24 @@
-# Claude Code Skills
+# Claude Code and Codex Skills
 
 [中文版 README](README_zh.md)
 
-A collection of specialized skills for Claude Code to enhance AI performance on specific tasks.
+A collection of specialized skills for Claude Code and Codex to guide specific tasks.
 
 ## Overview
 
-These skills provide professional guidance for Claude Code in specific domains, ensuring outputs meet expected format, style, and quality requirements.
+These skills provide task-specific guidance for AI coding agents, including format, style, quality, and workflow requirements. Individual skills state when they apply.
 
 ## Available Skills
+
+### pi
+
+**Purpose**: Delegate repository work to Pi while Codex selects the model, monitors progress, and independently reviews changes.
+
+**Use Cases**: Coding tasks where the user asks Codex to use Pi as the executor.
+
+**Invoke in Codex**: Ask Codex to use Pi for the task or invoke `$pi`.
+
+---
 
 ### writer
 
@@ -104,6 +114,9 @@ python3 scripts/cleanup_syncthing.py --folders ~/Develop ~/Codes
 
 ```
 skills/
+├── pi/                       # Codex-to-Pi delegation and review
+│   ├── SKILL.md
+│   └── agents/openai.yaml
 ├── writer/                   # Modular writing router and references
 │   ├── SKILL.md
 │   ├── MAINTENANCE.md
@@ -126,7 +139,7 @@ skills/
 
 ### Invoking a Skill
 
-Use the command directly in Claude Code:
+In Claude Code, use the slash command for a skill:
 
 ```
 /skill-name
@@ -136,6 +149,8 @@ Examples:
 ```
 /writer
 ```
+
+In Codex, ask for a matching skill in natural language or invoke it by name (for example, `$pi`).
 
 ### Updating a Skill
 

@@ -1,14 +1,24 @@
-# Claude Code Skills
+# Claude Code 与 Codex Skills
 
 [English README](README.md)
 
-Claude Code 专用技能集合，提升 AI 在特定任务中的表现。
+供 Claude Code 与 Codex 使用的技能集合，指导特定任务。
 
 ## 概述
 
-这些 skills 为 Claude Code 提供了特定领域的专业指导，确保输出符合预期的格式、风格和质量要求。
+这些 skills 为 AI 编码助手提供任务指导，涵盖格式、风格、质量与工作流程。各 skill 会说明自己的适用条件。
 
 ## 可用 Skills
+
+### pi
+
+**用途**：让 Pi 执行仓库任务，由 Codex 选择模型、监督进度并独立审阅修改。
+
+**适用场景**：用户要求 Codex 使用 Pi 作为代码任务执行者。
+
+**在 Codex 中调用**：直接要求 Codex 使用 Pi，或输入 `$pi`。
+
+---
 
 ### writer
 
@@ -98,6 +108,9 @@ python3 scripts/cleanup_syncthing.py --folders ~/Develop ~/Codes
 
 ```
 skills/
+├── pi/                       # Codex 委托 Pi 执行并审阅
+│   ├── SKILL.md
+│   └── agents/openai.yaml
 ├── writer/                   # 模块化写作路由与 references
 │   ├── SKILL.md
 │   ├── MAINTENANCE.md
@@ -132,6 +145,8 @@ skills/
 ```
 /writer
 ```
+
+在 Codex 中，可以直接用自然语言请求对应 skill，或按名称调用（例如 `$pi`）。
 
 ### 更新 Skill
 
