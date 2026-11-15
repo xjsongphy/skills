@@ -229,3 +229,37 @@ as one spacing system. Keep the box's line leading close to the body's so the
 smaller text does not look denser than the surrounding page. Keep short callouts
 unbreakable (`breakable: false`); moving the whole box to the next page is better
 than splitting its title from its body.
+
+## API entry boxes
+
+Give each API entry a full-width signature box with a light fill and a top rule,
+then the summary, then a hanging parameter block. Keep the parameter label at
+the body indent and align the list under it; do not let the label and list form
+two competing indents.
+
+```typst
+#let api(signature) = block(
+  width: 100%, above: 1.1em, below: 0.7em,
+  fill: rgb("#EEF4FB"), stroke: (top: 2pt + rgb("#2F5EA8")),
+  inset: (left: 9pt, right: 9pt, top: 7pt, bottom: 7pt),
+)[
+  #set par(first-line-indent: 0em, justify: false)
+  #text(font: ("Menlo", "PingFang SC"), size: 9.5pt, weight: "bold")[#signature]
+]
+
+#let api-params(body) = block(
+  width: 100%, above: 0.5em, below: 0.5em,
+  inset: (left: 2em),
+)[
+  #set par(first-line-indent: 0em, spacing: 0.35em)
+  #set list(indent: 0em, spacing: 0.35em)
+  *参数：*
+  #parbreak()
+  #body
+]
+```
+
+Set the signature block to `justify: false`; long signatures otherwise stretch.
+Escape `*` and leading `__` in C signatures, or Typst will parse them as markup.
+Render a long signature and a list of eight parameters; confirm the box wraps
+without clipping and the parameter list remains aligned.
