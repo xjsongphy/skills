@@ -323,3 +323,30 @@ without adding a fact, limitation, or next step. Scan for contrastive
 constructions and quotation marks wrapping paraphrases; retain them only when
 they resolve a real ambiguity or carry reader-facing information. Apply the
 keep-vs-cut test to every retained contrast.
+
+## API reference entries
+
+Introduce a new API as a reference entry, not as a paragraph that lists its
+parameters. Put the signature on its own line, give a one-sentence summary,
+then list every parameter with its role and direction (input, output, or both).
+Add a separate note only for behavior that is not visible from the parameter
+list, such as a root-only buffer or a handle that becomes null on completion.
+When variants share a signature, state that their parameters are the same rather
+than repeating the list.
+
+```text
+MPI_Bcast(buffer, count, datatype, root, comm)
+将根进程缓冲区中的数据分发给通信器内所有进程。
+
+参数：
+- buffer（输入/输出）：缓冲区首地址；根进程提供数据，其他进程接收数据。
+- count（输入）：元素个数。
+- datatype（输入）：元素类型。
+- root（输入）：提供数据的根进程编号。
+- comm（输入）：参与广播的通信器。
+```
+
+Keep the parameter order identical to the signature. Do not leave a parameter
+unexplained because its meaning seems obvious from the name. In Typst, put the
+signature in a dedicated monospace block rather than merging it into the
+description paragraph.
