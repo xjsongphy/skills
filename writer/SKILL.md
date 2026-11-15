@@ -1,6 +1,6 @@
 ---
 name: writer
-description: Route the creation, revision, audit, or explanation of academic and technical documents. Use for reports, experiment reports, paper or repository explanations, textbook material, and their Markdown, LaTeX, or Typst source; compose one primary type with optional lenses, source objects, domains, format, and format integrations.
+description: Route the creation, revision, audit, or explanation of academic and technical documents. Use for reports, experiment reports, paper or repository explanations, textbook material, course exercise teaching slides (习题讲解PPT), and their Markdown, LaTeX, or Typst source; compose one primary type with optional lenses, source objects, domains, format, and format integrations.
 ---
 
 # Writer
@@ -9,7 +9,7 @@ description: Route the creation, revision, audit, or explanation of academic and
 writing. It is intentionally compositional:
 
 > exactly one primary type + zero or more lenses + zero or more source objects
-> + zero or more domains + one format for artifacts (zero for chat-only prose)
+> + zero or more domains + one format owner per artifact (zero for chat-only prose)
 > + optional format integrations
 
 The module selected for a task is the canonical home of that rule. Do not copy
@@ -26,7 +26,7 @@ choosing a file to edit.
    artifact. The full source-grounded workflow applies conditionally to
    substantial explanations; reports and textbooks follow their type contracts.
 2. Select exactly one primary type under `references/types/`:
-   `report`, `explanation`, or `textbook`.
+   `report`, `explanation`, `textbook`, or `teaching-slides`.
 3. If the primary type has a bounded variant or component, load it from
    `references/type-addons/`: `report-experiment` or `textbook-exercises`. An
    add-on does not become a
@@ -41,13 +41,18 @@ choosing a file to edit.
 5. Add source objects under `references/objects/` when the task relies on
    identifiable evidence sources: `paper`, `repository`, or both. Add a
    domain module only when the subject has domain-specific evidence or terms.
-6. For a source artifact, select exactly one format under `references/formats/`:
-   Markdown, LaTeX, or Typst. Chat-only prose selects no format.
+   Record assignment pages, course handouts and local answers in the shared
+   evidence ledger without forcing them into a paper or repository object.
+6. For a Markdown, LaTeX, or Typst source artifact, select exactly one format
+   under `references/formats/`. For explicitly native PPTX / Google Slides,
+   let the available presentation skill own that format instead of forcing a
+   Typst or Markdown source module. Resolve formats per artifact: a slide deck
+   may have a supporting Markdown API reminder. Chat-only prose selects no format.
 7. Resolve exactly one format according to `Format resolution` below. Load a
    format integration only for a real type-format or package interaction that
    cannot be expressed cleanly in the type and format modules. The initial
-   exception integrations are `scholia-typst` and `textbook-latex` under
-   `references/format-integrations/`.
+   exception integrations are `scholia-typst`, `textbook-latex`, and
+   `teaching-slides-typst` under `references/format-integrations/`.
 8. Load `references/common/writing.md` for every reader-facing output.
    Add `common/evidence-and-citations.md` when claims depend on research,
    measurements, code, or other sources; that module owns the shared ledger.
@@ -70,6 +75,7 @@ silently composing a large bundle.
 | Physics/engineering experiment report | `types/report.md` + `type-addons/report-experiment.md` |
 | Standalone paper or repository explanation | `types/explanation.md` + active source object(s) |
 | Mathematics textbook chapter | `types/textbook.md` |
+| Course exercise / programming teaching slides (习题讲解PPT) | `types/teaching-slides.md` |
 | Textbook exercises and answers | `type-addons/textbook-exercises.md` |
 | Derivation-heavy exposition | `lenses/derivation-analysis.md` |
 | Mechanism/deep pipeline analysis | `lenses/mechanism-analysis.md` |
@@ -84,6 +90,7 @@ silently composing a large bundle.
 | LaTeX source | `formats/latex.md`; use the separate `latex-compile` skill for builds |
 | Typst source | `formats/typst.md` |
 | Scholia + Typst interaction | `format-integrations/scholia-typst.md` |
+| Typst teaching slides and reusable classroom preset | `format-integrations/teaching-slides-typst.md` |
 | LaTeX textbook interaction | `format-integrations/textbook-latex.md` |
 | Document gates | `checks/document.md` (run the applicable sections) |
 | Source-grounded review | `reviewers/source-reviewer.md` |
@@ -106,6 +113,11 @@ silently composing a large bundle.
   checks when applicable.
 - **LaTeX textbook**: textbook + LaTeX + textbook-latex; add exercises only
   when exercises are part of the deliverable.
+- **Programming exercise teaching deck**: teaching-slides + Typst +
+  teaching-slides-typst; add source evidence as needed and keep full questions
+  outside slides by default. This is not a textbook + Scholia composition.
+- **Explicit native PPTX teaching deck**: teaching-slides + the available
+  presentation skill as format owner; preserve the requested native output.
 
 ## Reviewer and check activation
 
@@ -159,6 +171,19 @@ type/add-on default, and finally Markdown as the writer default. The default
 for `report + report-experiment` is LaTeX because the experiment contract and
 its established report assets are LaTeX-oriented; an explicit format always
 overrides it.
+
+For this user's course exercise slides (`teaching-slides`), default to
+Typst + PDF when no format or conflicting reference is specified;
+load `format-integrations/teaching-slides-typst.md`. Use an actual supplied
+reference before the bundled classroom preset. Explicit native PPTX / Google
+Slides remains native via the presentation skill, not a silently substituted PDF.
+
+For a new Chinese course handout, lecture note, or textbook in Typst, default
+to `@preview/scholia:0.1.0` and load `format-integrations/scholia-typst.md`
+for the established book layout. Respect an explicit user choice or an
+existing document template ahead of this default. These are book / handout
+defaults, not teaching-slide defaults. Ordinary reports and other formats do
+not acquire this default.
 
 For revisions, read the current document before editing. Inspect the working
 tree diff and relevant Git history when they reveal user changes or durable

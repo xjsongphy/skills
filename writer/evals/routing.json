@@ -85,6 +85,32 @@
       "expected_modules": ["types/explanation.md", "objects/paper.md", "formats/markdown.md", "common/writing.md", "common/evidence-and-citations.md", "reviewers/reader.md", "reviewers/source-reviewer.md", "checks/document.md"],
       "required_sections": ["common/writing.md#Length revision", "common/writing.md#Topic sentences for substantial artifacts"],
       "forbidden_modules": ["objects/repository.md"]
+    },
+    {
+      "id": "chinese-typst-lecture-notes",
+      "prompt": "用 Typst 撰写中文课程讲义，未指定其他模板。",
+      "expected_modules": ["types/textbook.md", "formats/typst.md", "format-integrations/scholia-typst.md", "common/writing.md", "checks/document.md"],
+      "required_sections": ["format-integrations/scholia-typst.md#Default layout for Chinese lecture notes and textbooks"],
+      "forbidden_modules": ["formats/latex.md"]
+    },
+    {
+      "id": "programming-exercise-teaching-slides",
+      "prompt": "用writer做一份计概B上机题讲解PPT，按之前的1023风格，用Typst；只讲选好的题目。",
+      "expected_modules": ["types/teaching-slides.md", "formats/typst.md", "format-integrations/teaching-slides-typst.md", "common/writing.md", "common/evidence-and-citations.md", "reviewers/source-reviewer.md", "checks/document.md"],
+      "forbidden_modules": ["types/textbook.md", "types/report.md", "format-integrations/scholia-typst.md", "type-addons/textbook-exercises.md"]
+    },
+    {
+      "id": "generic-programming-teaching-deck-default",
+      "prompt": "下次也按这种方式给初学者做一份编程练习讲解PPT，未指定其他格式和模板。",
+      "expected_modules": ["types/teaching-slides.md", "formats/typst.md", "format-integrations/teaching-slides-typst.md", "common/writing.md", "checks/document.md"],
+      "forbidden_modules": ["format-integrations/scholia-typst.md", "types/textbook.md"]
+    },
+    {
+      "id": "explicit-pptx-teaching-slides",
+      "prompt": "给选定的八道Python练习制作原生可编辑PPTX，已经提供PowerPoint模板。",
+      "expected_modules": ["types/teaching-slides.md", "common/writing.md", "common/evidence-and-citations.md", "reviewers/source-reviewer.md", "checks/document.md"],
+      "expected_external_skills": ["presentations:Presentations"],
+      "forbidden_modules": ["formats/typst.md", "format-integrations/teaching-slides-typst.md", "format-integrations/scholia-typst.md"]
     }
   ]
 }

@@ -12,6 +12,8 @@ already owns the concept.
 | Shared narrative wording, technical exposition, depth, density, or representation choice | `references/common/writing.md` |
 | Claim ledger, source identity, evidence boundaries, or citation policy | `references/common/evidence-and-citations.md` |
 | What the deliverable is and who reads it | one file under `references/types/` |
+| Classroom exercise-slide content, API aids, code/state-trace alignment | `references/types/teaching-slides.md` |
+| Typst classroom theme and portable slide preset | `references/format-integrations/teaching-slides-typst.md`; `assets/typst/teaching-slides/` |
 | A bounded type variant or component | `references/type-addons/`, e.g. `type-addons/report-experiment.md` |
 | Cross-type questions about derivations or mechanisms | `references/lenses/` |
 | What a paper or repository can prove | `references/objects/` |

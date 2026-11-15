@@ -1,0 +1,65 @@
+{
+  "skill_name": "writer",
+  "evals": [
+    {
+      "id": "selected-problems-and-template",
+      "prompt": "把最终选定的8道Python题做成讲解PPT，沿用已有课件。讲解不要放原题全文，不要重讲已经介绍过的input和循环。",
+      "expected_output": "A template-matched explanation deck with task-relevant examples, reasoning and code; statements remain in supporting material.",
+      "assertions": [
+        "Select teaching-slides as the only primary type",
+        "Read the final selected list and actual reference source/render before drafting",
+        "Do not paste full statements or judge-sample pages into the deck by default",
+        "Do not recreate generic prerequisite or API-overview pages for already-covered material",
+        "The source format and output match the explicit request or applicable teaching-deck default"
+      ]
+    },
+    {
+      "id": "api-state-and-math-to-code",
+      "prompt": "第四题从M进制位权公式解释逐位求值；index(char)在这里讲。第五题改用list.reverse，另给同学一份简短API提示Markdown。",
+      "expected_output": "Local explanations bridge positional notation to the code and distinguish reverse mutation from its None return.",
+      "assertions": [
+        "Explain index as zero-based character lookup rather than automatic base conversion",
+        "Explain multiply-and-add accumulation and quotient/remainder extraction from positional notation",
+        "Match the fifth answer file and slide code to the requested list.reverse implementation",
+        "API reminder gives receiver, return value and state effect using small examples",
+        "Do not restore a removed global API-overview slide"
+      ]
+    },
+    {
+      "id": "stepwise-bfs-small-list",
+      "prompt": "普通四方向迷宫，n≤16，BFS用list的append/pop(0)；复杂度说一句。画图一步一步扩展。做完读图。",
+      "expected_output": "A small checked BFS trace aligned with the list-based solution, followed by actual rendered-image review.",
+      "assertions": [
+        "Do not replace the ordinary maze with a sliding maze",
+        "Honor the requested list implementation while giving a proportionate complexity note",
+        "Queue order, discovered/processed states and neighbor order agree with code",
+        "Include an early-visited duplicate-neighbor case when it helps explain the trace",
+        "Open actual rendered pages and recheck modified diagrams instead of only counting source headings"
+      ]
+    },
+    {
+      "id": "user-deletes-from-markdown",
+      "prompt": "我在Markdown里面删了几道题，请只保留这些题的解答，重新编号。那两页队列库选择和类型比较也删掉。",
+      "expected_output": "Current user edits drive a synchronized reduced deck and local materials, with no restoration of deleted content.",
+      "assertions": [
+        "Read current Markdown and filesystem state rather than reusing the former problem count",
+        "Synchronize only the authorized selected materials, names, references and index",
+        "Preserve unrelated changes and do not restore a manually deleted alternative file",
+        "Delete the named slides and verify they do not remain in the PDF",
+        "Keep tasks in the project TODO through the final render review"
+      ]
+    },
+    {
+      "id": "josephus-variants-and-speed",
+      "prompt": "约瑟夫能直接pop指定下标吗？补一个list解法，比较速度；PPT里不要放机器环境和重复次数那句话。",
+      "expected_output": "Correct indexed deletion and evidence-backed timing with reproducibility details off-slide.",
+      "assertions": [
+        "Distinguish list.pop(index) from deque.pop without an index argument",
+        "Explain how the next counting position survives deletion and wraparound",
+        "Check removal traces and the final survivor against a reference",
+        "Use comparable measured timings, including stated inputs and units, without making up results",
+        "Keep machine and repeat metadata in supporting notes, not the removed slide caption"
+      ]
+    }
+  ]
+}
