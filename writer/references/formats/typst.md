@@ -233,33 +233,43 @@ than splitting its title from its body.
 ## API entry boxes
 
 Give each API entry a full-width signature box with a light fill and a top rule,
-then the summary, then a hanging parameter block. Keep the parameter label at
-the body indent and align the list under it; do not let the label and list form
-two competing indents.
+then the summary, then a two-column parameter block: the bold `参数：` label sits
+at the body indent and the list starts in a separate right-hand column. Do not
+stack the label and list at the same left edge, and do not tighten the list into
+a paragraph.
 
 ```typst
 #let api(signature) = block(
-  width: 100%, above: 1.1em, below: 0.7em,
-  fill: rgb("#EEF4FB"), stroke: (top: 2pt + rgb("#2F5EA8")),
-  inset: (left: 9pt, right: 9pt, top: 7pt, bottom: 7pt),
+  width: 100%, above: 1.4em, below: 1.2em,
+  fill: rgb("#EAF2FB"), stroke: (top: 2.5pt + rgb("#2F5EA8")),
+  inset: (left: 12pt, right: 12pt, top: 12pt, bottom: 12pt),
 )[
   #set par(first-line-indent: 0em, justify: false)
-  #text(font: ("Menlo", "PingFang SC"), size: 9.5pt, weight: "bold")[#signature]
+  #text(font: ("Menlo", "PingFang SC"), size: 11pt, weight: "bold")[#signature]
 ]
 
 #let api-params(body) = block(
-  width: 100%, above: 0.5em, below: 0.5em,
+  width: 100%, above: 1em, below: 1.2em,
   inset: (left: 2em),
 )[
-  #set par(first-line-indent: 0em, spacing: 0.35em)
-  #set list(indent: 0em, spacing: 0.35em)
-  *参数：*
-  #parbreak()
-  #body
+  #table(
+    columns: (auto, 1fr),
+    column-gutter: 4em,
+    stroke: none,
+    inset: (x: 0pt, y: 0pt),
+    align: (left + top, left + top),
+    [*参数：*],
+    [
+      #set par(first-line-indent: 0em, spacing: 0.8em)
+      #set list(indent: 0.5em, spacing: 0.8em)
+      #body
+    ],
+  )
 ]
 ```
 
 Set the signature block to `justify: false`; long signatures otherwise stretch.
 Escape `*` and leading `__` in C signatures, or Typst will parse them as markup.
 Render a long signature and a list of eight parameters; confirm the box wraps
-without clipping and the parameter list remains aligned.
+without clipping, the two parameter columns stay aligned, and the list keeps
+readable inter-item spacing.
