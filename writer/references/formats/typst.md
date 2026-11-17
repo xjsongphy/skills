@@ -238,6 +238,11 @@ at the body indent and the list starts in a separate right-hand column. Do not
 stack the label and list at the same left edge, and do not tighten the list into
 a paragraph.
 
+Format the text inside the parameter block, not just its geometry. Parameter
+names take the accent color in bold monospace, the input/output annotation
+is italic and muted, and literal identifiers in descriptions use inline code
+with a tinted background. Keep the signature at body size; do not enlarge it.
+
 ```typst
 #let api(signature) = block(
   width: 100%, above: 1.4em, below: 1.2em,
@@ -245,8 +250,16 @@ a paragraph.
   inset: (left: 12pt, right: 12pt, top: 12pt, bottom: 12pt),
 )[
   #set par(first-line-indent: 0em, justify: false)
-  #text(font: ("Menlo", "PingFang SC"), size: 11pt, weight: "bold")[#signature]
+  #text(font: ("Menlo", "PingFang SC"), weight: "bold")[#signature]
 ]
+
+#let api-name(name) = text(
+  font: ("Menlo", "PingFang SC"),
+  fill: rgb("#2F5EA8"),
+  weight: "bold",
+)[#name]
+
+#let api-dir(body) = text(style: "italic", fill: rgb("#6B7686"))[（#body）]
 
 #let api-params(body) = block(
   width: 100%, above: 1em, below: 1.2em,
@@ -260,16 +273,28 @@ a paragraph.
     align: (left + top, left + top),
     [*参数：*],
     [
-      #set par(first-line-indent: 0em, spacing: 0.8em)
+      #set par(first-line-indent: 0em, spacing: 0.8em, justify: false)
       #set list(indent: 0.5em, spacing: 0.8em)
+      #show raw.where(block: false): it => highlight(
+        fill: rgb("#E8EEF7"),
+        radius: 2pt,
+        extent: 2pt,
+        text(
+          font: ("Menlo", "PingFang SC"),
+          size: 0.85em,
+          fill: rgb("#33415C"),
+        )[#it.text],
+      )
       #body
     ],
   )
 ]
 ```
 
-Set the signature block to `justify: false`; long signatures otherwise stretch.
-Escape `*` and leading `__` in C signatures, or Typst will parse them as markup.
-Render a long signature and a list of eight parameters; confirm the box wraps
-without clipping, the two parameter columns stay aligned, and the list keeps
-readable inter-item spacing.
+Write a parameter line as `- #api-name[comm]#api-dir[输入]：通信器。`; multiple
+names repeat `api-name`. Set the signature block to `justify: false`; long
+signatures otherwise stretch. Escape `*` and leading `__` in C signatures, or
+Typst will parse them as markup. Render a long signature and a list of eight
+parameters; confirm the box wraps without clipping, the two parameter columns
+stay aligned, and the color, italic annotation, and inline-code background all
+survive on continuation lines.
