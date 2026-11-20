@@ -260,8 +260,8 @@ annotation is italic and muted, and literal identifiers in descriptions use
 inline code with a tinted background. Keep the signature and all parameter
 text at body size, and use the body list spacing. Inline code stays at `1em`
 in regular weight with about 3.5pt of horizontal padding, so it never touches
-the surrounding characters. Do not bold parameter names or inline code; the
-color and background already distinguish them, and extra weight reads as a
+the surrounding characters. Do not bold the signature, parameter names, or inline code; the box, top rule,
+color, and background already distinguish them, and extra weight reads as a
 separate tier.
 
 ```typst
@@ -271,7 +271,7 @@ separate tier.
   inset: (left: 12pt, right: 12pt, top: 12pt, bottom: 12pt),
 )[
   #set par(first-line-indent: 0em, justify: false)
-  #text(font: ("Menlo", "PingFang SC"), weight: "bold")[#signature]
+  #text(font: ("Menlo", "PingFang SC"), weight: "regular")[#signature]
 ]
 
 #let api-name(name) = text(
