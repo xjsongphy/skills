@@ -201,6 +201,12 @@ prose rather than code. Add an installed CJK sans to the raw stack:
 #show raw: set text(font: ("Menlo", "PingFang SC", "DejaVu Sans Mono"))
 ```
 
+Set inline raw to body size so API names in prose do not shrink:
+
+```typst
+#show raw.where(block: false): set text(size: 1em)
+```
+
 For Scholia documents, set the same stack through `fonts.mono` instead; see
 `../format-integrations/scholia-typst.md`.
 
