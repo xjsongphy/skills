@@ -204,6 +204,22 @@ prose rather than code. Add an installed CJK sans to the raw stack:
 For Scholia documents, set the same stack through `fonts.mono` instead; see
 `../format-integrations/scholia-typst.md`.
 
+Give block code a quiet full-width background so fragments do not merge with
+prose. Use a light fill, rounded corners, and padding; keep this separate from
+the inline-code pill, which stays at text size.
+
+```typst
+#show raw.where(block: true): it => block(
+  width: 100%,
+  fill: rgb("#F6F8FA"),
+  inset: (x: 10pt, y: 8pt),
+  radius: 3pt,
+  above: 8pt,
+  below: 8pt,
+  it,
+)
+```
+
 ## Callout boxes and internal spacing
 
 A callout with smaller text than body prose needs its own spacing scale. To make
@@ -239,9 +255,14 @@ stack the label and list at the same left edge, and do not tighten the list into
 a paragraph.
 
 Format the text inside the parameter block, not just its geometry. Parameter
-names take the accent color in bold monospace, the input/output annotation
-is italic and muted, and literal identifiers in descriptions use inline code
-with a tinted background. Keep the signature at body size; do not enlarge it.
+names take the accent color in regular-weight monospace; the input/output
+annotation is italic and muted, and literal identifiers in descriptions use
+inline code with a tinted background. Keep the signature and all parameter
+text at body size, and use the body list spacing. Inline code stays at `1em`
+in regular weight with about 3.5pt of horizontal padding, so it never touches
+the surrounding characters. Do not bold parameter names or inline code; the
+color and background already distinguish them, and extra weight reads as a
+separate tier.
 
 ```typst
 #let api(signature) = block(
@@ -256,7 +277,7 @@ with a tinted background. Keep the signature at body size; do not enlarge it.
 #let api-name(name) = text(
   font: ("Menlo", "PingFang SC"),
   fill: rgb("#2F5EA8"),
-  weight: "bold",
+  weight: "regular",
 )[#name]
 
 #let api-dir(body) = text(style: "italic", fill: rgb("#6B7686"))[（#body）]
@@ -267,22 +288,23 @@ with a tinted background. Keep the signature at body size; do not enlarge it.
 )[
   #table(
     columns: (auto, 1fr),
-    column-gutter: 4em,
+    column-gutter: 3em,
     stroke: none,
     inset: (x: 0pt, y: 0pt),
     align: (left + top, left + top),
     [*参数：*],
     [
-      #set par(first-line-indent: 0em, spacing: 0.8em, justify: false)
-      #set list(indent: 0.5em, spacing: 0.8em)
-      #show raw.where(block: false): it => highlight(
-        fill: rgb("#E8EEF7"),
-        radius: 2pt,
-        extent: 2pt,
+      #set par(first-line-indent: 0em, spacing: 1.15em, justify: false)
+      #set list(indent: 0.5em, spacing: 0.45em)
+      #show raw.where(block: false): it => box(
+        fill: rgb("#EBEEF2"),
+        inset: (x: 3.5pt, y: 1pt),
+        radius: 3pt,
         text(
           font: ("Menlo", "PingFang SC"),
-          size: 0.85em,
-          fill: rgb("#33415C"),
+          size: 1em,
+          weight: "regular",
+          fill: rgb("#414B5A"),
         )[#it.text],
       )
       #body
@@ -298,3 +320,10 @@ Typst will parse them as markup. Render a long signature and a list of eight
 parameters; confirm the box wraps without clipping, the two parameter columns
 stay aligned, and the color, italic annotation, and inline-code background all
 survive on continuation lines.
+
+## Source-first review
+
+Check content, terminology, duplicated passages, markup, and cross-references in
+the `.typ` source. Compile and inspect rendered pages only for layout: page
+breaks, heading and paragraph spacing, overflow, font fallback, and callout
+geometry. Do not transcribe or proofread content from page images.
