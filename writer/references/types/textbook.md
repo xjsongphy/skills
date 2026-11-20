@@ -34,3 +34,13 @@ $\exp(X) = U$。接下来把 $X$ 按 Hamiltonian 基展开……定理得证。�
 Use examples to make an abstract definition operational.
 Keep a consistent theorem, definition, example, remark, and exercise hierarchy.
 Do not add generic process commentary or ornamental emphasis.
+
+## Chinese course notes and revision handouts
+
+For lecture notes and revision handouts, mark emphasis where the content occurs
+with the document's inline marker. Do not add a chapter summary box, an
+end-of-document priority table, or a separate paragraph explaining why a point
+matters. Bold a key term at its first definition and do not bold whole sentences
+or paragraphs. Place a short example beside an abstract concept only when the
+source supplies it; do not import examples from general knowledge. Check the
+source for duplicated paragraphs and claims; render pages only for layout.
