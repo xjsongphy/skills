@@ -265,9 +265,13 @@ names take the accent color in regular-weight monospace; the input/output
 annotation is italic and muted, and literal identifiers in descriptions use
 inline code with a tinted background. Monospace text looks larger than CJK at
 the same point size, so set the signature to `0.9em` to match the body's apparent
-size; keep parameter text at body size and use the body list spacing. Inline code stays at `1em`
-in regular weight with about 3.5pt of horizontal padding, so it never touches
-the surrounding characters. Do not bold the signature, parameter names, or inline code; the box, top rule,
+size; keep parameter text at body size. Set list item spacing to about `1.3em`
+so a wrapped continuation and the next item keep the same baseline distance;
+the usual body list spacing makes wrapped lines bunch against the next item.
+Inline code stays at `1em` in regular weight with about 3.5pt of horizontal
+padding inside the highlight, so it never touches the surrounding characters.
+Do not wrap inline code in a box that raises the line height, or the parameter
+rows will have visibly different gaps. Do not bold the signature, parameter names, or inline code; the box, top rule,
 color, and background already distinguish them, and extra weight reads as a
 separate tier.
 
@@ -302,17 +306,17 @@ separate tier.
     [*参数：*],
     [
       #set par(first-line-indent: 0em, spacing: 1.15em, justify: false)
-      #set list(indent: 0.5em, spacing: 0.45em)
-      #show raw.where(block: false): it => box(
+      #set list(indent: 0.5em, spacing: 1.3em)
+      #show raw.where(block: false): it => highlight(
         fill: rgb("#EBEEF2"),
-        inset: (x: 3.5pt, y: 1pt),
         radius: 3pt,
+        extent: 2pt,
         text(
           font: ("Menlo", "PingFang SC"),
           size: 1em,
           weight: "regular",
           fill: rgb("#414B5A"),
-        )[#it.text],
+        )[#h(3.5pt)#it.text#h(3.5pt)],
       )
       #body
     ],
