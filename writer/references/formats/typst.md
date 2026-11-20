@@ -263,8 +263,9 @@ a paragraph.
 Format the text inside the parameter block, not just its geometry. Parameter
 names take the accent color in regular-weight monospace; the input/output
 annotation is italic and muted, and literal identifiers in descriptions use
-inline code with a tinted background. Keep the signature and all parameter
-text at body size, and use the body list spacing. Inline code stays at `1em`
+inline code with a tinted background. Monospace text looks larger than CJK at
+the same point size, so set the signature to `0.9em` to match the body's apparent
+size; keep parameter text at body size and use the body list spacing. Inline code stays at `1em`
 in regular weight with about 3.5pt of horizontal padding, so it never touches
 the surrounding characters. Do not bold the signature, parameter names, or inline code; the box, top rule,
 color, and background already distinguish them, and extra weight reads as a
@@ -277,7 +278,7 @@ separate tier.
   inset: (left: 12pt, right: 12pt, top: 12pt, bottom: 12pt),
 )[
   #set par(first-line-indent: 0em, justify: false)
-  #text(font: ("Menlo", "PingFang SC"), weight: "regular")[#signature]
+  #text(font: ("Menlo", "PingFang SC"), weight: "regular", size: 0.9em)[#signature]
 ]
 
 #let api-name(name) = text(
