@@ -293,3 +293,13 @@ Add an installed CJK sans to the `mono` stack through the `fonts` override:
 Latin code keeps Menlo; only missing CJK glyphs fall back to PingFang SC.
 Render a code block containing Chinese comments at high resolution, because the
 fallback is easy to miss at body size.
+
+## Chinese example boxes
+
+Use the package's native `example` when an English label is acceptable. For a
+Chinese handout that needs a `例` label, a local frame is acceptable when it
+matches the package's example frame: 2.2pt left rule, 12/11/8/8pt inset, 16pt
+above and below, `leading: 1.25em`, `spacing: 0.9em`, and
+`first-line-indent: (amount: 2em, all: false)` inside the frame; take the amber
+example colour from the theme. Keep the box unbreakable, short, and next to the
+concept it illustrates. Do not use it for summaries or emphasis lists.
