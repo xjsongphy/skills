@@ -12,6 +12,8 @@ revision. Do not apply those sections to a brief chat answer or local lookup.
 - Start with the subject, mechanism, evidence, or consequence. Remove meta-commentary about what was searched, what the writer intends to do, or what the writer will avoid.
 - Do not emit defensive process disclaimers. If a source limitation changes the interpretation, state the concrete limitation at the point where it matters; do not repeat it as a drafting explanation.
 - Prefer positive, evidence-bearing sentences over negation-based assurances. State what the source establishes, what the excerpt illustrates, and where the boundary lies.
+- When restating a lecture, source, or meeting, state the claim itself rather than narrating the act of emphasis (“老师强调”, “要记住的是”, “老师把它概括为”, “在课程概括中”). Keep attribution only where it changes the claim's status, such as a contested reading or a named commentator.
+- Do not add qualifications, comparisons, or caveats the source does not make; a summary's scope is the source's scope.
 - Use the field's established term. When source objects are active, verify
   source-specific terminology against them. Do not coin a non-standard term or
   import a term from another document unless the current document uses it. If a

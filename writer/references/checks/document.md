@@ -56,6 +56,12 @@ is to announce writing, importance, or a section change:
 Keep an introduction roadmap that names forthcoming sections. Keep a heading
 that names a required template part.
 
+**Source-emphasis narration.** When a document restates a lecture or source,
+flag “老师强调”, “要记住的是”, “老师把它概括为”, “在课程概括中” and rewrite
+as the claim itself unless the attribution carries a contested reading or names
+a commentator. Flag qualifications, comparisons, or caveats that the source does
+not make and delete them.
+
 **Empty closers.** Delete a paragraph-final sentence that restates the
 paragraph with no new fact, limitation, or next step.
 
