@@ -1,7 +1,6 @@
 // Minimal course-paper starter.
-// This is a clean single-column layout, not a full APA template.
-// For APA author-year citations, replace the numbered reference block with
-// #bibliography("references.bib", style: "apa").
+// This is a clean single-column layout.
+// The numbered reference block is intentional: entries are ordered by first citation.
 
 #set document(title: "Paper Title")
 

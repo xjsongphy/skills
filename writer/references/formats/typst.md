@@ -350,9 +350,10 @@ margins, Times New Roman 12 pt, ragged-right body text, 12 pt leading,
 numbers, and left-aligned 10 pt figure captions. The starter also shows a
 numbered reference block ordered by first citation.
 
-This is a course-paper layout, not a full APA template. Keep the page geometry
-when APA is required, but replace the numbered reference block with
-`#bibliography("references.bib", style: "apa")` and use author-year citations.
+The numbered reference block is intentional for this starter: entries are
+ordered by first citation. Keep that form when using the starter. If a target
+requires APA author-year citations, use a separate APA variant rather than
+changing the starter's default.
 Keep figure source information inside the caption instead of adding a separate
 `Note.` line unless the target style requires one. The figure block is commented
 out so the starter compiles without an image; uncomment it after adding the
