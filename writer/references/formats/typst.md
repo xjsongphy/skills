@@ -340,6 +340,24 @@ parameters; confirm the box wraps without clipping, the two parameter columns
 stay aligned, and the color, italic annotation, and inline-code background all
 survive on continuation lines.
 
+## Minimal paper / essay starter
+
+For short course papers and argumentative essays that need a clean
+single-column layout, start from
+`assets/typst/minimal-paper/starter.typ`. It sets US Letter with 1-inch
+margins, Times New Roman 12 pt, ragged-right body text, 12 pt leading,
+12 pt paragraph spacing, a 0.25-inch first-line indent, bottom-centre page
+numbers, and left-aligned 10 pt figure captions. The starter also shows a
+numbered reference block ordered by first citation.
+
+This is a course-paper layout, not a full APA template. Keep the page geometry
+when APA is required, but replace the numbered reference block with
+`#bibliography("references.bib", style: "apa")` and use author-year citations.
+Keep figure source information inside the caption instead of adding a separate
+`Note.` line unless the target style requires one. The figure block is commented
+out so the starter compiles without an image; uncomment it after adding the
+image file beside the starter.
+
 ## Source-first review
 
 Check content, terminology, duplicated passages, markup, and cross-references in
