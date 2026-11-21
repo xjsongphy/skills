@@ -226,13 +226,21 @@ the inline-code pill, which stays at text size.
 )
 ```
 
+## Lists with wrapped items
+
+Set `list(spacing:)` close to the line advance, about `1.3em` at body size.
+A compact `0.45em` gap makes a wrapped continuation sit farther from its own
+previous line than from the next bullet, so the list looks unevenly spaced even
+though the setting is constant. Use the same spacing in body lists, callouts,
+and parameter lists, and keep `par(spacing:)` at the body value.
+
 ## Callout boxes and internal spacing
 
 A callout with smaller text than body prose needs its own spacing scale. To make
 line and paragraph gaps visually equal, keep `spacing` slightly below `leading`;
 at 10.5pt, `leading: 1.35em` with `spacing: 1.15em` matches the body's rhythm.
 Use `first-line-indent: 2em` to keep paragraph boundaries visible, and
-`list(indent: 1.2em, spacing: 1em)` with
+`list(indent: 1.2em, spacing: 1.3em)` with
 `#show list: set par(first-line-indent: 0em)` so list items do not inherit the
 indent. Do not use a larger paragraph spacing for callouts; the gap then reads
 as a separate block.
